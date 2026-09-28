@@ -1,14 +1,8 @@
 ---
-import { site } from '@/config/site'
-
 const links = [
-  { href: '/#tours', label: 'Tours' },
-  { href: '/#testimonios', label: 'Testimonios' },
-  { href: '/#preguntas', label: 'Preguntas' },
-  { href: '/#contacto', label: 'Contacto' },
+  { href: '/#paisajes', label: 'Paisajes' },
+  { href: '/#antes-de-viajar', label: 'Antes de viajar' },
 ]
-
-const whatsapp = `https://wa.me/${site.contact.whatsapp}`
 ---
 
 <header data-nav class="pointer-events-none fixed inset-x-0 top-4 z-40 px-4">
@@ -16,81 +10,20 @@ const whatsapp = `https://wa.me/${site.contact.whatsapp}`
     aria-label="Principal"
     data-nav-inner
     data-reveal
-    class="pointer-events-auto relative mx-auto flex w-fit max-w-full items-center gap-2 rounded-full border border-waterloo/30 bg-baltic-sea/60 p-1.5 shadow-lg shadow-baltic-sea/40 backdrop-blur-md md:pl-3"
+    class="pointer-events-auto mx-auto w-fit rounded-full border border-dusk/30 bg-desert-night/60 p-1.5 shadow-lg shadow-desert-night/40 backdrop-blur-md"
   >
-    <ul class="hidden items-center md:flex">
+    <ul class="flex items-center">
       {links.map((link) => (
         <li>
           <a
             href={link.href}
-            class="rounded-full px-3 py-2 text-sm text-tide transition-colors hover:text-bali-hai"
+            class="block rounded-full px-4 py-2 whitespace-nowrap text-sand transition-colors hover:bg-dusk/15 hover:text-gold"
           >
             {link.label}
           </a>
         </li>
       ))}
     </ul>
-
-    <a
-      href={whatsapp}
-      target="_blank"
-      rel="noopener"
-      class="rounded-full bg-bali-hai px-4 py-2 text-sm font-medium whitespace-nowrap text-baltic-sea transition-colors hover:bg-tide"
-    >
-      Reservar
-    </a>
-
-    <button
-      type="button"
-      data-nav-toggle
-      aria-expanded="false"
-      aria-controls="menu-movil"
-      class="group grid size-9 place-items-center rounded-full text-tide transition-colors hover:bg-waterloo/20 md:hidden"
-    >
-      <span class="sr-only">Abrir menú</span>
-      <svg
-        aria-hidden="true"
-        class="size-5 group-aria-expanded:hidden"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="1.8"
-        stroke-linecap="round"
-      >
-        <path d="M4 7h16M4 12h16M4 17h16"></path>
-      </svg>
-      <svg
-        aria-hidden="true"
-        class="hidden size-5 group-aria-expanded:block"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="1.8"
-        stroke-linecap="round"
-      >
-        <path d="M6 6l12 12M18 6L6 18"></path>
-      </svg>
-    </button>
-
-    <div
-      id="menu-movil"
-      data-nav-menu
-      hidden
-      class="absolute top-full left-1/2 mt-2 w-56 -translate-x-1/2 rounded-3xl border border-waterloo/30 bg-baltic-sea/90 p-2 backdrop-blur-md md:hidden"
-    >
-      <ul>
-        {links.map((link) => (
-          <li>
-            <a
-              href={link.href}
-              class="block rounded-2xl px-4 py-3 text-tide transition-colors hover:bg-waterloo/20 hover:text-bali-hai"
-            >
-              {link.label}
-            </a>
-          </li>
-        ))}
-      </ul>
-    </div>
   </nav>
 </header>
 
@@ -99,24 +32,8 @@ const whatsapp = `https://wa.me/${site.contact.whatsapp}`
 
   const header = document.querySelector<HTMLElement>('[data-nav]')
   const inner = header?.querySelector<HTMLElement>('[data-nav-inner]')
-  const toggle = header?.querySelector<HTMLButtonElement>('[data-nav-toggle]')
-  const menu = header?.querySelector<HTMLElement>('[data-nav-menu]')
 
-  if (header && inner && toggle && menu) {
-    const isOpen = () => toggle.getAttribute('aria-expanded') === 'true'
-    const setOpen = (open: boolean) => {
-      toggle.setAttribute('aria-expanded', String(open))
-      menu.hidden = !open
-    }
-
-    toggle.addEventListener('click', () => setOpen(!isOpen()))
-    menu.addEventListener('click', (event) => {
-      if ((event.target as Element).closest('a')) setOpen(false)
-    })
-    document.addEventListener('keydown', (event) => {
-      if (event.key === 'Escape') setOpen(false)
-    })
-
+  if (header && inner) {
     animate(header, ({ reduceMotion }) => {
       if (reduceMotion) return
 
@@ -132,7 +49,7 @@ const whatsapp = `https://wa.me/${site.contact.whatsapp}`
         start: 0,
         end: 'max',
         onUpdate: (self) => {
-          const hide = self.direction === 1 && self.scroll() > 200 && !isOpen()
+          const hide = self.direction === 1 && self.scroll() > 200
           gsap.to(header, {
             yPercent: hide ? -200 : 0,
             duration: 0.5,

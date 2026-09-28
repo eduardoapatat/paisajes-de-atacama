@@ -1,33 +1,31 @@
 ---
 import { Picture } from 'astro:assets'
-import heroImage from '@/assets/images/milky-way-in-san-pedro-de-atacama.jpg'
+import heroImage from '@/assets/images/desert-atacama-hero.jpg'
 import { site } from '@/config/site'
-
-const whatsapp = `https://wa.me/${site.contact.whatsapp}`
 ---
 
-<section id="inicio" data-hero class="relative h-svh overflow-hidden bg-baltic-sea">
-  <!-- El zoom se hace sobre este contenedor; anclado abajo para que solo se recorte la parte superior -->
-  <div data-hero-media class="absolute inset-0 origin-[64%_100%]">
+<section id="inicio" data-hero class="relative h-svh overflow-hidden bg-desert-night">
+  <!-- La foto ocupa toda la pantalla; este contenedor hace el parallax al bajar -->
+  <div data-hero-media class="absolute inset-0">
     <Picture
       src={heroImage}
-      alt="Vía Láctea sobre el desierto y una persona iluminando el cielo con una linterna"
-      widths={[640, 1024, 1600, 2400]}
+      alt="Altiplano de Atacama al atardecer, con pastizales dorados y volcanes bajo un cielo rosado"
+      widths={[640, 1024, 1600, 2400, 3200]}
       sizes="100vw"
       formats={['avif', 'webp']}
       loading="eager"
       fetchpriority="high"
       data-hero-image
       data-reveal
-      class="h-full w-full object-cover object-[64%_100%]"
+      class="h-full w-full object-cover object-[50%_45%]"
     />
   </div>
 
+  <!-- Oscurece la foto (que es clara) para que el texto se lea -->
   <div
     aria-hidden="true"
-    class="absolute inset-0 bg-linear-to-b from-baltic-sea/40 via-transparent via-60% to-baltic-sea/80"
+    class="absolute inset-0 bg-linear-to-b from-desert-night/50 via-desert-night/20 to-desert-night/90"
   ></div>
-  <div aria-hidden="true" data-hero-shade class="absolute inset-0 bg-baltic-sea opacity-0"></div>
 
   <div
     data-hero-content
@@ -36,9 +34,9 @@ const whatsapp = `https://wa.me/${site.contact.whatsapp}`
     <p
       data-hero-fade
       data-reveal
-      class="text-xs font-medium tracking-[0.35em] text-bali-hai uppercase sm:text-sm"
+      class="text-xs font-medium tracking-[0.35em] text-gold uppercase sm:text-sm"
     >
-      {site.location.city} · {site.location.country}
+      {site.location.name} · {site.location.country}
     </p>
 
     <h1
@@ -49,31 +47,23 @@ const whatsapp = `https://wa.me/${site.contact.whatsapp}`
       {site.name}
     </h1>
 
-    <p data-hero-fade data-reveal class="mt-6 max-w-xl text-lg text-tide sm:text-xl">
+    <p data-hero-fade data-reveal class="mt-6 max-w-xl text-lg text-sand sm:text-xl">
       {site.tagline}
     </p>
 
-    <div data-hero-fade data-reveal class="mt-10 flex flex-wrap justify-center gap-3">
+    <div data-hero-fade data-reveal class="mt-10">
       <a
-        href="#tours"
-        class="rounded-full bg-bali-hai px-6 py-3 font-medium text-baltic-sea transition-colors hover:bg-tide"
+        href="#paisajes"
+        class="rounded-full bg-gold px-6 py-3 font-medium text-desert-night transition-colors hover:bg-sand"
       >
-        Ver tours
-      </a>
-      <a
-        href={whatsapp}
-        target="_blank"
-        rel="noopener"
-        class="rounded-full border border-waterloo/60 px-6 py-3 font-medium text-tide backdrop-blur-sm transition-colors hover:border-bali-hai hover:text-bali-hai"
-      >
-        Reservar por WhatsApp
+        Explorar
       </a>
     </div>
 
     <p
       data-hero-fade
       data-reveal
-      class="absolute bottom-8 text-xs tracking-[0.3em] text-bali-hai uppercase"
+      class="absolute bottom-8 text-xs tracking-[0.3em] text-sand/70 uppercase"
     >
       Desliza
     </p>
@@ -87,46 +77,49 @@ const whatsapp = `https://wa.me/${site.contact.whatsapp}`
   const title = hero?.querySelector<HTMLElement>('[data-hero-title]')
 
   if (hero && title) {
-    // SplitText debe medir con la fuente final cargada
-    document.fonts.ready.then(() => {
-      animate(hero, ({ reduceMotion }) => {
-        if (reduceMotion) return
+    animate(hero, ({ reduceMotion, afterFonts }) => {
+      if (reduceMotion) return
 
+      // Cortina: el hero queda fijo sin agregar espacio de scroll (pinSpacing: false)
+      // y la sección siguiente sube por encima hasta taparlo. Mientras tanto la foto
+      // se acerca un poco y el texto se desvanece.
+      gsap
+        .timeline({
+          scrollTrigger: {
+            trigger: hero,
+            start: 'top top',
+            end: 'bottom top',
+            pin: true,
+            pinSpacing: false,
+            scrub: true,
+            refreshPriority: 1,
+          },
+        })
+        .to('[data-hero-media]', { scale: 1.1, ease: 'none', duration: 1 }, 0)
+        .to(
+          '[data-hero-content]',
+          { yPercent: -30, autoAlpha: 0, ease: 'power1.in', duration: 0.6 },
+          0,
+        )
+
+      // Entrada al cargar: SplitText debe medir con la fuente final cargada
+      afterFonts(() => {
         const split = SplitText.create(title, { type: 'words', mask: 'words' })
-
-        // Entrada al cargar la página
         gsap
           .timeline({ defaults: { ease: 'expo.out', duration: 1.4 } })
           .fromTo(
-            '[data-hero-image]',
-            { scale: 1.15, autoAlpha: 0 },
+            hero.querySelector('[data-hero-image]'),
+            { scale: 1.08, autoAlpha: 0 },
             { scale: 1, autoAlpha: 1, duration: 2.4 },
           )
           .set(title, { autoAlpha: 1 }, 0.3)
           .fromTo(split.words, { yPercent: 110 }, { yPercent: 0, stagger: 0.08 }, 0.3)
           .fromTo(
-            '[data-hero-fade]',
+            hero.querySelectorAll('[data-hero-fade]'),
             { autoAlpha: 0, y: 24 },
             { autoAlpha: 1, y: 0, stagger: 0.12 },
             0.7,
           )
-
-        // Scroll: la sección queda fija, la foto se aleja y el contenido se desvanece
-        gsap
-          .timeline({
-            scrollTrigger: {
-              trigger: hero,
-              start: 'top top',
-              end: '+=120%',
-              pin: true,
-              scrub: 1,
-            },
-          })
-          .fromTo('[data-hero-media]', { scale: 1.3 }, { scale: 1, ease: 'none' }, 0)
-          .to('[data-hero-content]', { yPercent: -25, autoAlpha: 0, ease: 'power1.in' }, 0)
-          .to('[data-hero-shade]', { opacity: 1, ease: 'none' }, 0.5)
-
-        return () => split.revert()
       })
     })
   }
