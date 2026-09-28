@@ -1,0 +1,72 @@
+[
+  {
+    "id": "que-pasa-si-esta-nublado",
+    "order": 1,
+    "category": "clima",
+    "question": "¿Qué pasa si el cielo está nublado?",
+    "answer": "Revisamos el pronóstico cada tarde. Si la nubosidad impide la observación, te avisamos antes de las 17:00 y puedes reprogramar sin costo o pedir la devolución completa."
+  },
+  {
+    "id": "mejor-epoca",
+    "order": 2,
+    "category": "clima",
+    "question": "¿Cuál es la mejor época del año para venir?",
+    "answer": "Arica tiene cielos despejados casi todo el año en los valles interiores. Entre abril y septiembre el centro de la Vía Láctea se ve alto en el cielo. En enero y febrero el invierno altiplánico puede traer lluvias a Putre, por lo que ese tour tiene menos salidas."
+  },
+  {
+    "id": "luna-llena",
+    "order": 3,
+    "category": "clima",
+    "question": "¿Conviene evitar las noches de luna llena?",
+    "answer": "La luna llena ilumina el cielo y oculta las estrellas más débiles, pero es perfecta para observar sus cráteres por telescopio. Marcamos en el calendario de reservas las fechas con luna nueva, ideales para ver la Vía Láctea."
+  },
+  {
+    "id": "como-reservar",
+    "order": 4,
+    "category": "reservas",
+    "question": "¿Cómo reservo y pago?",
+    "answer": "Escríbenos por WhatsApp o correo con la fecha, el tour y la cantidad de personas. Confirmamos disponibilidad y te enviamos un link de pago. Aceptamos tarjetas de crédito y débito, transferencia bancaria y efectivo el día del tour con un abono previo del 30 %."
+  },
+  {
+    "id": "politica-cancelacion",
+    "order": 5,
+    "category": "reservas",
+    "question": "¿Puedo cancelar mi reserva?",
+    "answer": "Sí. Si cancelas con más de 48 horas de anticipación te devolvemos el 100 %. Entre 48 y 24 horas, el 50 %. Con menos de 24 horas no hay devolución, pero puedes cambiar la fecha una vez."
+  },
+  {
+    "id": "tours-privados",
+    "order": 6,
+    "category": "reservas",
+    "question": "¿Hacen tours privados o para empresas?",
+    "answer": "Sí. Organizamos salidas privadas para parejas, familias, colegios y equipos de trabajo. Cotiza con nosotros indicando la fecha y la cantidad de personas."
+  },
+  {
+    "id": "experiencia-previa",
+    "order": 7,
+    "category": "experiencia",
+    "question": "¿Necesito saber de astronomía?",
+    "answer": "No. Los tours están pensados para personas sin conocimientos previos. El guía explica todo desde cero y adapta el nivel a las preguntas del grupo."
+  },
+  {
+    "id": "idiomas",
+    "order": 8,
+    "category": "experiencia",
+    "question": "¿En qué idiomas son los tours?",
+    "answer": "Todos los tours son en español e inglés. Con aviso previo podemos coordinar un guía que hable portugués."
+  },
+  {
+    "id": "que-ropa-llevar",
+    "order": 9,
+    "category": "logistica",
+    "question": "¿Qué ropa debo llevar?",
+    "answer": "Aunque de día haga calor, en el desierto la temperatura baja mucho de noche. Lleva ropa de abrigo en capas y zapatos cerrados. Para el tour a Putre necesitas ropa de invierno: gorro, guantes y parka."
+  },
+  {
+    "id": "punto-encuentro",
+    "order": 10,
+    "category": "logistica",
+    "question": "¿Dónde es el punto de encuentro?",
+    "answer": "Todos los tours salen desde Plaza Colón, frente a la Catedral San Marcos, en el centro de Arica. Si te alojas en un hotel del centro o de la costanera, podemos recogerte sin costo adicional."
+  }
+]

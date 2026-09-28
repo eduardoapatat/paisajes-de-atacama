@@ -1,17 +1,12 @@
 ---
-import '../styles/global.css'
+import BaseLayout from '../layouts/BaseLayout.astro'
+import { site } from '../config/site'
 ---
 
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="icon" href="/favicon.ico" />
-    <meta name="viewport" content="width=device-width" />
-    <meta name="generator" content={Astro.generator} />
-    <title>Astro</title>
-  </head>
-  <body>
-    <h1>Astro</h1>
-  </body>
-</html>
+<BaseLayout>
+  <!-- Las secciones se agregan una a una desde src/components/sections/ -->
+  <section class="container-page grid min-h-dvh place-content-center gap-4 text-center">
+    <h1 class="text-5xl sm:text-7xl">{site.name}</h1>
+    <p class="text-lg text-star-400">{site.tagline}</p>
+  </section>
+</BaseLayout>

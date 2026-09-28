@@ -1,1 +1,80 @@
 @import 'tailwindcss';
+
+/* Tokens de diseño: generan utilidades (bg-night-900, text-gold-400, font-sans...) */
+@theme {
+  --color-night-950: #050a18;
+  --color-night-900: #0a1128;
+  --color-night-800: #111b3a;
+  --color-night-700: #1a2750;
+  --color-night-600: #2a3a6b;
+
+  --color-star-50: #f5f7fc;
+  --color-star-200: #d6dcee;
+  --color-star-400: #9aa6c7;
+
+  --color-gold-300: #f3d58a;
+  --color-gold-400: #e8bf5c;
+  --color-gold-500: #d4a53a;
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@theme inline {
+  --font-sans: var(--font-outfit);
+}
+
+@layer base {
+  html {
+    color-scheme: dark;
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    @apply bg-night-900 font-sans text-star-200 antialiased;
+    min-height: 100dvh;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-semibold text-star-50;
+    text-wrap: balance;
+    line-height: 1.1;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  ::selection {
+    @apply bg-gold-400 text-night-950;
+  }
+
+  :focus-visible {
+    @apply outline-2 outline-offset-4 outline-gold-400;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@utility container-page {
+  @apply mx-auto w-full max-w-7xl px-5 sm:px-8;
+}
+
+@utility text-gradient-gold {
+  @apply bg-linear-to-r from-gold-300 to-gold-500 bg-clip-text text-transparent;
+}
