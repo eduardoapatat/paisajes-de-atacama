@@ -1,12 +1,22 @@
 @import 'tailwindcss';
 
-/* Tokens de diseño: generan utilidades (bg-baltic-sea, text-tide, font-sans...) */
+/* Tokens de diseño: generan utilidades (bg-desert-night, text-sand, font-sans...) */
 @theme {
-  /* Paleta base (Baltic Sea, Tide, Waterloo, Bali Hai) con más contraste y saturación */
-  --color-baltic-sea: #1b161d; /* fondo (original #232024) */
-  --color-tide: #f1eeec; /* texto principal (original #bab3af) */
-  --color-waterloo: #5d6bab; /* bordes y detalles (original #777e9d) */
-  --color-bali-hai: #7197ca; /* acento y texto secundario (original #8698b0) */
+  /* Paleta sacada de la foto del hero (atardecer en el altiplano) */
+  --color-desert-night: #1a1411; /* fondo: sombra cálida del desierto */
+  --color-sand: #f5eee6; /* texto principal: crema claro */
+  --color-gold: #e2a93b; /* acento: pasto dorado */
+  --color-dusk: #d9a293; /* bordes y detalles: cielo rosado del atardecer */
+
+  /*
+   * Tailwind pone line-height: 1 desde text-5xl. Con eso la máscara de SplitText
+   * corta las letras con cola (j, g, q), así que se reserva más altura en general.
+   */
+  --text-5xl--line-height: 1.3;
+  --text-6xl--line-height: 1.3;
+  --text-7xl--line-height: 1.3;
+  --text-8xl--line-height: 1.3;
+  --text-9xl--line-height: 1.3;
 
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
 }
@@ -23,7 +33,7 @@
   }
 
   body {
-    @apply bg-baltic-sea font-sans text-tide antialiased;
+    @apply bg-desert-night font-sans text-sand antialiased;
     min-height: 100dvh;
   }
 
@@ -31,9 +41,10 @@
   h2,
   h3,
   h4 {
-    @apply font-semibold text-tide;
+    @apply font-semibold text-sand;
     text-wrap: balance;
-    line-height: 1.1;
+    /* Altura suficiente para las letras con cola (j, g, q): SplitText recorta al alto de la línea */
+    line-height: 1.3;
   }
 
   p {
@@ -41,11 +52,11 @@
   }
 
   ::selection {
-    @apply bg-bali-hai text-baltic-sea;
+    @apply bg-gold text-desert-night;
   }
 
   :focus-visible {
-    @apply outline-2 outline-offset-4 outline-bali-hai;
+    @apply outline-2 outline-offset-4 outline-gold;
   }
 
   /* Oculta lo que GSAP va a revelar para evitar un parpadeo antes de la animación */
