@@ -5,7 +5,7 @@ import tailwindcss from '@tailwindcss/vite'
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://desertskytours.cl',
+  site: 'https://paisajesdeatacama.cl',
   fonts: [
     {
       provider: fontProviders.fontsource(),

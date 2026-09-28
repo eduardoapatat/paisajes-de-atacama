@@ -1,0 +1,44 @@
+---
+import type { GetStaticPaths } from 'astro'
+import { Picture } from 'astro:assets'
+import { getCollection, render } from 'astro:content'
+import BaseLayout from '@/layouts/BaseLayout.astro'
+import { formatAltitude } from '@/lib/format'
+
+export const getStaticPaths = (async () => {
+  const paisajes = await getCollection('paisajes')
+  return paisajes.map((paisaje) => ({ params: { slug: paisaje.id }, props: { paisaje } }))
+}) satisfies GetStaticPaths
+
+const { paisaje } = Astro.props
+const { Content } = await render(paisaje)
+const { data } = paisaje
+---
+
+<!-- Página provisional: el diseño se hará en su propia etapa -->
+<BaseLayout title={data.title} description={data.intro}>
+  <article class="container-page max-w-3xl py-28">
+    <a href="/#paisajes" class="text-sm text-gold hover:underline">
+      ← Volver a los paisajes
+    </a>
+
+    <h1 class="mt-6 text-4xl sm:text-6xl">{data.title}</h1>
+    <p class="mt-4 text-sm text-sand/60">
+      {data.location} · {formatAltitude(data.altitudeMeters)}
+    </p>
+    <p class="mt-6 text-xl leading-relaxed text-sand/85">{data.intro}</p>
+
+    <Picture
+      src={data.cover}
+      alt={data.coverAlt}
+      widths={[640, 1024, 1600]}
+      sizes="(min-width: 768px) 768px, 100vw"
+      formats={['avif', 'webp']}
+      class="mt-10 aspect-3/2 w-full rounded-2xl object-cover"
+    />
+
+    <div class="mt-12 space-y-5 text-lg leading-relaxed text-sand/85 [&_h2]:mt-12 [&_h2]:text-2xl [&_li]:ml-5 [&_li]:list-disc [&_strong]:text-sand">
+      <Content />
+    </div>
+  </article>
+</BaseLayout>

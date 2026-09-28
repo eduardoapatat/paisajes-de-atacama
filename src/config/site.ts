@@ -1,30 +1,22 @@
 /**
- * Datos de marca y contacto. Único lugar para cambiar nombre, eslogan
- * y formas de contacto en todo el sitio.
+ * Datos del sitio. Único lugar para cambiar nombre, eslogan y contacto.
  */
 export const site = {
-  name: 'Desert Sky Tours',
-  tagline: 'Tours astronómicos en Arica',
+  name: 'Paisajes de Atacama',
+  tagline: 'Valles, salares, lagunas y géiseres del norte de Chile',
   description:
-    'Tours astronómicos en el desierto de Arica y Parinacota: observación con telescopios, astrofotografía y noches en el altiplano con guías locales.',
+    'Un recorrido por los paisajes del Desierto de Atacama: el Valle de la Luna, las lagunas altiplánicas, los géiseres del Tatio y otros lugares únicos del norte de Chile.',
   locale: 'es-CL',
   location: {
-    city: 'Arica',
-    region: 'Región de Arica y Parinacota',
+    name: 'Desierto de Atacama',
+    region: 'Región de Antofagasta',
     country: 'Chile',
-    meetingPoint: 'Plaza Colón, frente a la Catedral San Marcos, Arica',
   },
   contact: {
-    email: 'reservas@desertskytours.cl',
-    phone: '+56 9 8765 4321',
-    // Número en formato internacional sin espacios ni signos, para wa.me
-    whatsapp: '56987654321',
-    hours: 'Lunes a sábado, de 10:00 a 20:00',
+    email: 'hola@paisajesdeatacama.cl',
   },
   social: {
-    instagram: 'https://www.instagram.com/desertskytours',
-    facebook: 'https://www.facebook.com/desertskytours',
-    tiktok: 'https://www.tiktok.com/@desertskytours',
+    instagram: 'https://www.instagram.com/paisajesdeatacama',
   },
 } as const
 
