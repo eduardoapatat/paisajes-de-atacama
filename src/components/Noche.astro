@@ -1,0 +1,78 @@
+---
+import { Picture } from 'astro:assets'
+import nightImage from '@/assets/images/desert-atacama-night.jpg'
+---
+
+<section id="noche" data-noche class="relative h-svh overflow-hidden bg-desert-night">
+  <!-- La foto se abre en un círculo centrado en el arco de la Vía Láctea -->
+  <div data-noche-media data-reveal class="absolute inset-0">
+    <Picture
+      src={nightImage}
+      alt="Arco de la Vía Láctea sobre el Desierto de Atacama de noche, con rocas en primer plano"
+      widths={[640, 1024, 1600, 2400, 3200]}
+      sizes="100vw"
+      formats={['avif', 'webp']}
+      data-noche-image
+      class="h-full w-full object-cover object-[50%_40%]"
+    />
+    <div
+      aria-hidden="true"
+      class="absolute inset-0 bg-linear-to-b from-desert-night/40 via-transparent to-desert-night/70"
+    ></div>
+  </div>
+
+  <div class="container-page relative flex h-full items-center justify-center">
+    <h2 data-noche-title data-reveal class="text-center text-5xl text-sand sm:text-7xl lg:text-8xl">
+      En la noche...
+    </h2>
+  </div>
+</section>
+
+<script>
+  import { animate, gsap, SplitText } from '@/lib/gsap'
+
+  const section = document.querySelector<HTMLElement>('[data-noche]')
+  const title = section?.querySelector<HTMLElement>('[data-noche-title]')
+
+  if (section && title) {
+    animate(section, ({ reduceMotion, afterFonts }) => {
+      if (reduceMotion) return
+
+      afterFonts(() => {
+        const split = SplitText.create(title, { type: 'chars' })
+
+        // La sección queda fija y todo avanza con el scroll: primero el título
+        // letra por letra, después la foto se abre desde el centro del cielo
+        gsap
+          .timeline({
+            scrollTrigger: {
+              trigger: section,
+              start: 'top top',
+              end: '+=100%',
+              pin: true,
+              scrub: true,
+            },
+          })
+          .set(title, { autoAlpha: 1 }, 0)
+          .fromTo(
+            split.chars,
+            { autoAlpha: 0, y: 40, filter: 'blur(10px)' },
+            { autoAlpha: 1, y: 0, filter: 'blur(0px)', stagger: 0.04, duration: 0.3 },
+            0,
+          )
+          .fromTo(
+            '[data-noche-media]',
+            { autoAlpha: 1, clipPath: 'circle(0% at 50% 40%)' },
+            { clipPath: 'circle(75% at 50% 40%)', duration: 1, ease: 'power2.inOut' },
+            0.35,
+          )
+          .fromTo(
+            '[data-noche-image]',
+            { scale: 1.4 },
+            { scale: 1, duration: 1.2, ease: 'none' },
+            0.35,
+          )
+      })
+    })
+  }
+</script>
