@@ -12,6 +12,11 @@ export const MOTION_REDUCED = '(prefers-reduced-motion: reduce)'
 
 type MotionContext = {
   reduceMotion: boolean
+  /**
+   * Ejecuta `fn` cuando la fuente terminó de cargar (necesario para SplitText).
+   * Lo que se cree dentro se revierte junto con el resto de la sección.
+   */
+  afterFonts: (fn: () => void) => void
 }
 
 /**
@@ -22,9 +27,24 @@ type MotionContext = {
 export function animate(scope: Element, setup: (ctx: MotionContext) => void | (() => void)) {
   const mm = gsap.matchMedia(scope)
 
-  mm.add({ reduceMotion: MOTION_REDUCED }, (context) => {
-    const { reduceMotion } = context.conditions as MotionContext
-    return setup({ reduceMotion })
+  // matchMedia solo ejecuta el setup si alguna condición se cumple:
+  // con las dos queries opuestas siempre se ejecuta
+  mm.add({ motionOk: MOTION_OK, reduceMotion: MOTION_REDUCED }, (context) => {
+    const { reduceMotion } = context.conditions as { reduceMotion: boolean }
+    let active = true
+
+    const afterFonts = (fn: () => void) => {
+      document.fonts.ready.then(() => {
+        if (active) context.add(fn)
+      })
+    }
+
+    const cleanup = setup({ reduceMotion, afterFonts })
+
+    return () => {
+      active = false
+      cleanup?.()
+    }
   })
 
   return mm
