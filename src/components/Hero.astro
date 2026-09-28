@@ -1,0 +1,133 @@
+---
+import { Picture } from 'astro:assets'
+import heroImage from '@/assets/images/milky-way-in-san-pedro-de-atacama.jpg'
+import { site } from '@/config/site'
+
+const whatsapp = `https://wa.me/${site.contact.whatsapp}`
+---
+
+<section id="inicio" data-hero class="relative h-svh overflow-hidden bg-baltic-sea">
+  <!-- El zoom se hace sobre este contenedor; anclado abajo para que solo se recorte la parte superior -->
+  <div data-hero-media class="absolute inset-0 origin-[64%_100%]">
+    <Picture
+      src={heroImage}
+      alt="Vía Láctea sobre el desierto y una persona iluminando el cielo con una linterna"
+      widths={[640, 1024, 1600, 2400]}
+      sizes="100vw"
+      formats={['avif', 'webp']}
+      loading="eager"
+      fetchpriority="high"
+      data-hero-image
+      data-reveal
+      class="h-full w-full object-cover object-[64%_100%]"
+    />
+  </div>
+
+  <div
+    aria-hidden="true"
+    class="absolute inset-0 bg-linear-to-b from-baltic-sea/40 via-transparent via-60% to-baltic-sea/80"
+  ></div>
+  <div aria-hidden="true" data-hero-shade class="absolute inset-0 bg-baltic-sea opacity-0"></div>
+
+  <div
+    data-hero-content
+    class="container-page relative flex h-full flex-col items-center justify-center text-center"
+  >
+    <p
+      data-hero-fade
+      data-reveal
+      class="text-xs font-medium tracking-[0.35em] text-bali-hai uppercase sm:text-sm"
+    >
+      {site.location.city} · {site.location.country}
+    </p>
+
+    <h1
+      data-hero-title
+      data-reveal
+      class="mt-5 text-5xl font-semibold tracking-tight drop-shadow-lg sm:text-7xl lg:text-8xl"
+    >
+      {site.name}
+    </h1>
+
+    <p data-hero-fade data-reveal class="mt-6 max-w-xl text-lg text-tide sm:text-xl">
+      {site.tagline}
+    </p>
+
+    <div data-hero-fade data-reveal class="mt-10 flex flex-wrap justify-center gap-3">
+      <a
+        href="#tours"
+        class="rounded-full bg-bali-hai px-6 py-3 font-medium text-baltic-sea transition-colors hover:bg-tide"
+      >
+        Ver tours
+      </a>
+      <a
+        href={whatsapp}
+        target="_blank"
+        rel="noopener"
+        class="rounded-full border border-waterloo/60 px-6 py-3 font-medium text-tide backdrop-blur-sm transition-colors hover:border-bali-hai hover:text-bali-hai"
+      >
+        Reservar por WhatsApp
+      </a>
+    </div>
+
+    <p
+      data-hero-fade
+      data-reveal
+      class="absolute bottom-8 text-xs tracking-[0.3em] text-bali-hai uppercase"
+    >
+      Desliza
+    </p>
+  </div>
+</section>
+
+<script>
+  import { animate, gsap, SplitText } from '@/lib/gsap'
+
+  const hero = document.querySelector<HTMLElement>('[data-hero]')
+  const title = hero?.querySelector<HTMLElement>('[data-hero-title]')
+
+  if (hero && title) {
+    // SplitText debe medir con la fuente final cargada
+    document.fonts.ready.then(() => {
+      animate(hero, ({ reduceMotion }) => {
+        if (reduceMotion) return
+
+        const split = SplitText.create(title, { type: 'words', mask: 'words' })
+
+        // Entrada al cargar la página
+        gsap
+          .timeline({ defaults: { ease: 'expo.out', duration: 1.4 } })
+          .fromTo(
+            '[data-hero-image]',
+            { scale: 1.15, autoAlpha: 0 },
+            { scale: 1, autoAlpha: 1, duration: 2.4 },
+          )
+          .set(title, { autoAlpha: 1 }, 0.3)
+          .fromTo(split.words, { yPercent: 110 }, { yPercent: 0, stagger: 0.08 }, 0.3)
+          .fromTo(
+            '[data-hero-fade]',
+            { autoAlpha: 0, y: 24 },
+            { autoAlpha: 1, y: 0, stagger: 0.12 },
+            0.7,
+          )
+
+        // Scroll: la sección queda fija, la foto se aleja y el contenido se desvanece
+        gsap
+          .timeline({
+            scrollTrigger: {
+              trigger: hero,
+              start: 'top top',
+              end: '+=120%',
+              pin: true,
+              scrub: 1,
+            },
+          })
+          .fromTo('[data-hero-media]', { scale: 1.3 }, { scale: 1, ease: 'none' }, 0)
+          .to('[data-hero-content]', { yPercent: -25, autoAlpha: 0, ease: 'power1.in' }, 0)
+          .to('[data-hero-shade]', { opacity: 1, ease: 'none' }, 0.5)
+
+        return () => split.revert()
+      })
+    })
+  }
+</script>

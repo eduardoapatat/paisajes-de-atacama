@@ -1,4 +1,4 @@
-import { site } from '../config/site'
+import { site } from '@/config/site'
 
 const clp = new Intl.NumberFormat(site.locale, {
   style: 'currency',

@@ -1,7 +1,8 @@
 ---
 import { Font } from 'astro:assets'
-import { site } from '../config/site'
-import '../styles/global.css'
+import Navbar from '@/components/Navbar.astro'
+import { site } from '@/config/site'
+import '@/styles/global.css'
 
 interface Props {
   title?: string
@@ -22,7 +23,7 @@ const ogImage = image ? new URL(image, Astro.site) : undefined
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
-    <meta name="theme-color" content="#0a1128" />
+    <meta name="theme-color" content="#1b161d" />
 
     <title>{pageTitle}</title>
     <meta name="description" content={description} />
@@ -41,14 +42,18 @@ const ogImage = image ? new URL(image, Astro.site) : undefined
     <meta name="twitter:card" content={ogImage ? 'summary_large_image' : 'summary'} />
 
     <Font cssVariable="--font-outfit" preload />
+    <script is:inline>
+      document.documentElement.classList.add('js')
+    </script>
   </head>
   <body>
     <a
       href="#contenido"
-      class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:rounded-md focus:bg-gold-400 focus:px-4 focus:py-2 focus:text-night-950"
+      class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:rounded-md focus:bg-bali-hai focus:px-4 focus:py-2 focus:text-baltic-sea"
     >
       Saltar al contenido
     </a>
+    <Navbar />
     <main id="contenido">
       <slot />
     </main>

@@ -4,6 +4,9 @@ import { SplitText } from 'gsap/SplitText'
 
 gsap.registerPlugin(ScrollTrigger, SplitText)
 
+// Evita recalcular los pin cuando la barra del navegador móvil aparece o se oculta
+ScrollTrigger.config({ ignoreMobileResize: true })
+
 export const MOTION_OK = '(prefers-reduced-motion: no-preference)'
 export const MOTION_REDUCED = '(prefers-reduced-motion: reduce)'
 

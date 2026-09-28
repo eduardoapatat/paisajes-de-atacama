@@ -1,20 +1,12 @@
 @import 'tailwindcss';
 
-/* Tokens de diseño: generan utilidades (bg-night-900, text-gold-400, font-sans...) */
+/* Tokens de diseño: generan utilidades (bg-baltic-sea, text-tide, font-sans...) */
 @theme {
-  --color-night-950: #050a18;
-  --color-night-900: #0a1128;
-  --color-night-800: #111b3a;
-  --color-night-700: #1a2750;
-  --color-night-600: #2a3a6b;
-
-  --color-star-50: #f5f7fc;
-  --color-star-200: #d6dcee;
-  --color-star-400: #9aa6c7;
-
-  --color-gold-300: #f3d58a;
-  --color-gold-400: #e8bf5c;
-  --color-gold-500: #d4a53a;
+  /* Paleta base (Baltic Sea, Tide, Waterloo, Bali Hai) con más contraste y saturación */
+  --color-baltic-sea: #1b161d; /* fondo (original #232024) */
+  --color-tide: #f1eeec; /* texto principal (original #bab3af) */
+  --color-waterloo: #5d6bab; /* bordes y detalles (original #777e9d) */
+  --color-bali-hai: #7197ca; /* acento y texto secundario (original #8698b0) */
 
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
 }
@@ -31,7 +23,7 @@
   }
 
   body {
-    @apply bg-night-900 font-sans text-star-200 antialiased;
+    @apply bg-baltic-sea font-sans text-tide antialiased;
     min-height: 100dvh;
   }
 
@@ -39,7 +31,7 @@
   h2,
   h3,
   h4 {
-    @apply font-semibold text-star-50;
+    @apply font-semibold text-tide;
     text-wrap: balance;
     line-height: 1.1;
   }
@@ -49,11 +41,18 @@
   }
 
   ::selection {
-    @apply bg-gold-400 text-night-950;
+    @apply bg-bali-hai text-baltic-sea;
   }
 
   :focus-visible {
-    @apply outline-2 outline-offset-4 outline-gold-400;
+    @apply outline-2 outline-offset-4 outline-bali-hai;
+  }
+
+  /* Oculta lo que GSAP va a revelar para evitar un parpadeo antes de la animación */
+  @media (prefers-reduced-motion: no-preference) {
+    .js [data-reveal] {
+      visibility: hidden;
+    }
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -73,8 +72,4 @@
 
 @utility container-page {
   @apply mx-auto w-full max-w-7xl px-5 sm:px-8;
-}
-
-@utility text-gradient-gold {
-  @apply bg-linear-to-r from-gold-300 to-gold-500 bg-clip-text text-transparent;
 }

@@ -1,8 +1,8 @@
 ---
 import type { GetStaticPaths } from 'astro'
 import { getCollection, render } from 'astro:content'
-import BaseLayout from '../../layouts/BaseLayout.astro'
-import { formatAltitude, formatDuration, formatPrice } from '../../lib/format'
+import BaseLayout from '@/layouts/BaseLayout.astro'
+import { formatAltitude, formatDuration, formatPrice } from '@/lib/format'
 
 export const getStaticPaths = (async () => {
   const tours = await getCollection('tours')
@@ -17,27 +17,27 @@ const { data } = tour
 <!-- Página provisional: el diseño se hará en su propia etapa -->
 <BaseLayout title={data.title} description={data.summary}>
   <article class="container-page max-w-3xl py-24">
-    <a href="/" class="text-sm text-gold-400 hover:underline">
+    <a href="/" class="text-sm text-bali-hai hover:underline">
       ← Volver al inicio
     </a>
     <h1 class="mt-6 text-4xl sm:text-5xl">{data.title}</h1>
-    <p class="mt-4 text-lg text-star-400">{data.summary}</p>
+    <p class="mt-4 text-lg text-bali-hai">{data.summary}</p>
 
     <dl class="mt-8 grid grid-cols-2 gap-4 text-sm sm:grid-cols-4">
       <div>
-        <dt class="text-star-400">Precio</dt>
-        <dd class="text-gold-300">{formatPrice(data.priceCLP)}</dd>
+        <dt class="text-bali-hai">Precio</dt>
+        <dd class="text-tide">{formatPrice(data.priceCLP)}</dd>
       </div>
       <div>
-        <dt class="text-star-400">Duración</dt>
+        <dt class="text-bali-hai">Duración</dt>
         <dd>{formatDuration(data.durationHours)}</dd>
       </div>
       <div>
-        <dt class="text-star-400">Salida</dt>
+        <dt class="text-bali-hai">Salida</dt>
         <dd>{data.startTime}</dd>
       </div>
       <div>
-        <dt class="text-star-400">Altura</dt>
+        <dt class="text-bali-hai">Altura</dt>
         <dd>{formatAltitude(data.altitudeMeters)}</dd>
       </div>
     </dl>
