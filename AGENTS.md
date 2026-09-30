@@ -5,7 +5,7 @@
 Objetivo del portafolio: demostrar dominio de Astro (colecciones de contenido, rutas dinámicas, componentes, optimización de imágenes) y animaciones profesionales con GSAP.
 
 - Repositorio: https://github.com/eduardoapatat/paisajes-de-atacama (público, rama `main`).
-- La carpeta local todavía se llama `desert-sky-tours` (nombre original del proyecto).
+- Nombre del proyecto y de la carpeta local: `paisajes-de-atacama`.
 
 ## Stack
 
