@@ -42,12 +42,12 @@ Objetivo del portafolio: demostrar dominio de Astro (colecciones de contenido, r
 
 Paleta cálida sacada de la foto del hero (tokens en `src/styles/global.css`):
 
-| Token          | Color     | Uso                                           |
-| -------------- | --------- | --------------------------------------------- |
-| `desert-night` | `#1a1411` | Fondo oscuro y texto sobre fondos claros      |
-| `sand`         | `#f5eee6` | Texto claro y fondo de secciones de lectura   |
-| `gold`         | `#e2a93b` | Acento: botones, etiquetas, números           |
-| `dusk`         | `#d9a293` | Bordes y detalles                             |
+| Token          | Color     | Uso                                         |
+| -------------- | --------- | ------------------------------------------- |
+| `desert-night` | `#1a1411` | Fondo oscuro y texto sobre fondos claros    |
+| `sand`         | `#f5eee6` | Texto claro y fondo de secciones de lectura |
+| `gold`         | `#e2a93b` | Acento: botones, etiquetas, números         |
+| `dusk`         | `#d9a293` | Bordes y detalles                           |
 
 - Secciones de lectura (Paisajes, Atractivos): fondo `sand` y texto `desert-night`. El dorado solo en elementos grandes o decorativos (poco contraste en texto chico).
 - Tailwind pone `line-height: 1` desde `text-5xl`; se sobrescribió a `1.3` en `@theme` (`--text-5xl--line-height` a `--text-9xl--line-height`) para que la máscara de SplitText no corte letras con cola (j, g, q). No usar parches de padding en las máscaras.
@@ -66,6 +66,7 @@ Paleta cálida sacada de la foto del hero (tokens en `src/styles/global.css`):
 3. **Paisajes** (`Paisajes.astro`): cortina con esquinas redondeadas y sombra. Capítulos numerados que alternan lado foto/texto. La foto se descubre con clip-path en ciclo desde abajo, izquierda y derecha (nunca desde arriba), con parallax; título e intro suben por líneas.
 4. **Atractivos** (`Atractivos.astro`): "Otros lugares para conocer". Tarjetas con foto cuadrada que aparecen de a una (`ScrollTrigger.batch`, escalonadas si entran juntas).
 5. **Noche** (`Noche.astro`): "En la noche...". Sección fija una pantalla de scroll: el título aparece letra por letra con desenfoque y luego la foto `desert-atacama-night.jpg` se abre en un círculo desde el centro del cielo. El usuario prefiere esta versión (se probó adelantar el título y se descartó).
+
 - **Página `/paisajes/[slug]`**: provisional, muestra la historia completa de cada paisaje. Falta diseñarla.
 
 ## Decisiones descartadas
