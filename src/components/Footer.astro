@@ -1,0 +1,59 @@
+---
+import { getCollection } from 'astro:content'
+import { site } from '@/config/site'
+
+const paisajes = (await getCollection('paisajes')).sort((a, b) => a.data.order - b.data.order)
+
+const columns = [
+  {
+    title: 'Explorar',
+    links: [
+      { href: '/#paisajes', label: 'Paisajes' },
+      { href: '/#atractivos', label: 'Otros lugares' },
+      { href: '/#noche', label: 'En la noche' },
+      { href: '/#antes-de-viajar', label: 'Antes de viajar' },
+    ],
+  },
+  {
+    title: 'Paisajes',
+    links: paisajes.map((paisaje) => ({
+      href: `/paisajes/${paisaje.id}`,
+      label: paisaje.data.title,
+    })),
+  },
+]
+
+const year = new Date().getFullYear()
+---
+
+<footer class="border-t border-dusk/20 bg-desert-night text-dusk">
+  <div class="mx-auto max-w-6xl px-6 py-12">
+    <div class="grid gap-10 sm:grid-cols-3">
+      <div>
+        <p class="text-lg font-medium text-sand">{site.name}</p>
+        <p class="mt-2 text-sm">
+          {site.location.name}, {site.location.country}
+        </p>
+      </div>
+
+      {columns.map((column) => (
+        <nav aria-label={column.title}>
+          <p class="text-sm font-medium text-sand">{column.title}</p>
+          <ul class="mt-3 space-y-2 text-sm">
+            {column.links.map((link) => (
+              <li>
+                <a href={link.href} class="transition-colors hover:text-gold">
+                  {link.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      ))}
+    </div>
+
+    <p class="mt-12 border-t border-dusk/20 pt-6 text-sm">
+      © {year} · Creado por {site.author}
+    </p>
+  </div>
+</footer>
