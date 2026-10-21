@@ -4,7 +4,12 @@ summary: Una mano gigante que emerge de la arena en medio de la nada. Es una de 
 order: 1
 location: Ruta 5 Norte, a 75 km al sur de Antofagasta
 cover: ../../assets/images/mano-del-desierto.jpg
-coverAlt: Escultura de la Mano del Desierto emergiendo de la arena
+coverAlt: La Mano del Desierto al atardecer, con el cielo anaranjado sobre los cerros
+coverCredit:
+  author: Nicolas Valdes Ortega
+  license: CC BY-SA 4.0
+  licenseUrl: https://creativecommons.org/licenses/by-sa/4.0/deed.es
+  url: https://commons.wikimedia.org/wiki/File:La_Mano_del_Desierto,_Panoramica.jpg
 facts:
   - label: Autor
     value: Mario Irarrázabal

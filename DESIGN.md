@@ -49,6 +49,11 @@ typography:
     fontWeight: 400
     lineHeight: 1.33
     letterSpacing: '0.3em'
+  credit:
+    fontFamily: 'Outfit, sans-serif'
+    fontSize: '0.8125rem'
+    fontWeight: 400
+    lineHeight: 1.4
 rounded:
   sm: '6px'
   card: '16px'
@@ -267,7 +272,11 @@ Fondo sombra del desierto y texto cielo rosado, sin animación. Tres columnas de
 
 ### Chapter Reveal (componente propio)
 
-Es la firma del sitio. La foto se descubre con una máscara (`inset`, 1.2 s, `expo.inOut`) y, dentro de ella, la imagen hace parallax (±8 %) mientras se recorre. Después entran el número (sube 40px), el título y la introducción por líneas con máscara (SplitText, `expo.out`), los metadatos con un fundido y el enlace desde la izquierda. Se dispara una sola vez, cuando el capítulo llega al 70 % de la ventana.
+Es la firma del sitio. La foto se descubre con una máscara (`inset`, `mask` 0,9 s, `expo.inOut`) y, dentro de ella, la imagen hace parallax (±8 %) mientras se recorre. Casi a la vez entran el número (sube `rise` 16px), el título y la introducción por líneas con máscara (SplitText, `text` 0,6 s, `expo.out`), los metadatos con un fundido y el enlace desde la izquierda: todo legible en 1 s. Se dispara una sola vez, cuando el capítulo llega al 80 % de la ventana.
+
+### Photo Credit (componente propio)
+
+Toda foto lleva su crédito dentro de la imagen, abajo a la derecha (`PhotoCredit.astro`): "Foto: autor · licencia", con enlaces a la fuente y a la licencia. Texto `credit` (13px) en arena al 90 % sobre un degradado de `desert-night` al 70 % que sube desde el borde inferior, así se lee sobre cualquier foto. Los datos salen del campo `coverCredit` de cada ficha (obligatorio en el esquema). En la noche va fuera del círculo, porque en móvil el círculo no alcanza la esquina inferior.
 
 ### Night Reveal (componente propio)
 
@@ -290,6 +299,7 @@ Las estrellas del canvas (`src/lib/starfield.ts`) tienen un núcleo nítido con 
 - **Do** dar a cada animación una alternativa con `prefers-reduced-motion`: el contenido nunca depende de que la animación se ejecute.
 - **Do** usar `ease-out-expo` (`cubic-bezier(0.16, 1, 0.3, 1)`) o `expo.out` en las entradas, y `expo.inOut` en las máscaras.
 - **Do** cargar todas las fotos con `<Picture>` en AVIF y WebP, con `widths` y `sizes` reales. Solo el hero va con `eager` y `fetchpriority="high"`.
+- **Do** usar solo fotos con autor y licencia conocidos, y mostrar su crédito con `PhotoCredit` dentro de la imagen.
 
 ### Don't:
 

@@ -5,7 +5,12 @@ order: 4
 location: Salar de Aguas Calientes, altiplano de Atacama
 altitudeMeters: 4000
 cover: ../../assets/images/piedras-rojas.jpg
-coverAlt: Rocas rojas junto a la laguna turquesa del Salar de Aguas Calientes
+coverAlt: Rocas rojas junto a la laguna del Salar de Aguas Calientes, con una persona caminando y cerros de fondo
+coverCredit:
+  author: Diego Jimenez
+  license: CC0
+  licenseUrl: https://creativecommons.org/publicdomain/zero/1.0/deed.es
+  url: https://commons.wikimedia.org/wiki/File:Walking_Through_The_Desert_(Unsplash).jpg
 ---
 
 Al sur de las lagunas altiplánicas, el camino hacia Argentina pasa junto al Salar de Aguas Calientes. En su orilla aparece un campo de rocas rojas que contrasta con todo lo que lo rodea.

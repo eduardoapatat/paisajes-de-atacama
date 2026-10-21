@@ -19,6 +19,10 @@
   --text-8xl--line-height: 1.1;
   --text-9xl--line-height: 1.1;
 
+  /* Crédito de foto: más chico que el texto, pero sin bajar de 13px */
+  --text-credit: 0.8125rem;
+  --text-credit--line-height: 1.4;
+
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
 }
 

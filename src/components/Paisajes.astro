@@ -1,6 +1,7 @@
 ---
 import { Picture } from 'astro:assets'
 import { getCollection } from 'astro:content'
+import PhotoCredit from '@/components/PhotoCredit.astro'
 import { formatAltitude, formatChapter, keepNumbersTogether } from '@/lib/format'
 
 const paisajes = (await getCollection('paisajes')).sort((a, b) => a.data.order - b.data.order)
@@ -46,6 +47,7 @@ const paisajes = (await getCollection('paisajes')).sort((a, b) => a.data.order -
                 class="h-full w-full object-cover"
               />
             </div>
+            <PhotoCredit {...data.coverCredit} />
           </div>
 
           <div class="lg:col-span-5">

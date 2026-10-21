@@ -6,6 +6,11 @@ location: Campo geotérmico El Tatio, cordillera de los Andes
 altitudeMeters: 4320
 cover: ../../assets/images/geiseres-del-tatio.jpg
 coverAlt: Columnas de vapor de los géiseres del Tatio al amanecer
+coverCredit:
+  author: Diego Delso
+  license: CC BY-SA 4.0
+  licenseUrl: https://creativecommons.org/licenses/by-sa/4.0/deed.es
+  url: https://commons.wikimedia.org/wiki/File:G%C3%A9iseres_del_Tatio,_Atacama,_Chile,_2016-02-01,_DD_51-53_HDR.JPG
 ---
 
 El Tatio es uno de los campos de géiseres más altos del mundo y el más grande del hemisferio sur. Está en un valle rodeado de volcanes, a unos 90 kilómetros de San Pedro de Atacama.

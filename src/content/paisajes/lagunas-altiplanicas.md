@@ -5,7 +5,12 @@ order: 2
 location: Altiplano de Socaire, Reserva Nacional Los Flamencos
 altitudeMeters: 4140
 cover: ../../assets/images/lagunas-altiplanicas.jpg
-coverAlt: Laguna Miscanti con el cerro Miscanti de fondo
+coverAlt: Laguna Miscanti reflejando el cerro Miscanti y los pastos dorados del altiplano
+coverCredit:
+  author: Godot13
+  license: CC BY-SA 4.0
+  licenseUrl: https://creativecommons.org/licenses/by-sa/4.0/deed.es
+  url: https://commons.wikimedia.org/wiki/File:Laguna_Miscanti_(Antofagasta,_Chile)_02.jpg
 ---
 
 Subiendo desde el Salar de Atacama hacia el altiplano, el camino llega a dos lagunas que parecen pintadas: Miscanti y Miñiques. El agua es de un azul profundo que contrasta con el amarillo del pasto y el blanco de las orillas.

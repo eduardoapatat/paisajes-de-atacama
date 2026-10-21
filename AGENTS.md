@@ -57,10 +57,11 @@ Paleta cálida sacada de la foto del hero (tokens en `src/styles/global.css`):
 
 ## Contenido (colecciones en `src/content.config.ts`)
 
-- `paisajes` (`src/content/paisajes/*.md`): 6 lugares. Campos: `title`, `intro`, `order`, `location`, `altitudeMeters`, `cover` (obligatoria), `coverAlt` (obligatorio). El cuerpo cuenta cómo se formó, qué se ve y cuándo ir.
-- `atractivos` (`src/content/atractivos/*.md`): lugares que no son paisajes (por ahora La Mano del Desierto). Campos: `title`, `summary`, `order`, `location`, `facts` (hasta 3 pares label/value), `cover` y `coverAlt` obligatorios.
+- `paisajes` (`src/content/paisajes/*.md`): 6 lugares. Campos: `title`, `intro`, `order`, `location`, `altitudeMeters`, `cover` (obligatoria), `coverAlt` y `coverCredit` (obligatorios). El cuerpo cuenta cómo se formó, qué se ve y cuándo ir.
+- `atractivos` (`src/content/atractivos/*.md`): lugares que no son paisajes (por ahora La Mano del Desierto). Campos: `title`, `summary`, `order`, `location`, `facts` (hasta 3 pares label/value), `cover`, `coverAlt` y `coverCredit` obligatorios.
 - `faqs` (`src/content/faqs.json`): preguntas "Antes de viajar" (clima, altura, preparación). Aún no tienen sección.
 - Las fotos son obligatorias: si falta un archivo, el build falla con `ImageNotFound`.
+- Toda foto debe tener autor y licencia conocidos. `coverCredit` lleva `author`, `license`, `licenseUrl` y `url` (página de la foto); `PhotoCredit.astro` lo muestra dentro de la imagen, abajo. Los créditos también van en el README. Las fotos de Wikimedia Commons se usan en la versión de hasta 3840 px que publica Commons (no se recomprimen con otras herramientas).
 
 ## Secciones (en orden en `src/pages/index.astro`)
 
@@ -86,7 +87,7 @@ Paleta cálida sacada de la foto del hero (tokens en `src/styles/global.css`):
 
 - Sección "Antes de viajar" (usa la colección `faqs`); en el navbar y el footer "Antes de viajar" va como texto sin enlace; al crearla, darle `id="antes-de-viajar"` y agregar el `href` en `Navbar.astro` y `Footer.astro`.
 - Diseñar la página de detalle `/paisajes/[slug]` y decidir si los atractivos tienen página propia o enlace en el navbar.
-- `geiseres-del-tatio.jpg` pesa 9 MB (8688 px de ancho); conviene reducirla a unos 3000 px.
+- La foto del hero (`desert-atacama-hero.jpg`) no tiene crédito: buscar una con autor y licencia conocidos.
 - Si el servidor de desarrollo muestra "0 lugares", reiniciarlo: no toma colecciones nuevas en caliente.
 
 ## Development

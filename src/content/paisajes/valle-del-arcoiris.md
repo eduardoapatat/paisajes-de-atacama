@@ -5,7 +5,12 @@ order: 6
 location: Quebrada de Rainales, precordillera de Atacama
 altitudeMeters: 3000
 cover: ../../assets/images/valle-del-arcoiris.jpg
-coverAlt: Cerros de colores del Valle del Arcoíris
+coverAlt: Cerro con capas rojas, verdes y blancas en el Valle del Arcoíris
+coverCredit:
+  author: Diego Delso
+  license: CC BY-SA 4.0
+  licenseUrl: https://creativecommons.org/licenses/by-sa/4.0/deed.es
+  url: https://commons.wikimedia.org/wiki/File:Valle_Arcoiris,_R%C3%ADo_Grande,_Chile,_2016-02-05,_DD_26.JPG
 ---
 
 Camino a Calama, la quebrada de Rainales esconde un valle donde los cerros tienen franjas de colores. Es menos visitado que otros lugares de Atacama, y por eso es más tranquilo.

@@ -1,13 +1,14 @@
 ---
 import { Picture } from 'astro:assets'
 import nightImage from '@/assets/images/valle-de-la-luna-noche.jpg'
+import PhotoCredit from '@/components/PhotoCredit.astro'
 
 // Foto con licencia CC BY 4.0: el crédito debe quedar visible y enlazado
 const credit = {
   author: 'P. Horálek/ESO',
-  href: 'https://www.eso.org/public/images/potw2348a/',
+  url: 'https://www.eso.org/public/images/potw2348a/',
   license: 'CC BY 4.0',
-  licenseHref: 'https://creativecommons.org/licenses/by/4.0/deed.es',
+  licenseUrl: 'https://creativecommons.org/licenses/by/4.0/deed.es',
 }
 ---
 
@@ -49,20 +50,11 @@ const credit = {
     </h2>
   </div>
 
-  <p
-    data-noche-credit
-    data-reveal
-    class="absolute right-5 bottom-4 text-xs text-sand/70 sm:right-8"
-  >
-    Foto:{' '}
-    <a href={credit.href} class="underline-offset-2 hover:text-sand hover:underline">
-      {credit.author}
-    </a>
-    {' · '}
-    <a href={credit.licenseHref} class="underline-offset-2 hover:text-sand hover:underline">
-      {credit.license}
-    </a>
-  </p>
+  <!--
+    Fuera del círculo: en móvil el círculo no alcanza la esquina inferior y lo
+    recortaría. Aparece con su propio fundido cuando la foto ya está abierta.
+  -->
+  <PhotoCredit {...credit} data-noche-credit data-reveal class="sm:px-8" />
 </section>
 
 <script>

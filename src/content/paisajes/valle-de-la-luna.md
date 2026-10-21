@@ -5,7 +5,12 @@ order: 1
 location: Cordillera de la Sal, Reserva Nacional Los Flamencos
 altitudeMeters: 2500
 cover: ../../assets/images/valle-de-la-luna.jpg
-coverAlt: Crestas de sal y dunas del Valle de la Luna
+coverAlt: El Anfiteatro del Valle de la Luna, una pared de roca iluminada por el sol de la tarde sobre arena y sal
+coverCredit:
+  author: Diego Delso
+  license: CC BY-SA 4.0
+  licenseUrl: https://creativecommons.org/licenses/by-sa/4.0/deed.es
+  url: https://commons.wikimedia.org/wiki/File:Anfiteatro,_Valle_de_la_Luna,_San_Pedro_de_Atacama,_Chile,_2016-02-01,_DD_165.JPG
 ---
 
 A pocos kilómetros de San Pedro de Atacama, la Cordillera de la Sal forma un paisaje que parece de otro planeta. De ahí viene su nombre: sus crestas afiladas, sus dunas y sus cráteres recuerdan a la superficie de la Luna.

@@ -2,6 +2,15 @@ import { defineCollection } from 'astro:content'
 import { file, glob } from 'astro/loaders'
 import { z } from 'astro/zod'
 
+// Crédito obligatorio de cada foto: se muestra dentro de la imagen, abajo,
+// con enlace a la fuente y a la licencia (las CC BY lo exigen)
+const coverCredit = z.object({
+  author: z.string(),
+  license: z.string(),
+  licenseUrl: z.string().url(),
+  url: z.string().url(),
+})
+
 const paisajes = defineCollection({
   loader: glob({ pattern: '**/*.md', base: './src/content/paisajes' }),
   schema: ({ image }) =>
@@ -15,6 +24,7 @@ const paisajes = defineCollection({
       // Foto obligatoria en src/assets/images/ (Astro la optimiza)
       cover: image(),
       coverAlt: z.string(),
+      coverCredit,
     }),
 })
 
@@ -34,6 +44,7 @@ const atractivos = defineCollection({
       // Foto obligatoria en src/assets/images/ (Astro la optimiza)
       cover: image(),
       coverAlt: z.string(),
+      coverCredit,
     }),
 })
 

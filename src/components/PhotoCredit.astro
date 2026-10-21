@@ -1,0 +1,35 @@
+---
+import type { HTMLAttributes } from 'astro/types'
+
+interface Props extends HTMLAttributes<'p'> {
+  author: string
+  license: string
+  licenseUrl: string
+  url: string
+}
+
+const { author, license, licenseUrl, url, class: className, ...rest } = Astro.props
+---
+
+<!--
+  Crédito dentro de la foto, abajo a la derecha. El degradado asegura que se lea
+  sobre cualquier imagen; el contenedor padre debe ser `relative`.
+-->
+<p
+  class:list={[
+    'pointer-events-none absolute inset-x-0 bottom-0 flex justify-end bg-linear-to-t from-desert-night/70 to-transparent px-3 pt-10 pb-2 text-credit text-sand/90',
+    className,
+  ]}
+  {...rest}
+>
+  <span class="pointer-events-auto">
+    Foto:{' '}
+    <a href={url} class="underline-offset-2 hover:text-sand hover:underline">
+      {author}
+    </a>
+    {' · '}
+    <a href={licenseUrl} class="underline-offset-2 hover:text-sand hover:underline">
+      {license}
+    </a>
+  </span>
+</p>

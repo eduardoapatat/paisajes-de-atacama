@@ -5,7 +5,12 @@ order: 5
 location: Salar de Atacama
 altitudeMeters: 2300
 cover: ../../assets/images/laguna-cejar.jpg
-coverAlt: Laguna Cejar en medio del Salar de Atacama
+coverAlt: Agua turquesa de la laguna Cejar junto a una orilla de sal blanca
+coverCredit:
+  author: Johan Bilien
+  license: CC BY 2.0
+  licenseUrl: https://creativecommons.org/licenses/by/2.0/deed.es
+  url: https://commons.wikimedia.org/wiki/File:Laguna_Cejas.jpg
 ---
 
 En medio del Salar de Atacama, el salar más grande de Chile, hay varias lagunas que rompen la extensión blanca de la sal. Las más conocidas son Cejar y Tebinquinche.
