@@ -37,6 +37,7 @@ Objetivo del portafolio: demostrar dominio de Astro (colecciones de contenido, r
   - `setup` recibe `reduceMotion` y `afterFonts(fn)`: todo lo que use SplitText va dentro de `afterFonts` para medir con la fuente final.
 - Elementos con `data-reveal` quedan ocultos por CSS (solo con JS y sin reduced motion) hasta que GSAP los muestra con `autoAlpha`. Si una animación no se ejecuta, el contenido queda invisible: revisar eso primero.
 - `src/lib/format.ts`: `formatAltitude` y `formatChapter`.
+- `src/lib/starfield.ts`: cielo de estrellas en canvas 2D. GSAP anima su `state` (`revealEnter`, `revealPin`, `spin`, `opacity`) y el canvas lo dibuja con `gsap.ticker` solo mientras está en pantalla. Cada ScrollTrigger anima su propio valor para no pisarse.
 
 ## Diseño
 
@@ -65,7 +66,7 @@ Paleta cálida sacada de la foto del hero (tokens en `src/styles/global.css`):
 2. **Hero** (`Hero.astro`): foto `desert-atacama-hero.jpg` a pantalla completa, título con SplitText por palabras. Al hacer scroll queda fijo sin agregar espacio (`pinSpacing: false`) y la sección siguiente lo tapa como cortina; la foto se acerca un poco y el texto se desvanece.
 3. **Paisajes** (`Paisajes.astro`): cortina con esquinas redondeadas y sombra. Capítulos numerados que alternan lado foto/texto. La foto se descubre con clip-path en ciclo desde abajo, izquierda y derecha (nunca desde arriba), con parallax; título e intro suben por líneas.
 4. **Atractivos** (`Atractivos.astro`): "Otros lugares para conocer". Tarjetas con foto cuadrada que aparecen de a una (`ScrollTrigger.batch`, escalonadas si entran juntas).
-5. **Noche** (`Noche.astro`): "En la noche...". Sección fija una pantalla de scroll: el título aparece letra por letra con desenfoque y luego la foto `valle-de-la-luna-noche.jpg` (Vía Láctea sobre el Valle de la Luna, P. Horálek/ESO, CC BY 4.0, con crédito visible en la sección) se abre en un círculo desde el centro del cielo. El usuario prefiere esta versión (se probó adelantar el título y se descartó).
+5. **Noche** (`Noche.astro`): "En la noche...". Mientras la sección sube aparecen un resplandor de atardecer y estrellas dibujadas en canvas (`src/lib/starfield.ts`, de las más brillantes a las tenues, se apartan del cursor en escritorio). Sección fija una pantalla de scroll: el título aparece letra por letra con desenfoque y luego la foto `valle-de-la-luna-noche.jpg` (Vía Láctea sobre el Valle de la Luna, P. Horálek/ESO, CC BY 4.0, con crédito visible en la sección) se abre en un círculo desde el centro del cielo. El usuario prefiere esta versión (se probó adelantar el título y se descartó).
 6. **Footer** (`Footer.astro`): fondo `desert-night`, texto `dusk` y bordes `dusk/20`, sin animación. Tres columnas: nombre y ubicación, "Explorar" (anclas de secciones, incluye `#antes-de-viajar`) y "Paisajes" (enlaces a `/paisajes/[slug]` desde la colección). Abajo, año y "Creado por" con `site.author`.
 
 - **Página `/paisajes/[slug]`**: provisional, muestra la historia completa de cada paisaje. Falta diseñarla.

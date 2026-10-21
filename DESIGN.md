@@ -243,7 +243,13 @@ Es la firma del sitio. La foto se descubre con una máscara (`inset`, 1.2 s, `ex
 
 ### Night Reveal (componente propio)
 
-Sección fija durante una pantalla de scroll. El título aparece letra por letra con desenfoque (de 10px a 0) y luego la foto nocturna se abre en un círculo desde el centro del cielo, de 0 % a 75 %, con un zoom de 1.4 a 1.
+Sección fija durante una pantalla de scroll, en tres capas: resplandor de atardecer, cielo de estrellas en canvas y la foto.
+
+1. **Entrada:** mientras la sección sube, aparece un resplandor `dusk` en el horizonte (del 30 % abajo a transparente arriba) y salen las estrellas del canvas, primero las más brillantes, como al oscurecer.
+2. **Tramo fijo:** terminan de salir las estrellas, el resplandor se apaga y el título aparece letra por letra con desenfoque (de 10px a 0).
+3. **Foto:** se abre en un círculo desde el centro del cielo, de 0 % a 75 %, con un zoom de 1.4 a 1, y tapa el canvas. El crédito de la foto aparece al final.
+
+Las estrellas del canvas (`src/lib/starfield.ts`) tienen un núcleo nítido con halo suave y parpadean cada una a su ritmo. La mayoría son arena; unas pocas son dorado claro, cielo rosado o el celeste pálido del cielo del hero. El cielo gira apenas con el scroll alrededor de un punto bajo el horizonte. En dispositivos con mouse, las estrellas se apartan suavemente del cursor (radio 140px). GSAP anima los valores y el canvas solo los dibuja con `gsap.ticker`, y únicamente mientras está en pantalla. Con reduced motion no se crea el canvas: la foto queda abierta desde el inicio.
 
 ## Do's and Don'ts
 

@@ -12,6 +12,20 @@ const credit = {
 ---
 
 <section id="noche" data-noche class="relative h-svh overflow-hidden bg-desert-night">
+  <!--
+    Resplandor del atardecer en el horizonte: la capa externa aparece al entrar
+    y la interna se apaga mientras salen las estrellas (cada una con su trigger)
+  -->
+  <div aria-hidden="true" data-noche-dusk class="absolute inset-0 opacity-0">
+    <div
+      data-noche-dusk-glow
+      class="absolute inset-0 bg-linear-to-t from-dusk/30 via-dusk/5 to-transparent"
+    ></div>
+  </div>
+
+  <!-- Estrellas dibujadas en canvas: la foto las tapa al abrirse -->
+  <canvas aria-hidden="true" data-noche-stars class="absolute inset-0 h-full w-full"></canvas>
+
   <!-- La foto se abre en un círculo centrado en el cielo -->
   <div data-noche-media data-reveal class="absolute inset-0">
     <Picture
@@ -52,20 +66,44 @@ const credit = {
 </section>
 
 <script>
-  import { animate, gsap, SplitText } from '@/lib/gsap'
+  import { animate, gsap, ScrollTrigger, SplitText } from '@/lib/gsap'
+  import { createStarfield } from '@/lib/starfield'
 
   const section = document.querySelector<HTMLElement>('[data-noche]')
   const title = section?.querySelector<HTMLElement>('[data-noche-title]')
+  const canvas = section?.querySelector<HTMLCanvasElement>('[data-noche-stars]')
 
-  if (section && title) {
+  if (section && title && canvas) {
     animate(section, ({ reduceMotion, afterFonts }) => {
+      // Con movimiento reducido la foto ya está abierta y sus estrellas bastan
       if (reduceMotion) return
+
+      const stars = createStarfield(canvas)
+
+      // La foto carga en diferido, pero si el scroll salta directo a la sección
+      // fija el navegador no la pide: se fuerza la carga unas pantallas antes
+      const image = section.querySelector<HTMLImageElement>('[data-noche-image]')
+      ScrollTrigger.create({
+        trigger: section,
+        start: 'top 300%',
+        once: true,
+        onEnter: () => image && (image.loading = 'eager'),
+      })
+
+      // Mientras la sección sube, oscurece y salen las estrellas más brillantes
+      gsap
+        .timeline({
+          scrollTrigger: { trigger: section, start: 'top bottom', end: 'top top', scrub: true },
+        })
+        .fromTo(stars.state, { revealEnter: 0 }, { revealEnter: 0.5, ease: 'none' }, 0)
+        .fromTo('[data-noche-dusk]', { autoAlpha: 0 }, { autoAlpha: 1, ease: 'none' }, 0)
 
       afterFonts(() => {
         const split = SplitText.create(title, { type: 'chars' })
 
-        // La sección queda fija y todo avanza con el scroll: primero el título
-        // letra por letra, después la foto se abre desde el centro del cielo
+        // La sección queda fija y todo avanza con el scroll: terminan de salir las
+        // estrellas y el título letra por letra, después la foto se abre desde el
+        // centro del cielo y tapa el canvas. El cielo gira apenas todo el tramo.
         gsap
           .timeline({
             scrollTrigger: {
@@ -77,6 +115,19 @@ const credit = {
             },
           })
           .set(title, { autoAlpha: 1 }, 0)
+          .fromTo(
+            stars.state,
+            { revealPin: 0 },
+            { revealPin: 0.5, duration: 0.45, ease: 'none' },
+            0,
+          )
+          .fromTo(stars.state, { spin: 0 }, { spin: 0.04, duration: 1.55, ease: 'none' }, 0)
+          .fromTo(
+            '[data-noche-dusk-glow]',
+            { autoAlpha: 1 },
+            { autoAlpha: 0, duration: 0.4, ease: 'none' },
+            0,
+          )
           .fromTo(
             split.chars,
             { autoAlpha: 0, y: 40, filter: 'blur(10px)' },
@@ -97,7 +148,11 @@ const credit = {
           )
           // El crédito aparece cuando la foto ya está abierta
           .fromTo('[data-noche-credit]', { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.2 }, 1.2)
+          // Con la foto completa el canvas ya no se ve: deja de dibujar
+          .to(stars.state, { opacity: 0, duration: 0.15, ease: 'none' }, 1.35)
       })
+
+      return () => stars.destroy()
     })
   }
 </script>
