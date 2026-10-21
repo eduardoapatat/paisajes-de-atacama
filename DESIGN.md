@@ -46,9 +46,9 @@ typography:
   label:
     fontFamily: 'Outfit, sans-serif'
     fontSize: '0.75rem'
-    fontWeight: 500
+    fontWeight: 400
     lineHeight: 1.33
-    letterSpacing: '0.35em'
+    letterSpacing: '0.3em'
 rounded:
   sm: '6px'
   card: '16px'
@@ -165,7 +165,7 @@ Cuatro colores cálidos del atardecer en el altiplano: dos neutros que se altern
 - **Body large** (400, 1.125rem, 1.625): introducción de cada capítulo y cuerpo de la página de detalle.
 - **Body** (400, 1rem, 1.5): texto general y resúmenes de los atractivos.
 - **Meta** (400, 0.875rem): ubicación y altitud, enlaces del pie.
-- **Label** (500, 0.75rem → 0.875rem desde `sm`, tracking 0.35em, en mayúsculas): etiquetas sobre los títulos ("PAISAJES", "ATRACTIVOS", "DESIERTO DE ATACAMA · CHILE").
+- **Label** (400, 0.75rem, tracking 0.3em, en mayúsculas, `sand` al 70 %): solo la indicación "Desliza" al pie del hero.
 
 ### Named Rules
 
@@ -267,6 +267,7 @@ Las estrellas del canvas (`src/lib/starfield.ts`) tienen un núcleo nítido con 
 
 - **Don't** poner precios, reservas, horarios ni botones de compra: no es una agencia.
 - **Don't** usar texto dorado chico sobre fondo arena.
+- **Don't** poner etiquetas en mayúsculas sobre los títulos ("PAISAJES" sobre "6 lugares del Desierto de Atacama"): repiten lo que ya dice el título y sobre foto no se leen.
 - **Don't** bajar el interlineado de los titulares de 1.3 ni parchar las máscaras de SplitText con padding.
 - **Don't** descubrir una foto de capítulo desde arriba.
 - **Don't** oscurecer el hero hasta un color sólido antes de la siguiente sección.

@@ -82,7 +82,10 @@
       },
       "body": { "displayName": "Body", "purpose": "Texto general." },
       "meta": { "displayName": "Meta", "purpose": "Ubicación, altitud y enlaces del pie." },
-      "label": { "displayName": "Label", "purpose": "Etiquetas en mayúsculas sobre los títulos." }
+      "label": {
+        "displayName": "Label",
+        "purpose": "Solo la indicación \"Desliza\" al pie del hero."
+      }
     },
     "shadows": [
       {
@@ -149,12 +152,12 @@
       "css": ".ds-link-story { display: inline-flex; align-items: center; gap: 8px; padding-bottom: 4px; border-bottom: 1px solid #e2a93b; color: #1a1411; font-family: Outfit, sans-serif; font-size: 0.875rem; font-weight: 500; text-decoration: none; } .ds-link-arrow { transition: transform 150ms; } .ds-link-story:hover .ds-link-arrow { transform: translateX(4px); } .ds-link-story:focus-visible { outline: 2px solid #e2a93b; outline-offset: 4px; }"
     },
     {
-      "name": "Etiqueta de sección",
-      "kind": "chip",
+      "name": "Indicación de scroll",
+      "kind": "custom",
       "refersTo": "label",
-      "description": "Etiqueta en mayúsculas con tracking amplio sobre los títulos de sección.",
-      "html": "<p class=\"ds-label\">Paisajes</p>",
-      "css": ".ds-label { margin: 0; font-family: Outfit, sans-serif; font-size: 0.75rem; font-weight: 500; letter-spacing: 0.35em; text-transform: uppercase; color: rgb(26 20 17 / 0.6); }"
+      "description": "Indicación \"Desliza\" al pie del hero, en mayúsculas con tracking amplio.",
+      "html": "<p class=\"ds-label\">Desliza</p>",
+      "css": ".ds-label { margin: 0; padding: 12px; background: #1a1411; font-family: Outfit, sans-serif; font-size: 0.75rem; font-weight: 400; letter-spacing: 0.3em; text-transform: uppercase; color: rgb(245 238 230 / 0.7); }"
     },
     {
       "name": "Capítulo de paisaje",
@@ -240,6 +243,7 @@
     "donts": [
       "Don't poner precios, reservas, horarios ni botones de compra: no es una agencia.",
       "Don't usar texto dorado chico sobre fondo arena.",
+      "Don't poner etiquetas en mayúsculas sobre los títulos (\"PAISAJES\" sobre \"6 lugares del Desierto de Atacama\"): repiten lo que ya dice el título y sobre foto no se leen.",
       "Don't bajar el interlineado de los titulares de 1.3 ni parchar las máscaras de SplitText con padding.",
       "Don't descubrir una foto de capítulo desde arriba.",
       "Don't oscurecer el hero hasta un color sólido antes de la siguiente sección.",

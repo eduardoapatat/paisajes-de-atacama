@@ -13,13 +13,7 @@ const paisajes = (await getCollection('paisajes')).sort((a, b) => a.data.order -
   class="relative z-10 rounded-t-[2rem] bg-sand py-24 text-desert-night shadow-[0_-24px_60px_rgb(0_0_0/0.35)] sm:rounded-t-[3rem] sm:py-32"
 >
   <header data-paisajes-heading class="container-page max-w-3xl text-center">
-    <p
-      data-reveal
-      class="text-xs font-medium tracking-[0.35em] text-desert-night/60 uppercase sm:text-sm"
-    >
-      Paisajes
-    </p>
-    <h2 data-reveal class="mt-4 text-4xl text-desert-night sm:text-5xl">
+    <h2 data-reveal class="text-4xl text-desert-night sm:text-5xl">
       {paisajes.length} lugares del Desierto de Atacama
     </h2>
   </header>
