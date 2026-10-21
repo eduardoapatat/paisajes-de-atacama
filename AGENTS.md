@@ -35,7 +35,9 @@ Objetivo del portafolio: demostrar dominio de Astro (colecciones de contenido, r
 - `src/lib/gsap.ts`: registra plugins y exporta el helper `animate(scope, setup)`.
   - Usa `gsap.matchMedia` con dos condiciones opuestas (`motionOk` y `reduceMotion`) para que el setup se ejecute siempre; con una sola condición no corre cuando las animaciones están activadas.
   - `setup` recibe `reduceMotion` y `afterFonts(fn)`: todo lo que use SplitText va dentro de `afterFonts` para medir con la fuente final.
-- Elementos con `data-reveal` quedan ocultos por CSS (solo con JS y sin reduced motion) hasta que GSAP los muestra con `autoAlpha`. Si una animación no se ejecuta, el contenido queda invisible: revisar eso primero.
+  - `MOTION`: tokens de duración, curva, escalonado y distancia (ver "Motion" en `DESIGN.md`). Ninguna animación usa números sueltos; lo que se lee queda legible en 1 s o menos.
+  - `fadeIn(targets)`: aparición con reduced motion (solo opacidad, 0,2 s). Con reduced motion las secciones la usan en vez de no animar nada.
+- Elementos con `data-reveal` quedan ocultos por CSS (solo con JS y sin reduced motion) hasta que GSAP los muestra con `autoAlpha`. Respaldo en `global.css`: si GSAP no corre, se muestran a los 3 s. Por eso cada sección debe fijar sus estados iniciales al arrancar (con `fromTo` o `set`), no recién al entrar en pantalla.
 - `src/lib/format.ts`: `formatAltitude` y `formatChapter`.
 - `src/lib/starfield.ts`: cielo de estrellas en canvas 2D. GSAP anima su `state` (`revealEnter`, `revealPin`, `spin`, `opacity`) y el canvas lo dibuja con `gsap.ticker` solo mientras está en pantalla. Cada ScrollTrigger anima su propio valor para no pisarse.
 

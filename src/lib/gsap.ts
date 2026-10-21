@@ -81,4 +81,24 @@ export function animate(scope: Element, setup: (ctx: MotionContext) => void | ((
   return mm
 }
 
+/**
+ * Aparición para reduced motion: solo opacidad, corta y sin desplazamiento.
+ * Cada elemento se funde al entrar en pantalla. Llamarla dentro del setup de
+ * `animate` para que se revierta si cambia la preferencia.
+ */
+export function fadeIn(targets: Iterable<Element>) {
+  for (const target of targets) {
+    gsap.fromTo(
+      target,
+      { autoAlpha: 0 },
+      {
+        autoAlpha: 1,
+        duration: MOTION.fade,
+        ease: 'power1.out',
+        scrollTrigger: { trigger: target, start: MOTION.start, once: true },
+      },
+    )
+  }
+}
+
 export { gsap, ScrollTrigger, SplitText }

@@ -97,13 +97,17 @@ const single = atractivos.length === 1
 </section>
 
 <script>
-  import { animate, gsap, MOTION, ScrollTrigger } from '@/lib/gsap'
+  import { animate, fadeIn, gsap, MOTION, ScrollTrigger } from '@/lib/gsap'
 
   const section = document.querySelector<HTMLElement>('[data-atractivos]')
 
   if (section) {
     animate(section, ({ reduceMotion }) => {
-      if (reduceMotion) return
+      // Sin desplazamientos ni máscaras: cada bloque aparece con un fundido corto
+      if (reduceMotion) {
+        fadeIn(section.querySelectorAll('[data-atractivos-heading], [data-atractivo]'))
+        return
+      }
 
       const heading = section.querySelectorAll('[data-atractivos-heading] > *')
       const cards = section.querySelectorAll<HTMLElement>('[data-atractivo]')

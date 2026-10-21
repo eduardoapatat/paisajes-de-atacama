@@ -81,7 +81,10 @@ const paisajes = (await getCollection('paisajes')).sort((a, b) => a.data.order -
               class="group mt-8 inline-flex items-center gap-2 border-b border-gold pb-1 text-sm font-medium text-desert-night"
             >
               Leer su historia
-              <span aria-hidden="true" class="transition-transform group-hover:translate-x-1">
+              <span
+                aria-hidden="true"
+                class="transition-transform motion-safe:group-hover:translate-x-1"
+              >
                 →
               </span>
             </a>
@@ -93,13 +96,17 @@ const paisajes = (await getCollection('paisajes')).sort((a, b) => a.data.order -
 </section>
 
 <script>
-  import { animate, gsap, MOTION, SplitText } from '@/lib/gsap'
+  import { animate, fadeIn, gsap, MOTION, SplitText } from '@/lib/gsap'
 
   const section = document.querySelector<HTMLElement>('[data-paisajes]')
 
   if (section) {
     animate(section, ({ reduceMotion, afterFonts }) => {
-      if (reduceMotion) return
+      // Sin desplazamientos ni máscaras: cada bloque aparece con un fundido corto
+      if (reduceMotion) {
+        fadeIn(section.querySelectorAll('[data-paisajes-heading], [data-chapter]'))
+        return
+      }
 
       const chapters = section.querySelectorAll<HTMLElement>('[data-chapter]')
 

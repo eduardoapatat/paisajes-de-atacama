@@ -78,17 +78,14 @@
     }
   }
 
+  /*
+   * Reduced motion: menos y más suave, no cero. Se quita el scroll suave; los
+   * cambios de color siguen con su transición y lo que se mueve (flecha, presión
+   * del botón) se limita con `motion-safe:` en cada componente.
+   */
   @media (prefers-reduced-motion: reduce) {
     html {
       scroll-behavior: auto;
-    }
-
-    *,
-    *::before,
-    *::after {
-      animation-duration: 0.01ms !important;
-      animation-iteration-count: 1 !important;
-      transition-duration: 0.01ms !important;
     }
   }
 }
