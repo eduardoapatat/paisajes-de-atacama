@@ -1,0 +1,251 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-21T00:00:00Z",
+  "title": "Design System: Paisajes de Atacama",
+  "extensions": {
+    "colorMeta": {
+      "desert-night": {
+        "role": "neutral",
+        "displayName": "Sombra del desierto",
+        "canonical": "#1a1411",
+        "tonalRamp": [
+          "oklch(15% 0.012 50)",
+          "oklch(19% 0.012 50)",
+          "oklch(30% 0.012 50)",
+          "oklch(42% 0.012 50)",
+          "oklch(55% 0.012 50)",
+          "oklch(68% 0.012 50)",
+          "oklch(82% 0.012 50)",
+          "oklch(95% 0.012 50)"
+        ]
+      },
+      "sand": {
+        "role": "neutral",
+        "displayName": "Arena clara",
+        "canonical": "#f5eee6",
+        "tonalRamp": [
+          "oklch(15% 0.012 70)",
+          "oklch(27% 0.012 70)",
+          "oklch(39% 0.012 70)",
+          "oklch(51% 0.012 70)",
+          "oklch(63% 0.012 70)",
+          "oklch(75% 0.012 70)",
+          "oklch(87% 0.012 70)",
+          "oklch(95.5% 0.012 70)"
+        ]
+      },
+      "gold": {
+        "role": "primary",
+        "displayName": "Pasto dorado",
+        "canonical": "#e2a93b",
+        "tonalRamp": [
+          "oklch(15% 0.04 75)",
+          "oklch(27% 0.07 75)",
+          "oklch(39% 0.1 75)",
+          "oklch(51% 0.12 75)",
+          "oklch(63% 0.14 75)",
+          "oklch(77% 0.14 75)",
+          "oklch(87% 0.09 75)",
+          "oklch(95% 0.04 75)"
+        ]
+      },
+      "dusk": {
+        "role": "secondary",
+        "displayName": "Cielo rosado",
+        "canonical": "#d9a293",
+        "tonalRamp": [
+          "oklch(15% 0.03 35)",
+          "oklch(27% 0.045 35)",
+          "oklch(39% 0.06 35)",
+          "oklch(51% 0.07 35)",
+          "oklch(63% 0.07 35)",
+          "oklch(76% 0.07 35)",
+          "oklch(87% 0.045 35)",
+          "oklch(95% 0.02 35)"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "Título del hero y de la noche. Escala 3rem → 4.5rem (sm) → 6rem (lg)."
+      },
+      "headline": { "displayName": "Headline", "purpose": "Títulos de sección y de capítulo." },
+      "title": { "displayName": "Title", "purpose": "Título de las tarjetas de atractivos." },
+      "numeral": {
+        "displayName": "Numeral",
+        "purpose": "Números de capítulo en dorado, decorativos."
+      },
+      "body-lg": {
+        "displayName": "Body large",
+        "purpose": "Introducciones de capítulo y cuerpo de la página de detalle."
+      },
+      "body": { "displayName": "Body", "purpose": "Texto general." },
+      "meta": { "displayName": "Meta", "purpose": "Ubicación, altitud y enlaces del pie." },
+      "label": { "displayName": "Label", "purpose": "Etiquetas en mayúsculas sobre los títulos." }
+    },
+    "shadows": [
+      {
+        "name": "curtain",
+        "value": "0 -24px 60px rgb(0 0 0 / 0.35)",
+        "purpose": "Borde superior de la sección que sube sobre el hero."
+      },
+      {
+        "name": "floating",
+        "value": "0 10px 15px -3px rgb(26 20 17 / 0.4), 0 4px 6px -4px rgb(26 20 17 / 0.4)",
+        "purpose": "Cápsula del navbar."
+      }
+    ],
+    "motion": [
+      {
+        "name": "ease-out-expo",
+        "value": "cubic-bezier(0.16, 1, 0.3, 1)",
+        "purpose": "Entradas de texto y elementos (GSAP expo.out)."
+      },
+      {
+        "name": "mask-reveal",
+        "value": "expo.inOut, 1.2s",
+        "purpose": "Apertura de las máscaras de foto en capítulos y atractivos."
+      },
+      {
+        "name": "nav-toggle",
+        "value": "power3.out, 0.5s",
+        "purpose": "Ocultar o mostrar el navbar según la dirección del scroll."
+      },
+      {
+        "name": "scrub",
+        "value": "ScrollTrigger scrub: true",
+        "purpose": "Parallax, cortina del hero y apertura de la noche, ligados al scroll."
+      }
+    ],
+    "breakpoints": [
+      { "name": "sm", "value": "640px" },
+      { "name": "lg", "value": "1024px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Botón principal",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "El único botón relleno del sitio: Explorar, en el hero.",
+      "html": "<a class=\"ds-btn-primary\" href=\"#\">Explorar</a>",
+      "css": ".ds-btn-primary { display: inline-block; background: #e2a93b; color: #1a1411; font-family: Outfit, sans-serif; font-weight: 500; padding: 12px 24px; border-radius: 9999px; text-decoration: none; transition: background-color 150ms cubic-bezier(0.4, 0, 0.2, 1); } .ds-btn-primary:hover { background: #f5eee6; } .ds-btn-primary:focus-visible { outline: 2px solid #e2a93b; outline-offset: 4px; }"
+    },
+    {
+      "name": "Navbar en cápsula",
+      "kind": "nav",
+      "refersTo": "nav-pill",
+      "description": "Cápsula flotante con desenfoque de fondo; se oculta al bajar y reaparece al subir.",
+      "html": "<nav class=\"ds-nav\"><a class=\"ds-nav-link\" href=\"#\">Paisajes</a><a class=\"ds-nav-link\" href=\"#\">Antes de viajar</a></nav>",
+      "css": ".ds-nav { display: inline-flex; padding: 6px; border-radius: 9999px; border: 1px solid rgb(217 162 147 / 0.3); background: rgb(26 20 17 / 0.6); backdrop-filter: blur(12px); box-shadow: 0 10px 15px -3px rgb(26 20 17 / 0.4); font-family: Outfit, sans-serif; } .ds-nav-link { display: block; padding: 8px 16px; border-radius: 9999px; color: #f5eee6; text-decoration: none; white-space: nowrap; transition: color 150ms, background-color 150ms; } .ds-nav-link:hover { color: #e2a93b; background: rgb(217 162 147 / 0.15); } .ds-nav-link:focus-visible { outline: 2px solid #e2a93b; outline-offset: 4px; }"
+    },
+    {
+      "name": "Enlace Leer su historia",
+      "kind": "custom",
+      "refersTo": "link-story",
+      "description": "Enlace de capítulo con subrayado dorado y flecha que avanza en hover.",
+      "html": "<a class=\"ds-link-story\" href=\"#\">Leer su historia <span class=\"ds-link-arrow\" aria-hidden=\"true\">→</span></a>",
+      "css": ".ds-link-story { display: inline-flex; align-items: center; gap: 8px; padding-bottom: 4px; border-bottom: 1px solid #e2a93b; color: #1a1411; font-family: Outfit, sans-serif; font-size: 0.875rem; font-weight: 500; text-decoration: none; } .ds-link-arrow { transition: transform 150ms; } .ds-link-story:hover .ds-link-arrow { transform: translateX(4px); } .ds-link-story:focus-visible { outline: 2px solid #e2a93b; outline-offset: 4px; }"
+    },
+    {
+      "name": "Etiqueta de sección",
+      "kind": "chip",
+      "refersTo": "label",
+      "description": "Etiqueta en mayúsculas con tracking amplio sobre los títulos de sección.",
+      "html": "<p class=\"ds-label\">Paisajes</p>",
+      "css": ".ds-label { margin: 0; font-family: Outfit, sans-serif; font-size: 0.75rem; font-weight: 500; letter-spacing: 0.35em; text-transform: uppercase; color: rgb(26 20 17 / 0.6); }"
+    },
+    {
+      "name": "Capítulo de paisaje",
+      "kind": "card",
+      "refersTo": "curtain-section",
+      "description": "Número dorado, título, metadatos e introducción junto a una foto de esquinas suaves.",
+      "html": "<article class=\"ds-chapter\"><div class=\"ds-chapter-media\"></div><div><p class=\"ds-chapter-num\" aria-hidden=\"true\">01</p><h3 class=\"ds-chapter-title\">Valle de la Luna</h3><p class=\"ds-chapter-meta\">Cordillera de la Sal · 2.500 m s. n. m.</p><p class=\"ds-chapter-intro\">Crestas de sal, dunas y cuevas moldeadas por el viento durante miles de años.</p></div></article>",
+      "css": ".ds-chapter { display: grid; gap: 40px; padding: 32px; background: #f5eee6; color: #1a1411; font-family: Outfit, sans-serif; } .ds-chapter-media { aspect-ratio: 4 / 3; border-radius: 16px; background: linear-gradient(160deg, #d9a293, #e2a93b 60%, #1a1411); } .ds-chapter-num { margin: 0; font-size: 4.5rem; font-weight: 300; line-height: 1.3; color: #e2a93b; } .ds-chapter-title { margin: 16px 0 0; font-size: 1.875rem; font-weight: 600; line-height: 1.3; } .ds-chapter-meta { margin: 16px 0 0; font-size: 0.875rem; color: rgb(26 20 17 / 0.6); } .ds-chapter-intro { margin: 24px 0 0; font-size: 1.125rem; line-height: 1.625; color: rgb(26 20 17 / 0.8); }"
+    },
+    {
+      "name": "Tarjeta de atractivo",
+      "kind": "card",
+      "refersTo": "card-atractivo",
+      "description": "Foto cuadrada sin borde ni sombra, seguida de ubicación, título, resumen y datos.",
+      "html": "<div class=\"ds-card\"><div class=\"ds-card-media\"></div><p class=\"ds-card-meta\">Ruta 5 Norte, a 75 km al sur de Antofagasta</p><h3 class=\"ds-card-title\">La Mano del Desierto</h3></div>",
+      "css": ".ds-card { max-width: 320px; padding: 24px; background: #f5eee6; color: #1a1411; font-family: Outfit, sans-serif; } .ds-card-media { aspect-ratio: 1; border-radius: 16px; background: rgb(26 20 17 / 0.05); } .ds-card-meta { margin: 20px 0 0; font-size: 0.875rem; color: rgb(26 20 17 / 0.6); } .ds-card-title { margin: 8px 0 0; font-size: 1.5rem; font-weight: 600; line-height: 1.3; }"
+    },
+    {
+      "name": "Pie",
+      "kind": "custom",
+      "refersTo": "footer",
+      "description": "Pie oscuro con texto cielo rosado y columnas de enlaces.",
+      "html": "<footer class=\"ds-footer\"><p class=\"ds-footer-title\">Explorar</p><a class=\"ds-footer-link\" href=\"#\">Paisajes</a><a class=\"ds-footer-link\" href=\"#\">En la noche</a></footer>",
+      "css": ".ds-footer { display: flex; flex-direction: column; gap: 8px; padding: 48px 24px; background: #1a1411; color: #d9a293; border-top: 1px solid rgb(217 162 147 / 0.2); font-family: Outfit, sans-serif; font-size: 0.875rem; } .ds-footer-title { margin: 0 0 4px; font-weight: 500; color: #f5eee6; } .ds-footer-link { color: #d9a293; text-decoration: none; transition: color 150ms; } .ds-footer-link:hover { color: #e2a93b; } .ds-footer-link:focus-visible { outline: 2px solid #e2a93b; outline-offset: 4px; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "Bitácora del atardecer",
+    "overview": "El sitio se lee como una bitácora: capítulos numerados que avanzan con el scroll, bajo la luz cálida del altiplano al caer la tarde. Toda la paleta sale de una sola foto, la del hero: la sombra del desierto, la arena clara, el pasto dorado y el cielo rosado. Ningún color viene de fuera de ese paisaje.\n\nEl ánimo es cálido, sereno y cinematográfico. Hay poca interfaz en pantalla y mucha fotografía. El movimiento es lento, va ligado al scroll y sirve para descubrir: las fotos se abren con máscaras, los títulos suben por líneas y las secciones se superponen como cortinas. La densidad es baja: grandes márgenes verticales entre capítulos y una sola idea por pantalla.\n\nHay dos ambientes que se alternan: el oscuro (hero, noche y pie) para la fotografía a pantalla completa, y el claro, color arena, para las secciones de lectura (paisajes y atractivos). El paso de uno al otro es siempre una cortina, nunca un corte.",
+    "keyCharacteristics": [
+      "Paleta de cuatro colores, toda sacada de la foto del hero.",
+      "Una sola familia tipográfica (Outfit variable), con jerarquía por peso y tamaño.",
+      "Fotografía protagonista, siempre optimizada con `<Picture>` (AVIF y WebP).",
+      "Movimiento ligado al scroll con GSAP y siempre con alternativa para `prefers-reduced-motion`.",
+      "Plano por defecto: la profundidad viene de las capas que se superponen al hacer scroll, no de sombras."
+    ],
+    "rules": [
+      {
+        "name": "The One Photo Rule",
+        "body": "Todo color nuevo debe poder encontrarse en la foto del hero. Si no está en el paisaje, no entra en la paleta.",
+        "section": "colors"
+      },
+      {
+        "name": "The Gold Is Big Rule",
+        "body": "Sobre fondo arena, el dorado solo va en elementos grandes o decorativos (números de capítulo, subrayados, el botón). Nunca en texto chico: no tiene contraste suficiente.",
+        "section": "colors"
+      },
+      {
+        "name": "The Opacity Ladder Rule",
+        "body": "La jerarquía del texto en las secciones claras se hace con opacidades de `desert-night` (100, 80, 60 y 50 %), no con grises nuevos.",
+        "section": "colors"
+      },
+      {
+        "name": "The 1.3 Floor Rule",
+        "body": "Ningún titular baja de un interlineado de 1.3, ni siquiera desde `text-5xl`, donde Tailwind pone 1. SplitText recorta las líneas al alto de la línea y un valor menor corta las letras con cola (j, g, q). Se corrige con el token, nunca con padding en la máscara.",
+        "section": "typography"
+      },
+      {
+        "name": "The Balanced Headline Rule",
+        "body": "Los titulares llevan `text-wrap: balance` y los párrafos `text-wrap: pretty`.",
+        "section": "typography"
+      },
+      {
+        "name": "The One Idea Per Screen Rule",
+        "body": "Cada pantalla de scroll muestra una sola idea: un capítulo, un título o una foto. No se agrupan capítulos ni se comprimen los márgenes para que quepa más.",
+        "section": "layout"
+      },
+      {
+        "name": "The Curtain Rule",
+        "body": "Una sección clara que entra sobre una oscura lo hace como cortina: esquinas superiores redondeadas, sombra hacia arriba y `z-index` por encima. Nunca hay capas que oscurecen el hero hasta un color sólido.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do sacar todo color de los cuatro tokens (`desert-night`, `sand`, `gold`, `dusk`) y de sus opacidades.",
+      "Do usar fondo arena y texto sombra del desierto en las secciones de lectura.",
+      "Do dejar ocultos con `data-reveal` los elementos que GSAP va a revelar, y mostrarlos siempre con `autoAlpha`.",
+      "Do poner todo lo que use SplitText dentro de `afterFonts`, para que mida con la fuente final.",
+      "Do dar a cada animación una alternativa con `prefers-reduced-motion`: el contenido nunca depende de que la animación se ejecute.",
+      "Do usar `ease-out-expo` (`cubic-bezier(0.16, 1, 0.3, 1)`) o `expo.out` en las entradas, y `expo.inOut` en las máscaras.",
+      "Do cargar todas las fotos con `<Picture>` en AVIF y WebP, con `widths` y `sizes` reales. Solo el hero va con `eager` y `fetchpriority=\"high\"`."
+    ],
+    "donts": [
+      "Don't poner precios, reservas, horarios ni botones de compra: no es una agencia.",
+      "Don't usar texto dorado chico sobre fondo arena.",
+      "Don't bajar el interlineado de los titulares de 1.3 ni parchar las máscaras de SplitText con padding.",
+      "Don't descubrir una foto de capítulo desde arriba.",
+      "Don't oscurecer el hero hasta un color sólido antes de la siguiente sección.",
+      "Don't agregar íconos decorativos al azar a los costados de los paisajes.",
+      "Don't usar secuencias de imágenes por frame ni fotos verticales que se desplazan en el hero.",
+      "Don't poner sombras en tarjetas o fotos: la profundidad viene del scroll."
+    ]
+  }
+}
