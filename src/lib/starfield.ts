@@ -117,7 +117,11 @@ export function createStarfield(canvas: HTMLCanvasElement) {
     if (changed || !stars.length) createStars()
   }
 
-  function draw(time: number) {
+  function draw(time: number, deltaMs: number) {
+    // Suavizado del cursor independiente de la frecuencia de la pantalla:
+    // equivale a avanzar un 10 % por cuadro a 60 Hz
+    const follow = 1 - Math.pow(0.9, Math.min(deltaMs, 100) / (1000 / 60))
+
     ctx.clearRect(0, 0, width, height)
     const reveal = state.revealEnter + state.revealPin
     if (state.opacity <= 0.01 || reveal <= 0) return
@@ -150,8 +154,8 @@ export function createStarfield(canvas: HTMLCanvasElement) {
           targetY = (py / distance) * force
         }
       }
-      star.ox += (targetX - star.ox) * 0.1
-      star.oy += (targetY - star.oy) * 0.1
+      star.ox += (targetX - star.ox) * follow
+      star.oy += (targetY - star.oy) * follow
 
       const twinkle = 0.78 + 0.22 * Math.sin(time * star.rate + star.phase)
       const halo = star.size * HALO
@@ -167,7 +171,7 @@ export function createStarfield(canvas: HTMLCanvasElement) {
     ctx.globalAlpha = 1
   }
 
-  const tick = (time: number) => draw(time)
+  const tick = (time: number, deltaMs: number) => draw(time, deltaMs)
 
   function start() {
     if (running) return
