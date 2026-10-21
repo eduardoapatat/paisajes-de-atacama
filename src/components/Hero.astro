@@ -16,7 +16,6 @@ import { site } from '@/config/site'
       loading="eager"
       fetchpriority="high"
       data-hero-image
-      data-reveal
       class="h-full w-full object-cover object-[50%_45%]"
     />
   </div>
@@ -94,23 +93,26 @@ import { site } from '@/config/site'
           0,
         )
 
-      // Entrada al cargar: SplitText debe medir con la fuente final cargada
+      // La foto es lo primero que se ve (LCP): queda visible desde el inicio y
+      // solo se asienta con un zoom suave, sin esperar a la fuente
+      gsap.fromTo(
+        hero.querySelector('[data-hero-image]'),
+        { scale: 1.08 },
+        { scale: 1, duration: 1.6, ease: 'expo.out' },
+      )
+
+      // Entrada del texto: SplitText debe medir con la fuente final cargada
       afterFonts(() => {
         const split = SplitText.create(title, { type: 'words', mask: 'words' })
         gsap
-          .timeline({ defaults: { ease: 'expo.out', duration: 1.4 } })
-          .fromTo(
-            hero.querySelector('[data-hero-image]'),
-            { scale: 1.08, autoAlpha: 0 },
-            { scale: 1, autoAlpha: 1, duration: 2.4 },
-          )
-          .set(title, { autoAlpha: 1 }, 0.3)
-          .fromTo(split.words, { yPercent: 110 }, { yPercent: 0, stagger: 0.08 }, 0.3)
+          .timeline({ defaults: { ease: 'expo.out', duration: 1.2 } })
+          .set(title, { autoAlpha: 1 }, 0)
+          .fromTo(split.words, { yPercent: 110 }, { yPercent: 0, stagger: 0.08 }, 0)
           .fromTo(
             hero.querySelectorAll('[data-hero-fade]'),
             { autoAlpha: 0, y: 24 },
             { autoAlpha: 1, y: 0, stagger: 0.12 },
-            0.7,
+            0.4,
           )
       })
     })
