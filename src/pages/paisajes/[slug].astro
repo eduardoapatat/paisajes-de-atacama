@@ -3,7 +3,7 @@ import type { GetStaticPaths } from 'astro'
 import { Picture } from 'astro:assets'
 import { getCollection, render } from 'astro:content'
 import BaseLayout from '@/layouts/BaseLayout.astro'
-import { formatAltitude } from '@/lib/format'
+import { formatAltitude, keepNumbersTogether } from '@/lib/format'
 
 export const getStaticPaths = (async () => {
   const paisajes = await getCollection('paisajes')
@@ -23,8 +23,8 @@ const { data } = paisaje
     </a>
 
     <h1 class="mt-6 text-4xl sm:text-6xl">{data.title}</h1>
-    <p class="mt-4 text-sm text-sand/60">
-      {data.location} · {formatAltitude(data.altitudeMeters)}
+    <p class="mt-4 text-sm text-sand/60 tabular-nums">
+      {keepNumbersTogether(data.location)} · {formatAltitude(data.altitudeMeters)}
     </p>
     <p class="mt-6 text-xl leading-relaxed text-sand/85">{data.intro}</p>
 

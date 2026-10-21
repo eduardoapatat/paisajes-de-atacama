@@ -1,6 +1,7 @@
 ---
 import { Picture } from 'astro:assets'
 import { getCollection } from 'astro:content'
+import { keepNumbersTogether } from '@/lib/format'
 
 const atractivos = (await getCollection('atractivos'))
   .sort((a, b) => a.data.order - b.data.order)
@@ -58,7 +59,7 @@ const single = atractivos.length === 1
 
             <div class:list={[!single && 'mt-5']}>
               <p data-atractivo-text data-reveal class="text-sm text-desert-night/70">
-                {data.location}
+                {keepNumbersTogether(data.location)}
               </p>
               <h3
                 data-atractivo-text
@@ -83,7 +84,9 @@ const single = atractivos.length === 1
                   {data.facts.map((fact) => (
                     <div>
                       <dt class="text-xs text-desert-night/70">{fact.label}</dt>
-                      <dd class="mt-1 text-sm font-medium">{fact.value}</dd>
+                      <dd class="mt-1 text-sm font-medium tabular-nums">
+                        {keepNumbersTogether(fact.value)}
+                      </dd>
                     </div>
                   ))}
                 </dl>

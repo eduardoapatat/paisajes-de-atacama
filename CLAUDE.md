@@ -38,7 +38,7 @@ Objetivo del portafolio: demostrar dominio de Astro (colecciones de contenido, r
   - `MOTION`: tokens de duración, curva, escalonado y distancia (ver "Motion" en `DESIGN.md`). Ninguna animación usa números sueltos; lo que se lee queda legible en 1 s o menos.
   - `fadeIn(targets)`: aparición con reduced motion (solo opacidad, 0,2 s). Con reduced motion las secciones la usan en vez de no animar nada.
 - Elementos con `data-reveal` quedan ocultos por CSS (solo con JS y sin reduced motion) hasta que GSAP los muestra con `autoAlpha`. Respaldo en `global.css`: si GSAP no corre, se muestran a los 3 s. Por eso cada sección debe fijar sus estados iniciales al arrancar (con `fromTo` o `set`), no recién al entrar en pantalla.
-- `src/lib/format.ts`: `formatAltitude` y `formatChapter`.
+- `src/lib/format.ts`: `formatAltitude`, `formatChapter` y `keepNumbersTogether` (une número y unidad con espacio de no separación: usarlo en todo texto con cifras que venga del contenido).
 - `src/lib/starfield.ts`: cielo de estrellas en canvas 2D. GSAP anima su `state` (`revealEnter`, `revealPin`, `spin`, `opacity`) y el canvas lo dibuja con `gsap.ticker` solo mientras está en pantalla. Cada ScrollTrigger anima su propio valor para no pisarse.
 
 ## Diseño

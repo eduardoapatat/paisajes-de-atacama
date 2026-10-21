@@ -1,7 +1,7 @@
 ---
 import { Picture } from 'astro:assets'
 import { getCollection } from 'astro:content'
-import { formatAltitude, formatChapter } from '@/lib/format'
+import { formatAltitude, formatChapter, keepNumbersTogether } from '@/lib/format'
 
 const paisajes = (await getCollection('paisajes')).sort((a, b) => a.data.order - b.data.order)
 ---
@@ -65,8 +65,8 @@ const paisajes = (await getCollection('paisajes')).sort((a, b) => a.data.order -
             >
               {data.title}
             </h3>
-            <p data-chapter-meta data-reveal class="mt-4 text-sm text-desert-night/70">
-              {data.location} · {formatAltitude(data.altitudeMeters)}
+            <p data-chapter-meta data-reveal class="mt-4 text-sm tabular-nums text-desert-night/70">
+              {keepNumbersTogether(data.location)} · {formatAltitude(data.altitudeMeters)}
             </p>
             <p
               data-chapter-intro
