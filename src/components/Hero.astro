@@ -45,7 +45,7 @@ import { site } from '@/config/site'
     <div data-hero-fade data-reveal class="mt-10">
       <a
         href="#paisajes"
-        class="rounded-full bg-gold px-6 py-3 font-medium text-desert-night transition-colors hover:bg-sand"
+        class="inline-block rounded-full bg-gold px-6 py-3 font-medium text-desert-night transition-[background-color,scale] duration-150 ease-out hover:bg-sand active:scale-97"
       >
         Explorar
       </a>
@@ -62,7 +62,7 @@ import { site } from '@/config/site'
 </section>
 
 <script>
-  import { animate, gsap, SplitText } from '@/lib/gsap'
+  import { animate, gsap, MOTION, SplitText } from '@/lib/gsap'
 
   const hero = document.querySelector<HTMLElement>('[data-hero]')
   const title = hero?.querySelector<HTMLElement>('[data-hero-title]')
@@ -97,21 +97,27 @@ import { site } from '@/config/site'
       // solo se asienta con un zoom suave, sin esperar a la fuente
       gsap.fromTo(
         hero.querySelector('[data-hero-image]'),
-        { scale: 1.08 },
-        { scale: 1, duration: 1.6, ease: 'expo.out' },
+        { scale: MOTION.zoom },
+        { scale: 1, duration: MOTION.settle, ease: MOTION.ease },
       )
 
-      // Entrada del texto: SplitText debe medir con la fuente final cargada
+      // Entrada del texto: SplitText debe medir con la fuente final cargada.
+      // El título es el protagonista; subtítulo y botón acompañan con `text`.
       afterFonts(() => {
         const split = SplitText.create(title, { type: 'words', mask: 'words' })
         gsap
-          .timeline({ defaults: { ease: 'expo.out', duration: 1.2 } })
+          .timeline({ defaults: { ease: MOTION.ease } })
           .set(title, { autoAlpha: 1 }, 0)
-          .fromTo(split.words, { yPercent: 110 }, { yPercent: 0, stagger: 0.08 }, 0)
+          .fromTo(
+            split.words,
+            { yPercent: 110 },
+            { yPercent: 0, stagger: MOTION.staggerBlock, duration: MOTION.hero },
+            0,
+          )
           .fromTo(
             hero.querySelectorAll('[data-hero-fade]'),
-            { autoAlpha: 0, y: 24 },
-            { autoAlpha: 1, y: 0, stagger: 0.12 },
+            { autoAlpha: 0, y: MOTION.rise },
+            { autoAlpha: 1, y: 0, stagger: MOTION.staggerBlock, duration: MOTION.text },
             0.4,
           )
       })

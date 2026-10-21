@@ -134,6 +134,7 @@ Tokens en `src/lib/gsap.ts` (`MOTION`); ninguna animación usa números sueltos.
 | `text`                     | 0,6 s           | Líneas de texto, metadatos y enlaces                                    |
 | `mask`                     | 0,9 s           | Apertura de una foto con `clip-path`                                    |
 | `settle`                   | 1,4 s           | Zoom de asentamiento de la foto dentro de su máscara (desde `zoom` 1.1) |
+| `hero`                     | 1,2 s           | Título del hero al cargar (momento único)                               |
 | `fade`                     | 0,2 s           | Aparición con reduced motion, solo opacidad                             |
 | `stagger` / `staggerBlock` | 0,06 s / 0,08 s | Entre líneas / entre bloques o tarjetas                                 |
 | `rise`                     | 16px            | Lo que sube un bloque al entrar                                         |

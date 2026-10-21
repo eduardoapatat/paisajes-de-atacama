@@ -24,6 +24,8 @@ export const MOTION = {
   mask: 0.9,
   /** Zoom de asentamiento de una foto dentro de su máscara: no bloquea la lectura */
   settle: 1.4,
+  /** Título del hero: momento único al cargar, puede durar más */
+  hero: 1.2,
   /** Fundido de aparición con reduced motion: sin desplazamiento */
   fade: 0.2,
   /** Escalonado entre líneas y entre bloques o tarjetas */

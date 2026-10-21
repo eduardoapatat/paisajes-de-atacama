@@ -97,7 +97,7 @@ const single = atractivos.length === 1
 </section>
 
 <script>
-  import { animate, gsap, ScrollTrigger } from '@/lib/gsap'
+  import { animate, gsap, MOTION, ScrollTrigger } from '@/lib/gsap'
 
   const section = document.querySelector<HTMLElement>('[data-atractivos]')
 
@@ -117,14 +117,14 @@ const single = atractivos.length === 1
       gsap.set(section.querySelectorAll('[data-atractivo-text]'), { autoAlpha: 0 })
       gsap.fromTo(
         heading,
-        { autoAlpha: 0, y: 32 },
+        { autoAlpha: 0, y: MOTION.rise },
         {
           autoAlpha: 1,
           y: 0,
-          stagger: 0.1,
-          duration: 1.1,
-          ease: 'expo.out',
-          scrollTrigger: { trigger: section, start: 'top 75%', once: true },
+          stagger: MOTION.staggerBlock,
+          duration: MOTION.text,
+          ease: MOTION.ease,
+          scrollTrigger: { trigger: section, start: MOTION.start, once: true },
         },
       )
 
@@ -135,28 +135,33 @@ const single = atractivos.length === 1
         const image = card.querySelector('[data-atractivo-image]')
         const texts = card.querySelectorAll('[data-atractivo-text]')
 
-        const tl = gsap.timeline({ delay, defaults: { ease: 'expo.out' } })
+        const tl = gsap.timeline({ delay, defaults: { ease: MOTION.ease } })
         // El cuadrado se abre de abajo hacia arriba
         tl.fromTo(
           media,
           { autoAlpha: 1, clipPath: 'inset(100% 0% 0% 0% round 16px)' },
-          { clipPath: 'inset(0% 0% 0% 0% round 16px)', duration: 1.3, ease: 'expo.inOut' },
+          {
+            clipPath: 'inset(0% 0% 0% 0% round 16px)',
+            duration: MOTION.mask,
+            ease: MOTION.easeMask,
+          },
         )
-        // La foto se asienta con un zoom suave
-        tl.fromTo(image, { scale: 1.25 }, { scale: 1, duration: 1.8 }, 0.2)
-        // Los textos suben uno tras otro
+        // La foto se asienta con un zoom suave mientras se abre
+        tl.fromTo(image, { scale: MOTION.zoom }, { scale: 1, duration: MOTION.settle }, 0)
+        // Los textos suben casi a la vez que la foto: legibles en ~1 s
         tl.fromTo(
           texts,
-          { autoAlpha: 0, y: 24 },
-          { autoAlpha: 1, y: 0, stagger: 0.08, duration: 1 },
-          0.6,
+          { autoAlpha: 0, y: MOTION.rise },
+          { autoAlpha: 1, y: 0, stagger: MOTION.stagger, duration: MOTION.text },
+          0.25,
         )
       }
 
       ScrollTrigger.batch(cards, {
-        start: 'top 85%',
+        start: MOTION.start,
         once: true,
-        onEnter: (batch) => batch.forEach((card, i) => reveal(card as HTMLElement, i * 0.18)),
+        onEnter: (batch) =>
+          batch.forEach((card, i) => reveal(card as HTMLElement, i * MOTION.staggerBlock)),
       })
     })
   }
