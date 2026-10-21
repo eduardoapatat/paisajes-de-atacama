@@ -178,7 +178,7 @@ Cuatro colores cálidos del atardecer en el altiplano: dos neutros que se altern
 - **Contenedor:** centrado, con ancho máximo de 1280px y márgenes laterales de 20px, que pasan a 32px desde `sm` (640px). El pie usa un contenedor más estrecho (1152px).
 - **Ritmo vertical:** las secciones de lectura tienen 96px de relleno vertical, que pasan a 128px desde `sm`. Entre capítulos hay 112px, que pasan a 160px desde `sm`.
 - **Capítulos de paisajes:** en móvil la foto va arriba y el texto debajo, con 40px de separación. Desde `lg` (1024px) es una grilla de 12 columnas: foto en 7 y texto en 5, con 64px de separación. El lado de la foto alterna en cada capítulo.
-- **Tarjetas de atractivos:** grilla de 1 columna, 2 desde `sm` y 3 desde `lg`, con 24px entre columnas y 48px entre filas.
+- **Tarjetas de atractivos:** grilla de 1 columna, 2 desde `sm` y 3 desde `lg`, con 24px entre columnas y 48px entre filas. Si hay un solo atractivo, en vez de la grilla va foto y texto lado a lado desde `sm` (ancho máximo 1024px, 64px de separación desde `lg`, título a 2.25rem): nunca una tarjeta suelta con columnas vacías.
 - **Pantallas completas:** hero y noche ocupan `100svh`.
 
 **The One Idea Per Screen Rule.** Cada pantalla de scroll muestra una sola idea: un capítulo, un título o una foto. No se agrupan capítulos ni se comprimen los márgenes para que quepa más.

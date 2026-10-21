@@ -5,6 +5,10 @@ import { getCollection } from 'astro:content'
 const atractivos = (await getCollection('atractivos'))
   .sort((a, b) => a.data.order - b.data.order)
   .map(({ data }) => data)
+
+// Con un solo lugar, foto y texto van lado a lado en vez de una tarjeta suelta
+// en una grilla de tres columnas con dos tercios vacíos
+const single = atractivos.length === 1
 ---
 
 <section
@@ -19,10 +23,18 @@ const atractivos = (await getCollection('atractivos'))
       </h2>
     </header>
 
-    <ul class="mt-14 grid gap-x-6 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
+    <ul
+      class:list={[
+        'mt-14 grid',
+        single ? 'max-w-5xl' : 'gap-x-6 gap-y-12 sm:grid-cols-2 lg:grid-cols-3',
+      ]}
+    >
       {atractivos.map((data) => {
         return (
-          <li data-atractivo>
+          <li
+            data-atractivo
+            class:list={[single && 'grid items-center gap-8 sm:grid-cols-2 lg:gap-16']}
+          >
             {/* Cuadrado que reserva el espacio de la foto */}
             <div
               data-atractivo-media
@@ -33,18 +45,29 @@ const atractivos = (await getCollection('atractivos'))
                 src={data.cover}
                 alt={data.coverAlt}
                 widths={[480, 800, 1200]}
-                sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+                sizes={
+                  single
+                    ? '(min-width: 1024px) 480px, (min-width: 640px) 50vw, 100vw'
+                    : '(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw'
+                }
                 formats={['avif', 'webp']}
                 data-atractivo-image
                 class="h-full w-full object-cover"
               />
             </div>
 
-            <div class="mt-5">
+            <div class:list={[!single && 'mt-5']}>
               <p data-atractivo-text data-reveal class="text-sm text-desert-night/70">
                 {data.location}
               </p>
-              <h3 data-atractivo-text data-reveal class="mt-2 text-2xl text-desert-night">
+              <h3
+                data-atractivo-text
+                data-reveal
+                class:list={[
+                  'mt-2 text-desert-night',
+                  single ? 'text-3xl sm:text-4xl' : 'text-2xl',
+                ]}
+              >
                 {data.title}
               </h3>
               <p data-atractivo-text data-reveal class="mt-3 leading-relaxed text-desert-night/80">
@@ -84,7 +107,6 @@ const atractivos = (await getCollection('atractivos'))
 
       const heading = section.querySelectorAll('[data-atractivos-heading] > *')
       const cards = section.querySelectorAll<HTMLElement>('[data-atractivo]')
-
       gsap.fromTo(
         heading,
         { autoAlpha: 0, y: 32 },
