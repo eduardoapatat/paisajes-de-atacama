@@ -47,7 +47,7 @@ const atractivos = (await getCollection('atractivos'))
             </div>
 
             <div class="mt-5">
-              <p data-atractivo-text data-reveal class="text-sm text-desert-night/60">
+              <p data-atractivo-text data-reveal class="text-sm text-desert-night/70">
                 {data.location}
               </p>
               <h3 data-atractivo-text data-reveal class="mt-2 text-2xl text-desert-night">
@@ -65,7 +65,7 @@ const atractivos = (await getCollection('atractivos'))
                 >
                   {data.facts.map((fact) => (
                     <div>
-                      <dt class="text-xs text-desert-night/50">{fact.label}</dt>
+                      <dt class="text-xs text-desert-night/70">{fact.label}</dt>
                       <dd class="mt-1 text-sm font-medium">{fact.value}</dd>
                     </div>
                   ))}

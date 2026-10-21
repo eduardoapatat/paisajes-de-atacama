@@ -204,7 +204,7 @@
       },
       {
         "name": "The Opacity Ladder Rule",
-        "body": "La jerarquía del texto en las secciones claras se hace con opacidades de `desert-night` (100, 80, 60 y 50 %), no con grises nuevos.",
+        "body": "La jerarquía del texto en las secciones claras se hace con opacidades de `desert-night` (100, 80 y 70 %), no con grises nuevos. El 70 % es el mínimo para texto: sobre arena da 6,4:1; con 60 % o menos no llega a 4,5:1.",
         "section": "colors"
       },
       {

@@ -138,7 +138,7 @@ Cuatro colores cálidos del atardecer en el altiplano: dos neutros que se altern
 
 ### Neutral
 
-- **Sombra del desierto** (`desert-night`): fondo de los ambientes oscuros y del `body`, y texto en las secciones claras. En las secciones claras el texto secundario usa opacidades: 80 % para párrafos, 60 % para metadatos y etiquetas, 50 % para rótulos de datos y 10 % para separadores.
+- **Sombra del desierto** (`desert-night`): fondo de los ambientes oscuros y del `body`, y texto en las secciones claras. En las secciones claras el texto secundario usa opacidades: 80 % para párrafos, 70 % para metadatos, etiquetas y rótulos de datos, y 10 % para separadores.
 - **Arena clara** (`sand`): texto sobre fondos oscuros y fotos, y fondo de las secciones de lectura.
 
 ### Named Rules
@@ -147,7 +147,7 @@ Cuatro colores cálidos del atardecer en el altiplano: dos neutros que se altern
 
 **The Gold Is Big Rule.** Sobre fondo arena, el dorado solo va en elementos grandes o decorativos (números de capítulo, subrayados, el botón). Nunca en texto chico: no tiene contraste suficiente.
 
-**The Opacity Ladder Rule.** La jerarquía del texto en las secciones claras se hace con opacidades de `desert-night` (100, 80, 60 y 50 %), no con grises nuevos.
+**The Opacity Ladder Rule.** La jerarquía del texto en las secciones claras se hace con opacidades de `desert-night` (100, 80 y 70 %), no con grises nuevos. El 70 % es el mínimo para texto: sobre arena da 6,4:1; con 60 % o menos no llega a 4,5:1.
 
 ## Typography
 
