@@ -26,3 +26,8 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+# impeccable binaries
+.claude/skills/impeccable/scripts/bin/
+
+# playwright-cli
+.playwright-cli/
