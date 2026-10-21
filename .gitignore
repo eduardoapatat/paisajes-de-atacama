@@ -31,3 +31,6 @@ pnpm-debug.log*
 
 # playwright-cli
 .playwright-cli/
+
+# caché del hook de impeccable
+.impeccable/hook.cache.json
