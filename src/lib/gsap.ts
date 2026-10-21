@@ -10,6 +10,35 @@ ScrollTrigger.config({ ignoreMobileResize: true })
 export const MOTION_OK = '(prefers-reduced-motion: no-preference)'
 export const MOTION_REDUCED = '(prefers-reduced-motion: reduce)'
 
+/**
+ * Tokens de movimiento (ver "Motion" en DESIGN.md). Duraciones en segundos.
+ * Regla principal: lo que se lee queda legible en 1 s o menos desde que entra.
+ */
+export const MOTION = {
+  /** Navbar y cambios de estado: entrada y salida (la salida, más rápida) */
+  ui: 0.25,
+  uiExit: 0.2,
+  /** Líneas de texto, metadatos y enlaces */
+  text: 0.6,
+  /** Apertura de una foto con clip-path (barrido que cruza la pantalla) */
+  mask: 0.9,
+  /** Zoom de asentamiento de una foto dentro de su máscara: no bloquea la lectura */
+  settle: 1.4,
+  /** Fundido de aparición con reduced motion: sin desplazamiento */
+  fade: 0.2,
+  /** Escalonado entre líneas y entre bloques o tarjetas */
+  stagger: 0.06,
+  staggerBlock: 0.08,
+  /** Cuánto sube un bloque al entrar, en px, y cuánto se acerca una foto */
+  rise: 16,
+  zoom: 1.1,
+  /** Entradas: expo.out. Barridos de máscara: expo.inOut. Scroll: none. */
+  ease: 'expo.out',
+  easeMask: 'expo.inOut',
+  /** Punto de la ventana en el que arrancan las apariciones */
+  start: 'top 80%',
+} as const
+
 type MotionContext = {
   reduceMotion: boolean
   /**

@@ -124,6 +124,33 @@ Hay dos ambientes que se alternan: el oscuro (hero, noche y pie) para la fotogra
 - Movimiento ligado al scroll con GSAP y siempre con alternativa para `prefers-reduced-motion`.
 - Plano por defecto: la profundidad viene de las capas que se superponen al hacer scroll, no de sombras.
 
+### Motion
+
+Tokens en `src/lib/gsap.ts` (`MOTION`); ninguna animación usa números sueltos.
+
+| Token                      | Valor           | Uso                                                                     |
+| -------------------------- | --------------- | ----------------------------------------------------------------------- |
+| `ui` / `uiExit`            | 0,25 s / 0,2 s  | Navbar y cambios de estado; la salida es más rápida que la entrada      |
+| `text`                     | 0,6 s           | Líneas de texto, metadatos y enlaces                                    |
+| `mask`                     | 0,9 s           | Apertura de una foto con `clip-path`                                    |
+| `settle`                   | 1,4 s           | Zoom de asentamiento de la foto dentro de su máscara (desde `zoom` 1.1) |
+| `fade`                     | 0,2 s           | Aparición con reduced motion, solo opacidad                             |
+| `stagger` / `staggerBlock` | 0,06 s / 0,08 s | Entre líneas / entre bloques o tarjetas                                 |
+| `rise`                     | 16px            | Lo que sube un bloque al entrar                                         |
+
+**The One Second Rule.** Lo que se lee queda completo y legible en 1 s o menos desde que entra en pantalla. El texto arranca en paralelo con la foto, no después.
+
+**The Ease-Out Rule.** Lo que entra usa `expo.out` (`cubic-bezier(0.16, 1, 0.3, 1)`). Los barridos de máscara que cruzan la pantalla usan `expo.inOut`. Lo ligado al scroll usa `ease: 'none'`. Nunca `ease-in` en una entrada.
+
+**The One Protagonist Rule.** Cada sección tiene un solo momento que se toma su tiempo: el título del hero, la máscara de cada capítulo, el círculo de la noche. El resto acompaña con `text` y no compite.
+
+- Las apariciones arrancan con el bloque al 80 % de la ventana (`top 80%`) y ocurren una sola vez (`once: true`).
+- El escalonado completo de un grupo no pasa de 300 ms.
+- Navegación y acciones frecuentes: 250 ms o menos. Hover de color: 150 ms. Lo presionable responde con `scale(0.97)` en `:active` (160 ms).
+- Desenfoque de 10px como máximo y solo en momentos únicos (el título de la noche).
+- El hero y la noche son momentos únicos y pueden durar más (título del hero 1,2 s, noche ligada al scroll).
+- Con reduced motion no hay desplazamientos, zoom ni máscaras: el contenido aparece con un fundido de `fade` (0,2 s) y las secciones fijas quedan abiertas.
+
 ## Colors
 
 Cuatro colores cálidos del atardecer en el altiplano: dos neutros que se alternan como fondo y texto, un acento dorado y un rosado para los detalles.

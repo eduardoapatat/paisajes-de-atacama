@@ -106,14 +106,34 @@
         "purpose": "Entradas de texto y elementos (GSAP expo.out)."
       },
       {
-        "name": "mask-reveal",
-        "value": "expo.inOut, 1.2s",
+        "name": "ui",
+        "value": "expo.out, 0.25s (salida 0.2s)",
+        "purpose": "Navbar y cambios de estado."
+      },
+      {
+        "name": "text",
+        "value": "expo.out, 0.6s",
+        "purpose": "Líneas de texto, metadatos y enlaces."
+      },
+      {
+        "name": "mask",
+        "value": "expo.inOut, 0.9s",
         "purpose": "Apertura de las máscaras de foto en capítulos y atractivos."
       },
       {
-        "name": "nav-toggle",
-        "value": "power3.out, 0.5s",
-        "purpose": "Ocultar o mostrar el navbar según la dirección del scroll."
+        "name": "settle",
+        "value": "expo.out, 1.4s, desde scale 1.1",
+        "purpose": "Zoom de asentamiento de una foto dentro de su máscara."
+      },
+      {
+        "name": "fade",
+        "value": "0.2s, solo opacidad",
+        "purpose": "Apariciones con reduced motion."
+      },
+      {
+        "name": "stagger",
+        "value": "0.06s líneas / 0.08s bloques",
+        "purpose": "Escalonado; un grupo no pasa de 300 ms."
       },
       {
         "name": "scrub",
