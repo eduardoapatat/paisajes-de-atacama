@@ -1,7 +1,8 @@
 ---
-const links = [
+// Sin `href`: la sección aún no existe y se muestra como texto, no como enlace
+const links: { href?: string; label: string }[] = [
   { href: '/#paisajes', label: 'Paisajes' },
-  { href: '/#antes-de-viajar', label: 'Antes de viajar' },
+  { label: 'Antes de viajar' },
 ]
 ---
 
@@ -15,12 +16,16 @@ const links = [
     <ul class="flex items-center">
       {links.map((link) => (
         <li>
-          <a
-            href={link.href}
-            class="block rounded-full px-4 py-2 whitespace-nowrap text-sand transition-colors hover:bg-dusk/15 hover:text-gold"
-          >
-            {link.label}
-          </a>
+          {link.href ? (
+            <a
+              href={link.href}
+              class="block rounded-full px-4 py-2 whitespace-nowrap text-sand transition-colors hover:bg-dusk/15 hover:text-gold"
+            >
+              {link.label}
+            </a>
+          ) : (
+            <span class="block px-4 py-2 whitespace-nowrap text-sand/60">{link.label}</span>
+          )}
         </li>
       ))}
     </ul>

@@ -11,7 +11,8 @@ const columns = [
       { href: '/#paisajes', label: 'Paisajes' },
       { href: '/#atractivos', label: 'Otros lugares' },
       { href: '/#noche', label: 'En la noche' },
-      { href: '/#antes-de-viajar', label: 'Antes de viajar' },
+      // Sin `href` mientras la sección no exista: se muestra como texto
+      { href: undefined, label: 'Antes de viajar' },
     ],
   },
   {
@@ -42,9 +43,13 @@ const year = new Date().getFullYear()
           <ul class="mt-3 space-y-2 text-sm">
             {column.links.map((link) => (
               <li>
-                <a href={link.href} class="transition-colors hover:text-gold">
-                  {link.label}
-                </a>
+                {link.href ? (
+                  <a href={link.href} class="transition-colors hover:text-gold">
+                    {link.label}
+                  </a>
+                ) : (
+                  <span class="text-dusk/70">{link.label}</span>
+                )}
               </li>
             ))}
           </ul>

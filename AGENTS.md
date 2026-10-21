@@ -67,7 +67,7 @@ Paleta cálida sacada de la foto del hero (tokens en `src/styles/global.css`):
 3. **Paisajes** (`Paisajes.astro`): cortina con esquinas redondeadas y sombra. Capítulos numerados que alternan lado foto/texto. La foto se descubre con clip-path en ciclo desde abajo, izquierda y derecha (nunca desde arriba), con parallax; título e intro suben por líneas.
 4. **Atractivos** (`Atractivos.astro`): "Otros lugares para conocer". Tarjetas con foto cuadrada que aparecen de a una (`ScrollTrigger.batch`, escalonadas si entran juntas).
 5. **Noche** (`Noche.astro`): "En la noche...". Mientras la sección sube aparecen un resplandor de atardecer y estrellas dibujadas en canvas (`src/lib/starfield.ts`, de las más brillantes a las tenues, se apartan del cursor en escritorio). Sección fija una pantalla de scroll: el título aparece letra por letra con desenfoque y luego la foto `valle-de-la-luna-noche.jpg` (Vía Láctea sobre el Valle de la Luna, P. Horálek/ESO, CC BY 4.0, con crédito visible en la sección) se abre en un círculo desde el centro del cielo. El usuario prefiere esta versión (se probó adelantar el título y se descartó).
-6. **Footer** (`Footer.astro`): fondo `desert-night`, texto `dusk` y bordes `dusk/20`, sin animación. Tres columnas: nombre y ubicación, "Explorar" (anclas de secciones, incluye `#antes-de-viajar`) y "Paisajes" (enlaces a `/paisajes/[slug]` desde la colección). Abajo, año y "Creado por" con `site.author`.
+6. **Footer** (`Footer.astro`): fondo `desert-night`, texto `dusk` y bordes `dusk/20`, sin animación. Tres columnas: nombre y ubicación, "Explorar" (anclas de secciones; "Antes de viajar" va como texto hasta que exista la sección) y "Paisajes" (enlaces a `/paisajes/[slug]` desde la colección). Abajo, año y "Creado por" con `site.author`.
 
 - **Página `/paisajes/[slug]`**: provisional, muestra la historia completa de cada paisaje. Falta diseñarla.
 
@@ -82,7 +82,7 @@ Paleta cálida sacada de la foto del hero (tokens en `src/styles/global.css`):
 
 ## Pendiente
 
-- Sección "Antes de viajar" (usa la colección `faqs`); el enlace del navbar ya apunta a `#antes-de-viajar`.
+- Sección "Antes de viajar" (usa la colección `faqs`); en el navbar y el footer "Antes de viajar" va como texto sin enlace; al crearla, darle `id="antes-de-viajar"` y agregar el `href` en `Navbar.astro` y `Footer.astro`.
 - Diseñar la página de detalle `/paisajes/[slug]` y decidir si los atractivos tienen página propia o enlace en el navbar.
 - `geiseres-del-tatio.jpg` pesa 9 MB (8688 px de ancho); conviene reducirla a unos 3000 px.
 - Si el servidor de desarrollo muestra "0 lugares", reiniciarlo: no toma colecciones nuevas en caliente.
