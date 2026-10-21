@@ -107,6 +107,14 @@ const single = atractivos.length === 1
 
       const heading = section.querySelectorAll('[data-atractivos-heading] > *')
       const cards = section.querySelectorAll<HTMLElement>('[data-atractivo]')
+
+      // Estado inicial desde el principio (no recién al entrar), para que el
+      // respaldo de `data-reveal` en global.css no las muestre antes de tiempo
+      gsap.set(section.querySelectorAll('[data-atractivo-media]'), {
+        autoAlpha: 1,
+        clipPath: 'inset(100% 0% 0% 0% round 16px)',
+      })
+      gsap.set(section.querySelectorAll('[data-atractivo-text]'), { autoAlpha: 0 })
       gsap.fromTo(
         heading,
         { autoAlpha: 0, y: 32 },

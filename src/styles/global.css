@@ -59,10 +59,22 @@
     @apply outline-2 outline-offset-4 outline-gold;
   }
 
-  /* Oculta lo que GSAP va a revelar para evitar un parpadeo antes de la animación */
+  /*
+   * Oculta lo que GSAP va a revelar para evitar un parpadeo antes de la animación.
+   * Respaldo: si GSAP nunca llega a ejecutarse (error de JS, script bloqueado),
+   * el contenido se muestra a los 3 s. Cuando GSAP sí corre, ya dejó cada
+   * elemento con opacity 0 hasta su animación, así que este respaldo no lo destapa.
+   */
   @media (prefers-reduced-motion: no-preference) {
     .js [data-reveal] {
       visibility: hidden;
+      animation: reveal-fallback 0s 3s forwards;
+    }
+  }
+
+  @keyframes reveal-fallback {
+    to {
+      visibility: visible;
     }
   }
 
