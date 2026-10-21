@@ -187,7 +187,7 @@ Cuatro colores cálidos del atardecer en el altiplano: dos neutros que se altern
 ### Hierarchy
 
 - **Display** (600, 3rem → 4.5rem desde `sm` → 6rem desde `lg`, interlineado 1.1, tracking −0.025em): título del hero y "En la noche...". Uno por pantalla.
-- **Headline** (600, 2.25rem → 3rem desde `sm`, 1.1): títulos de sección ("6 lugares del Desierto de Atacama", "Otros lugares para conocer"). Los títulos de capítulo usan la misma voz un poco más grande (1.875rem → 2.25rem → 3rem).
+- **Headline** (600, 2.25rem → 3rem desde `sm`, 1.1): títulos de sección ("6 lugares del Desierto de Atacama", "Otros lugares para conocer"). Los títulos de capítulo usan la misma voz un paso más abajo (1.875rem → 2.25rem desde `sm`) para no competir con el título de la sección; el número dorado ya les da presencia.
 - **Title** (600, 1.5rem, 1.1): título de las tarjetas de atractivos.
 - **Numeral** (300, 4.5rem → 6rem desde `sm`, 1.1): números de capítulo en dorado ("01", "02"…). Son decorativos y llevan `aria-hidden`.
 - **Body large** (400, 1.125rem, 1.625): introducción de cada capítulo y cuerpo de la página de detalle.
