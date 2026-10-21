@@ -1,14 +1,22 @@
 ---
 import { Picture } from 'astro:assets'
-import nightImage from '@/assets/images/desert-atacama-night.jpg'
+import nightImage from '@/assets/images/valle-de-la-luna-noche.jpg'
+
+// Foto con licencia CC BY 4.0: el crédito debe quedar visible y enlazado
+const credit = {
+  author: 'P. Horálek/ESO',
+  href: 'https://www.eso.org/public/images/potw2348a/',
+  license: 'CC BY 4.0',
+  licenseHref: 'https://creativecommons.org/licenses/by/4.0/deed.es',
+}
 ---
 
 <section id="noche" data-noche class="relative h-svh overflow-hidden bg-desert-night">
-  <!-- La foto se abre en un círculo centrado en el arco de la Vía Láctea -->
+  <!-- La foto se abre en un círculo centrado en el cielo -->
   <div data-noche-media data-reveal class="absolute inset-0">
     <Picture
       src={nightImage}
-      alt="Arco de la Vía Láctea sobre el Desierto de Atacama de noche, con rocas en primer plano"
+      alt="La Vía Láctea sobre las formaciones de sal del Valle de la Luna, de noche"
       widths={[640, 1024, 1600, 2400, 3200]}
       sizes="100vw"
       formats={['avif', 'webp']}
@@ -26,6 +34,21 @@ import nightImage from '@/assets/images/desert-atacama-night.jpg'
       En la noche...
     </h2>
   </div>
+
+  <p
+    data-noche-credit
+    data-reveal
+    class="absolute right-5 bottom-4 text-xs text-sand/70 sm:right-8"
+  >
+    Foto:{' '}
+    <a href={credit.href} class="underline-offset-2 hover:text-sand hover:underline">
+      {credit.author}
+    </a>
+    {' · '}
+    <a href={credit.licenseHref} class="underline-offset-2 hover:text-sand hover:underline">
+      {credit.license}
+    </a>
+  </p>
 </section>
 
 <script>
@@ -72,6 +95,8 @@ import nightImage from '@/assets/images/desert-atacama-night.jpg'
             { scale: 1, duration: 1.2, ease: 'none' },
             0.35,
           )
+          // El crédito aparece cuando la foto ya está abierta
+          .fromTo('[data-noche-credit]', { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.2 }, 1.2)
       })
     })
   }

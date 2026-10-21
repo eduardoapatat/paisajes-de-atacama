@@ -41,3 +41,11 @@ All commands are run from the root of the project, from a terminal:
 ## 👀 Want to learn more?
 
 Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+
+## Créditos de fotos
+
+| Foto                                                               | Autor                                                          | Licencia                                                         |
+| ------------------------------------------------------------------ | -------------------------------------------------------------- | ---------------------------------------------------------------- |
+| `valle-de-la-luna-noche.jpg`: Vía Láctea sobre el Valle de la Luna | [P. Horálek/ESO](https://www.eso.org/public/images/potw2348a/) | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/deed.es) |
+
+El resto de las fotos no tiene crédito registrado: vienen de Unsplash y otras páginas y está pendiente reemplazarlas por fotos con autor y licencia conocidos.
