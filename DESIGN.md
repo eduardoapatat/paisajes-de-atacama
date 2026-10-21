@@ -11,23 +11,23 @@ typography:
     fontFamily: 'Outfit, sans-serif'
     fontSize: '3rem'
     fontWeight: 600
-    lineHeight: 1.3
+    lineHeight: 1.1
     letterSpacing: '-0.025em'
   headline:
     fontFamily: 'Outfit, sans-serif'
     fontSize: '2.25rem'
     fontWeight: 600
-    lineHeight: 1.3
+    lineHeight: 1.1
   title:
     fontFamily: 'Outfit, sans-serif'
     fontSize: '1.5rem'
     fontWeight: 600
-    lineHeight: 1.3
+    lineHeight: 1.1
   numeral:
     fontFamily: 'Outfit, sans-serif'
     fontSize: '4.5rem'
     fontWeight: 300
-    lineHeight: 1.3
+    lineHeight: 1.1
   body-lg:
     fontFamily: 'Outfit, sans-serif'
     fontSize: '1.125rem'
@@ -186,10 +186,10 @@ Cuatro colores cálidos del atardecer en el altiplano: dos neutros que se altern
 
 ### Hierarchy
 
-- **Display** (600, 3rem → 4.5rem desde `sm` → 6rem desde `lg`, interlineado 1.3, tracking −0.025em): título del hero y "En la noche...". Uno por pantalla.
-- **Headline** (600, 2.25rem → 3rem desde `sm`, 1.3): títulos de sección ("6 lugares del Desierto de Atacama", "Otros lugares para conocer"). Los títulos de capítulo usan la misma voz un poco más grande (1.875rem → 2.25rem → 3rem).
-- **Title** (600, 1.5rem, 1.3): título de las tarjetas de atractivos.
-- **Numeral** (300, 4.5rem → 6rem desde `sm`, 1.3): números de capítulo en dorado ("01", "02"…). Son decorativos y llevan `aria-hidden`.
+- **Display** (600, 3rem → 4.5rem desde `sm` → 6rem desde `lg`, interlineado 1.1, tracking −0.025em): título del hero y "En la noche...". Uno por pantalla.
+- **Headline** (600, 2.25rem → 3rem desde `sm`, 1.1): títulos de sección ("6 lugares del Desierto de Atacama", "Otros lugares para conocer"). Los títulos de capítulo usan la misma voz un poco más grande (1.875rem → 2.25rem → 3rem).
+- **Title** (600, 1.5rem, 1.1): título de las tarjetas de atractivos.
+- **Numeral** (300, 4.5rem → 6rem desde `sm`, 1.1): números de capítulo en dorado ("01", "02"…). Son decorativos y llevan `aria-hidden`.
 - **Body large** (400, 1.125rem, 1.625): introducción de cada capítulo y cuerpo de la página de detalle.
 - **Body** (400, 1rem, 1.5): texto general y resúmenes de los atractivos.
 - **Meta** (400, 0.875rem): ubicación y altitud, enlaces del pie.
@@ -197,7 +197,7 @@ Cuatro colores cálidos del atardecer en el altiplano: dos neutros que se altern
 
 ### Named Rules
 
-**The 1.3 Floor Rule.** Ningún titular baja de un interlineado de 1.3, ni siquiera desde `text-5xl`, donde Tailwind pone 1. SplitText recorta las líneas al alto de la línea y un valor menor corta las letras con cola (j, g, q). Se corrige con el token, nunca con padding en la máscara.
+**The Clip Margin Rule.** Los titulares usan interlineado 1.1. Las máscaras de SplitText recortan al alto de la línea, así que llevan `overflow-clip-margin: 0.2em` (atributo `data-split-mask`) y el texto oculto parte desde `yPercent: 140` (`MOTION.maskFrom`). No se cortan acentos ni colas (j, g, q) y no se usa padding en las máscaras.
 
 **The Balanced Headline Rule.** Los titulares llevan `text-wrap: balance` y los párrafos `text-wrap: pretty`.
 
@@ -296,7 +296,7 @@ Las estrellas del canvas (`src/lib/starfield.ts`) tienen un núcleo nítido con 
 - **Don't** poner precios, reservas, horarios ni botones de compra: no es una agencia.
 - **Don't** usar texto dorado chico sobre fondo arena.
 - **Don't** poner etiquetas en mayúsculas sobre los títulos ("PAISAJES" sobre "6 lugares del Desierto de Atacama"): repiten lo que ya dice el título y sobre foto no se leen.
-- **Don't** bajar el interlineado de los titulares de 1.3 ni parchar las máscaras de SplitText con padding.
+- **Don't** parchar las máscaras de SplitText con padding ni subir el interlineado para que no corten letras: se usa `data-split-mask`.
 - **Don't** descubrir una foto de capítulo desde arriba.
 - **Don't** oscurecer el hero hasta un color sólido antes de la siguiente sección.
 - **Don't** agregar íconos decorativos al azar a los costados de los paisajes.

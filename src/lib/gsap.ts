@@ -34,6 +34,8 @@ export const MOTION = {
   /** Cuánto sube un bloque al entrar, en px, y cuánto se acerca una foto */
   rise: 16,
   zoom: 1.1,
+  /** yPercent inicial de un titular en máscara: queda fuera del margen de 0.2em */
+  maskFrom: 140,
   /** Entradas: expo.out. Barridos de máscara: expo.inOut. Scroll: none. */
   ease: 'expo.out',
   easeMask: 'expo.inOut',

@@ -32,6 +32,7 @@ import { site } from '@/config/site'
   >
     <h1
       data-hero-title
+      data-split-mask
       data-reveal
       class="text-5xl font-semibold tracking-tight drop-shadow-lg sm:text-7xl lg:text-8xl"
     >
@@ -110,7 +111,7 @@ import { site } from '@/config/site'
           .set(title, { autoAlpha: 1 }, 0)
           .fromTo(
             split.words,
-            { yPercent: 110 },
+            { yPercent: MOTION.maskFrom },
             { yPercent: 0, stagger: MOTION.staggerBlock, duration: MOTION.hero },
             0,
           )

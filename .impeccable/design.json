@@ -193,7 +193,7 @@
       "refersTo": "card-atractivo",
       "description": "Foto cuadrada sin borde ni sombra, seguida de ubicación, título, resumen y datos.",
       "html": "<div class=\"ds-card\"><div class=\"ds-card-media\"></div><p class=\"ds-card-meta\">Ruta 5 Norte, a 75 km al sur de Antofagasta</p><h3 class=\"ds-card-title\">La Mano del Desierto</h3></div>",
-      "css": ".ds-card { max-width: 320px; padding: 24px; background: #f5eee6; color: #1a1411; font-family: Outfit, sans-serif; } .ds-card-media { aspect-ratio: 1; border-radius: 16px; background: rgb(26 20 17 / 0.05); } .ds-card-meta { margin: 20px 0 0; font-size: 0.875rem; color: rgb(26 20 17 / 0.6); } .ds-card-title { margin: 8px 0 0; font-size: 1.5rem; font-weight: 600; line-height: 1.3; }"
+      "css": ".ds-card { max-width: 320px; padding: 24px; background: #f5eee6; color: #1a1411; font-family: Outfit, sans-serif; } .ds-card-media { aspect-ratio: 1; border-radius: 16px; background: rgb(26 20 17 / 0.05); } .ds-card-meta { margin: 20px 0 0; font-size: 0.875rem; color: rgb(26 20 17 / 0.6); } .ds-card-title { margin: 8px 0 0; font-size: 1.5rem; font-weight: 600; line-height: 1.1; }"
     },
     {
       "name": "Pie",
@@ -231,8 +231,8 @@
         "section": "colors"
       },
       {
-        "name": "The 1.3 Floor Rule",
-        "body": "Ningún titular baja de un interlineado de 1.3, ni siquiera desde `text-5xl`, donde Tailwind pone 1. SplitText recorta las líneas al alto de la línea y un valor menor corta las letras con cola (j, g, q). Se corrige con el token, nunca con padding en la máscara.",
+        "name": "The Clip Margin Rule",
+        "body": "Los titulares usan interlineado 1.1. Las máscaras de SplitText recortan al alto de la línea, así que llevan `overflow-clip-margin: 0.2em` (atributo `data-split-mask`) y el texto oculto parte desde `yPercent: 140` (`MOTION.maskFrom`). No se cortan acentos ni colas (j, g, q) y no se usa padding en las máscaras.",
         "section": "typography"
       },
       {
@@ -264,7 +264,7 @@
       "Don't poner precios, reservas, horarios ni botones de compra: no es una agencia.",
       "Don't usar texto dorado chico sobre fondo arena.",
       "Don't poner etiquetas en mayúsculas sobre los títulos (\"PAISAJES\" sobre \"6 lugares del Desierto de Atacama\"): repiten lo que ya dice el título y sobre foto no se leen.",
-      "Don't bajar el interlineado de los titulares de 1.3 ni parchar las máscaras de SplitText con padding.",
+      "Don't parchar las máscaras de SplitText con padding ni subir el interlineado para que no corten letras: se usa `data-split-mask`.",
       "Don't descubrir una foto de capítulo desde arriba.",
       "Don't oscurecer el hero hasta un color sólido antes de la siguiente sección.",
       "Don't agregar íconos decorativos al azar a los costados de los paisajes.",

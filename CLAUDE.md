@@ -53,7 +53,7 @@ Paleta cálida sacada de la foto del hero (tokens en `src/styles/global.css`):
 | `dusk`         | `#d9a293` | Bordes y detalles                           |
 
 - Secciones de lectura (Paisajes, Atractivos): fondo `sand` y texto `desert-night`. El dorado solo en elementos grandes o decorativos (poco contraste en texto chico).
-- Tailwind pone `line-height: 1` desde `text-5xl`; se sobrescribió a `1.3` en `@theme` (`--text-5xl--line-height` a `--text-9xl--line-height`) para que la máscara de SplitText no corte letras con cola (j, g, q). No usar parches de padding en las máscaras.
+- Tailwind pone `line-height: 1` desde `text-5xl`; los titulares usan `1.1` (en `@theme` y en `h1`–`h4`). Para que la máscara de SplitText no corte acentos ni colas (j, g, q), el elemento dividido lleva `data-split-mask` (`overflow-clip-margin: 0.2em` en `global.css`) y el texto oculto parte desde `MOTION.maskFrom` (`yPercent: 140`). No usar padding en las máscaras ni subir el interlineado.
 
 ## Contenido (colecciones en `src/content.config.ts`)
 

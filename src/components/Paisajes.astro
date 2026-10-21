@@ -59,6 +59,7 @@ const paisajes = (await getCollection('paisajes')).sort((a, b) => a.data.order -
             </p>
             <h3
               data-chapter-title
+              data-split-mask
               data-reveal
               class="mt-4 text-3xl text-desert-night sm:text-4xl lg:text-5xl"
             >
@@ -181,7 +182,7 @@ const paisajes = (await getCollection('paisajes')).sort((a, b) => a.data.order -
             .set([title, intro], { autoAlpha: 1 }, 0.15)
             .fromTo(
               titleSplit.lines,
-              { yPercent: 105 },
+              { yPercent: MOTION.maskFrom },
               { yPercent: 0, stagger: MOTION.stagger },
               0.15,
             )
