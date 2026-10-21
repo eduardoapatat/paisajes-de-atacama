@@ -68,7 +68,7 @@ const paisajes = (await getCollection('paisajes')).sort((a, b) => a.data.order -
               {data.title}
             </h3>
             <p data-chapter-meta data-reveal class="mt-4 text-sm tabular-nums text-desert-night/70">
-              {keepNumbersTogether(data.location)} · {formatAltitude(data.altitudeMeters)}
+              {keepNumbersTogether(data.location)}&nbsp;· {formatAltitude(data.altitudeMeters)}
             </p>
             <p
               data-chapter-intro
