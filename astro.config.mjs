@@ -5,7 +5,7 @@ import tailwindcss from '@tailwindcss/vite'
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://paisajesdeatacama.cl',
+  site: 'https://paisajes-de-atacama.vercel.app',
   fonts: [
     {
       provider: fontProviders.fontsource(),
