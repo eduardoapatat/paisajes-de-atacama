@@ -1,0 +1,33 @@
+---
+import Footer from '@/components/Footer.astro'
+import BaseLayout from '@/layouts/BaseLayout.astro'
+---
+
+<!-- Vercel la sirve en cualquier dirección que no exista. Sin animación: tiene que leerse al instante -->
+<BaseLayout title="Página no encontrada">
+  <section class="container-page flex min-h-svh flex-col items-center justify-center py-28 text-center">
+    <p aria-hidden="true" class="text-7xl font-light text-gold tabular-nums sm:text-8xl">
+      404
+    </p>
+    <h1 class="mt-6 text-4xl text-balance sm:text-5xl">Esta página no existe</h1>
+    <p class="mt-4 max-w-md text-lg leading-relaxed text-pretty text-sand/85">
+      Puede que la dirección esté mal escrita o que la página ya no esté.
+    </p>
+
+    <div class="mt-10 flex flex-wrap items-center justify-center gap-x-8 gap-y-4">
+      <a
+        href="/"
+        class="inline-block rounded-full bg-gold px-6 py-3 font-medium text-desert-night transition-[background-color,scale] duration-150 ease-out hover:bg-sand motion-safe:active:scale-97"
+      >
+        Volver al inicio
+      </a>
+      <a
+        href="/#paisajes"
+        class="py-3 text-sand underline-offset-4 transition-colors hover:text-gold hover:underline"
+      >
+        Ver los paisajes
+      </a>
+    </div>
+  </section>
+  <Footer />
+</BaseLayout>

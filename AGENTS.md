@@ -35,6 +35,7 @@ Objetivo del portafolio: demostrar dominio de Astro (colecciones de contenido, r
 - `src/assets/images/`: todas las fotos directo aquí, **sin subcarpetas**. Astro las optimiza con `<Picture>` (AVIF/WebP).
 - Imports con el alias `@/` (apunta a `src/`, definido en `tsconfig.json`).
 - `src/config/site.ts`: único lugar para nombre, eslogan, ubicación y contacto.
+- `src/layouts/BaseLayout.astro`: `<head>` de todas las páginas. Genera la imagen para redes (`og:image`) con `getImage`: 1200 × 630, recortada al centro y en JPEG (no todas las redes leen AVIF ni WebP). Usa la prop `image` (con `imageAlt`); sin ella, la foto del hero. Cada paisaje pasa su `cover`.
 - `src/lib/gsap.ts`: registra plugins y exporta el helper `animate(scope, setup)`.
   - Usa `gsap.matchMedia` con dos condiciones opuestas (`motionOk` y `reduceMotion`) para que el setup se ejecute siempre; con una sola condición no corre cuando las animaciones están activadas.
   - `setup` recibe `reduceMotion` y `afterFonts(fn)`: todo lo que use SplitText va dentro de `afterFonts` para medir con la fuente final.
@@ -78,6 +79,7 @@ Paleta cálida del atardecer en el desierto, presente en la foto del hero (token
 7. **Footer** (`Footer.astro`): fondo `desert-night`, texto `dusk` y bordes `dusk/20`, sin animación. Tres columnas: nombre y ubicación, "Explorar" (anclas de las secciones, en el mismo orden que la página; un enlace sin `href` se muestra como texto) y "Paisajes" (enlaces a `/paisajes/[slug]` desde la colección). Abajo, año y "Creado por" con `site.author`.
 
 - **Página `/paisajes/[slug]`**: provisional, muestra la historia completa de cada paisaje. Falta diseñarla.
+- **Página 404** (`src/pages/404.astro`): fondo `desert-night`, "404" grande en dorado (como los números de los capítulos), "Esta página no existe", botón "Volver al inicio" (el mismo del hero) y enlace a los paisajes; abajo el footer. Sin animación. Vercel la sirve en cualquier dirección que no exista.
 
 ## Decisiones descartadas
 
