@@ -227,7 +227,7 @@ El sistema es plano. Las tarjetas y las fotos no llevan sombra. La profundidad v
 
 ### Named Rules
 
-**The Curtain Rule.** Una sección clara que entra sobre una oscura lo hace como cortina: esquinas superiores redondeadas, sombra hacia arriba y `z-index` por encima. Nunca hay capas que oscurecen el hero hasta un color sólido.
+**The Curtain Rule.** Una sección clara que entra sobre una oscura lo hace como cortina: esquinas superiores redondeadas, sombra hacia arriba y `z-index` por encima. Al salir hacia una oscura, la cortina se levanta: esquinas inferiores redondeadas, sombra hacia abajo, y la sección oscura empieza debajo (margen negativo de 48px, 64px desde `sm`) para que se vea por las esquinas. Nunca hay capas que oscurecen el hero hasta un color sólido ni cortes rectos entre claro y oscuro.
 
 ## Shapes
 
