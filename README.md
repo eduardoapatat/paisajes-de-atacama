@@ -1,5 +1,7 @@
 # Paisajes de Atacama
 
+[![Portada del sitio: el título Paisajes de Atacama sobre el Valle de la Muerte al atardecer](docs/portada.webp)](https://paisajes-de-atacama.vercel.app)
+
 Un recorrido por los paisajes del Desierto de Atacama, en el norte de Chile, contado como un relato: el Valle de la Luna, las lagunas altiplánicas, los géiseres del Tatio y otros lugares del desierto, hasta su cielo de noche.
 
 **Sitio:** [paisajes-de-atacama.vercel.app](https://paisajes-de-atacama.vercel.app)
@@ -56,6 +58,7 @@ El sitio queda en `http://localhost:4321`.
 ## Estructura
 
 ```text
+docs/                Captura de la portada para este README
 public/              Favicon (el horizonte del Valle de la Luna al atardecer)
 src/
 ├── assets/images/   Fotos (Astro las optimiza al hacer el build)
