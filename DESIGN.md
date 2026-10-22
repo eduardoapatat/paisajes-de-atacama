@@ -123,7 +123,7 @@ Hay dos ambientes que se alternan: el oscuro (hero, noche y pie) para la fotogra
 
 **Key Characteristics:**
 
-- Paleta de cuatro colores, toda sacada de la foto del hero.
+- Paleta de cuatro colores, la del atardecer en el desierto: todos están en la foto del hero.
 - Una sola familia tipográfica (Outfit variable), con jerarquía por peso y tamaño.
 - Fotografía protagonista, siempre optimizada con `<Picture>` (AVIF y WebP).
 - Movimiento ligado al scroll con GSAP y siempre con alternativa para `prefers-reduced-motion`.

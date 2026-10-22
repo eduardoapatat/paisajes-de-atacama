@@ -208,7 +208,7 @@
     "northStar": "Bitácora del atardecer",
     "overview": "El sitio se lee como una bitácora: capítulos numerados que avanzan con el scroll, bajo la luz cálida del altiplano al caer la tarde. Toda la paleta sale de una sola foto, la del hero: la sombra del desierto, la arena clara, el pasto dorado y el cielo rosado. Ningún color viene de fuera de ese paisaje.\n\nEl ánimo es cálido, sereno y cinematográfico. Hay poca interfaz en pantalla y mucha fotografía. El movimiento es lento, va ligado al scroll y sirve para descubrir: las fotos se abren con máscaras, los títulos suben por líneas y las secciones se superponen como cortinas. La densidad es baja: grandes márgenes verticales entre capítulos y una sola idea por pantalla.\n\nHay dos ambientes que se alternan: el oscuro (hero, noche y pie) para la fotografía a pantalla completa, y el claro, color arena, para las secciones de lectura (paisajes y atractivos). El paso de uno al otro es siempre una cortina, nunca un corte.",
     "keyCharacteristics": [
-      "Paleta de cuatro colores, toda sacada de la foto del hero.",
+      "Paleta de cuatro colores, la del atardecer en el desierto: todos están en la foto del hero.",
       "Una sola familia tipográfica (Outfit variable), con jerarquía por peso y tamaño.",
       "Fotografía protagonista, siempre optimizada con `<Picture>` (AVIF y WebP).",
       "Movimiento ligado al scroll con GSAP y siempre con alternativa para `prefers-reduced-motion`.",

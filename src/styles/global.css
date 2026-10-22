@@ -2,7 +2,7 @@
 
 /* Tokens de diseño: generan utilidades (bg-desert-night, text-sand, font-sans...) */
 @theme {
-  /* Paleta sacada de la foto del hero (atardecer en el altiplano) */
+  /* Paleta del atardecer en el desierto: sus colores están en la foto del hero */
   --color-desert-night: #1a1411; /* fondo: sombra cálida del desierto */
   --color-sand: #f5eee6; /* texto principal: crema claro */
   --color-gold: #e2a93b; /* acento: pasto dorado */

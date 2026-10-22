@@ -46,7 +46,7 @@ Objetivo del portafolio: demostrar dominio de Astro (colecciones de contenido, r
 
 ## Diseño
 
-Paleta cálida sacada de la foto del hero (tokens en `src/styles/global.css`):
+Paleta cálida del atardecer en el desierto, presente en la foto del hero (tokens en `src/styles/global.css`):
 
 | Token          | Color     | Uso                                         |
 | -------------- | --------- | ------------------------------------------- |
@@ -69,7 +69,7 @@ Paleta cálida sacada de la foto del hero (tokens en `src/styles/global.css`):
 ## Secciones (en orden en `src/pages/index.astro`)
 
 1. **Navbar** (`Navbar.astro`): cápsula centrada arriba con "Paisajes" y "Antes de viajar". Entra después del hero, se oculta al bajar y reaparece al subir.
-2. **Hero** (`Hero.astro`): foto `desert-atacama-hero.jpg` a pantalla completa, título con SplitText por palabras. Al hacer scroll queda fijo sin agregar espacio (`pinSpacing: false`) y la sección siguiente lo tapa como cortina; la foto se acerca un poco y el texto se desvanece.
+2. **Hero** (`Hero.astro`): foto `valle-de-la-muerte.jpg` (atardecer en el Valle de la Muerte, Claire Provost, CC BY-SA 3.0, con crédito visible) a pantalla completa, título con SplitText por palabras. Al hacer scroll queda fijo sin agregar espacio (`pinSpacing: false`) y la sección siguiente lo tapa como cortina; la foto se acerca un poco y el texto se desvanece.
 3. **Paisajes** (`Paisajes.astro`): cortina con esquinas redondeadas y sombra. Capítulos numerados que alternan lado foto/texto. La foto se descubre con clip-path en ciclo desde abajo, izquierda y derecha (nunca desde arriba), con parallax; título e intro suben por líneas.
 4. **Atractivos** (`Atractivos.astro`): "Otros lugares para conocer". Tarjetas con foto cuadrada que aparecen de a una (`ScrollTrigger.batch`, escalonadas si entran juntas).
 5. **Antes de viajar** (`AntesDeViajar.astro`, `#antes-de-viajar`): fondo `sand`. La pregunta "¿En qué orden conviene visitar los paisajes?" junto a la escalera de altura (los 6 paisajes de menor a mayor altitud, barras desde el nivel del mar, marca punteada a los 4.000 m, enlaces a cada paisaje); debajo, las demás preguntas de `faqs.json` en tres grupos abiertos (Clima, Altura, Preparación), sin acordeón. Las barras crecen de la más baja a la más alta. Es la sección clara bajo el horizonte de la noche.
@@ -90,7 +90,6 @@ Paleta cálida sacada de la foto del hero (tokens en `src/styles/global.css`):
 ## Pendiente
 
 - Diseñar la página de detalle `/paisajes/[slug]` y decidir si los atractivos tienen página propia o enlace en el navbar.
-- La foto del hero (`desert-atacama-hero.jpg`) no tiene crédito: buscar una con autor y licencia conocidos.
 - Si el servidor de desarrollo muestra "0 lugares", reiniciarlo: no toma colecciones nuevas en caliente.
 
 ## Development
