@@ -2,6 +2,8 @@
 
 Un recorrido por los paisajes del Desierto de Atacama, en el norte de Chile, contado como un relato: el Valle de la Luna, las lagunas altiplánicas, los géiseres del Tatio y otros lugares del desierto, hasta su cielo de noche.
 
+**Sitio:** [paisajes-de-atacama.vercel.app](https://paisajes-de-atacama.vercel.app)
+
 Es un proyecto personal. Atacama es un lugar que me gusta mucho y que me gustaría visitar algún día, así que este sitio es mi forma de conocerlo antes de ir. No es una agencia de turismo: no hay precios, reservas ni horarios.
 
 También es un proyecto de portafolio para practicar Astro (colecciones de contenido, rutas dinámicas, componentes y optimización de imágenes) y animaciones con GSAP.
@@ -28,6 +30,7 @@ Todas las animaciones respetan `prefers-reduced-motion`: con movimiento reducido
 | [Outfit](https://fontsource.org/fonts/outfit)                  | Tipografía única, cargada con la API de fuentes de Astro                               |
 | [sharp](https://sharp.pixelplumbing.com)                       | Optimización de imágenes en el build                                                   |
 | [ESLint](https://eslint.org) y [Prettier](https://prettier.io) | Revisión y formato del código                                                          |
+| [Vercel](https://vercel.com)                                   | Publicación: cada push a `main` despliega el sitio                                     |
 
 ## Cómo correrlo
 
@@ -52,6 +55,7 @@ El sitio queda en `http://localhost:4321`.
 ## Estructura
 
 ```text
+public/              Favicon (el horizonte del Valle de la Luna al atardecer)
 src/
 ├── assets/images/   Fotos (Astro las optimiza al hacer el build)
 ├── components/      Secciones y componentes .astro, cada uno con su animación

@@ -5,6 +5,7 @@
 Objetivo del portafolio: demostrar dominio de Astro (colecciones de contenido, rutas dinámicas, componentes, optimización de imágenes) y animaciones profesionales con GSAP.
 
 - Repositorio: https://github.com/eduardoapatat/paisajes-de-atacama (público, rama `main`).
+- Sitio: https://paisajes-de-atacama.vercel.app (Vercel: cada push a `main` despliega a producción; es el `site` de `astro.config.mjs`).
 - Nombre del proyecto y de la carpeta local: `paisajes-de-atacama`.
 
 ## Stack
