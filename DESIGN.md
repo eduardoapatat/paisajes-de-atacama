@@ -212,6 +212,7 @@ Cuatro colores cálidos del atardecer en el altiplano: dos neutros que se altern
 - **Ritmo vertical:** las secciones de lectura tienen 96px de relleno vertical, que pasan a 128px desde `sm`. Entre capítulos hay 112px, que pasan a 160px desde `sm`.
 - **Capítulos de paisajes:** en móvil la foto va arriba y el texto debajo, con 40px de separación. Desde `lg` (1024px) es una grilla de 12 columnas: foto en 7 y texto en 5, con 64px de separación. El lado de la foto alterna en cada capítulo.
 - **Tarjetas de atractivos:** grilla de 1 columna, 2 desde `sm` y 3 desde `lg`, con 24px entre columnas y 48px entre filas. Si hay un solo atractivo, en vez de la grilla va foto y texto lado a lado desde `sm` (ancho máximo 1024px, 64px de separación desde `lg`, título a 2.25rem): nunca una tarjeta suelta con columnas vacías.
+- **Anclas:** el navbar flotante ocupa unos 70px y reaparece al subir. Toda sección con ancla cuyo título no tenga al menos ese aire arriba lleva `scroll-mt-20` (80px), para que al llegar desde un enlace el título no quede bajo el navbar.
 - **Antes de viajar:** la escalera de altura ocupa 8 de 12 columnas desde `lg`, junto a su pregunta (4 columnas); debajo, separadas por una línea `desert-night` al 10 %, las preguntas en tres grupos (una columna en móvil, tres desde `md`). Es la sección clara que queda bajo el horizonte: su relleno inferior suma `--horizon-height`.
 - **Pantallas completas:** hero y noche ocupan `100svh`.
 
