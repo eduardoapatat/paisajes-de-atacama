@@ -1,5 +1,5 @@
 * text=auto eol=lf
-*.css linguist-vendored
-*.scss linguist-vendored
 
-*.astro linguist-language=TypeScript
+# Herramientas del agente (skill Impeccable y sus scripts): no son código del sitio
+# y no cuentan en las estadísticas de lenguajes de GitHub
+.claude/** linguist-vendored
