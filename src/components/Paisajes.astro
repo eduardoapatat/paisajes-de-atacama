@@ -164,11 +164,19 @@ const paisajes = (await getCollection('paisajes')).sort((a, b) => a.data.order -
           const introSplit = SplitText.create(intro, { type: 'lines', mask: 'lines' })
 
           // La máscara es el protagonista; el texto arranca casi a la vez y queda
-          // legible en ~1 s (regla de DESIGN.md), sin esperar a que termine la foto
+          // legible en ~1 s (regla de DESIGN.md), sin esperar a que termine la foto.
+          // Se reproduce una vez con toggleActions y no con `once`: un timeline
+          // calcula su posición un instante después de crearse, y si otra sección
+          // crea su trigger en ese instante, el `once` se borra a mitad del cálculo
+          // y ScrollTrigger falla (pasaba al recargar con la noche en pantalla)
           gsap
             .timeline({
               defaults: { ease: MOTION.ease, duration: MOTION.text },
-              scrollTrigger: { trigger: chapter, start: MOTION.start, once: true },
+              scrollTrigger: {
+                trigger: chapter,
+                start: MOTION.start,
+                toggleActions: 'play none none none',
+              },
             })
             .fromTo(
               media,
