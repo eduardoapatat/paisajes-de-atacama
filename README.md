@@ -1,46 +1,68 @@
-# Astro Starter Kit: Minimal
+# Paisajes de Atacama
+
+Un recorrido por los paisajes del Desierto de Atacama, en el norte de Chile, contado como un relato: el Valle de la Luna, las lagunas altiplánicas, los géiseres del Tatio y otros lugares del desierto, hasta su cielo de noche.
+
+Es un proyecto personal. Atacama es un lugar que me gusta mucho y que me gustaría visitar algún día, así que este sitio es mi forma de conocerlo antes de ir. No es una agencia de turismo: no hay precios, reservas ni horarios.
+
+También es un proyecto de portafolio para practicar Astro (colecciones de contenido, rutas dinámicas, componentes y optimización de imágenes) y animaciones con GSAP.
+
+## Qué tiene el sitio
+
+- **Portada:** una foto del desierto a pantalla completa que queda fija y se tapa con la sección siguiente, como una cortina.
+- **Paisajes:** seis lugares en capítulos numerados. Cada foto se descubre al hacer scroll y cada capítulo lleva a una página con su historia completa.
+- **Otros lugares para conocer:** lugares que no son paisajes, como La Mano del Desierto.
+- **Antes de viajar:** preguntas sobre clima, altura y preparación, y una escalera de altura con los seis paisajes ordenados de menor a mayor altitud.
+- **En la noche:** el horizonte real del Valle de la Luna, un cielo de estrellas dibujado en canvas y una foto de la Vía Láctea con notas sobre lo que se ve en ella.
+
+Todas las animaciones respetan `prefers-reduced-motion`: con movimiento reducido, el contenido aparece con un fundido corto.
+
+## Tecnologías
+
+| Tecnología                                                     | Para qué se usa                                                                        |
+| -------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
+| [Astro 7](https://astro.build)                                 | Sitio estático, colecciones de contenido, rutas dinámicas y fotos en AVIF y WebP       |
+| TypeScript                                                     | Tipado estricto en componentes, contenido y scripts                                    |
+| [Tailwind CSS 4](https://tailwindcss.com)                      | Estilos, con la paleta del sitio como tokens en `@theme`                               |
+| [GSAP 3](https://gsap.com)                                     | Animaciones con scroll (ScrollTrigger) y texto dividido en líneas y letras (SplitText) |
+| Canvas 2D                                                      | El cielo de estrellas de la noche                                                      |
+| [Outfit](https://fontsource.org/fonts/outfit)                  | Tipografía única, cargada con la API de fuentes de Astro                               |
+| [sharp](https://sharp.pixelplumbing.com)                       | Optimización de imágenes en el build                                                   |
+| [ESLint](https://eslint.org) y [Prettier](https://prettier.io) | Revisión y formato del código                                                          |
+
+## Cómo correrlo
+
+Requiere Node 22.12 o superior y [pnpm](https://pnpm.io).
 
 ```sh
-pnpm create astro@latest -- --template minimal
+pnpm install
+pnpm dev
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+El sitio queda en `http://localhost:4321`.
 
-## 🚀 Project Structure
+| Comando             | Qué hace                                        |
+| :------------------ | :---------------------------------------------- |
+| `pnpm dev`          | Servidor de desarrollo                          |
+| `pnpm build`        | Genera el sitio estático en `dist/`             |
+| `pnpm preview`      | Sirve el build para revisarlo antes de publicar |
+| `pnpm lint`         | Revisa el código con ESLint                     |
+| `pnpm format:check` | Revisa el formato con Prettier                  |
+| `pnpm format`       | Aplica el formato de Prettier                   |
 
-Inside of your Astro project, you'll see the following folders and files:
+## Estructura
 
 ```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
+src/
+├── assets/images/   Fotos (Astro las optimiza al hacer el build)
+├── components/      Secciones y componentes .astro, cada uno con su animación
+├── config/site.ts   Nombre, descripción y ubicación del sitio
+├── content/         Paisajes, otros lugares y preguntas de "Antes de viajar"
+├── lib/             GSAP y sus tokens de movimiento, formato de cifras, estrellas
+├── pages/           Portada y página de cada paisaje (/paisajes/[slug])
+└── styles/          Estilos globales y paleta
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
-
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
-
-Any static assets, like images, can be placed in the `public/` directory.
-
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                | Action                                           |
-| :--------------------- | :----------------------------------------------- |
-| `pnpm install`         | Installs dependencies                            |
-| `pnpm dev`             | Starts local dev server at `localhost:4321`      |
-| `pnpm build`           | Build your production site to `./dist/`          |
-| `pnpm preview`         | Preview your build locally, before deploying     |
-| `pnpm astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `pnpm astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+El sistema de diseño (colores, tipografía, movimiento y componentes) está documentado en [`DESIGN.md`](DESIGN.md).
 
 ## Créditos de fotos
 
@@ -55,6 +77,10 @@ Feel free to check [our documentation](https://docs.astro.build) or jump into ou
 | `valle-del-arcoiris.jpg`: Valle del Arcoíris                       | [Diego Delso](https://commons.wikimedia.org/wiki/File:Valle_Arcoiris,_R%C3%ADo_Grande,_Chile,_2016-02-05,_DD_26.JPG)                     | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/deed.es) |
 | `mano-del-desierto.jpg`: La Mano del Desierto                      | [Nicolas Valdes Ortega](https://commons.wikimedia.org/wiki/File:La_Mano_del_Desierto,_Panoramica.jpg)                                    | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/deed.es) |
 
-Las fotos de Wikimedia Commons se usan en la versión de hasta 3840 px que publica Commons; en el sitio se recortan para cada formato y se convierten a AVIF y WebP. El crédito de cada foto se muestra dentro de la imagen y vive en el campo `coverCredit` de su ficha de contenido.
+Las fotos de Wikimedia Commons se usan en la versión de hasta 3840 px que publica Commons; en el sitio se recortan para cada formato y se convierten a AVIF y WebP. El crédito de cada foto se muestra dentro de la imagen y vive en el campo `coverCredit` de su ficha de contenido. Cada foto mantiene la licencia de su autor.
 
-Pendiente: la foto del hero (`desert-atacama-hero.jpg`) no tiene crédito registrado.
+Pendiente: la foto de la portada (`desert-atacama-hero.jpg`) no tiene crédito registrado.
+
+## Autor
+
+Hecho por Eduardo Apata Tito.
