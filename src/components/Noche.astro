@@ -10,81 +10,262 @@ const credit = {
   license: 'CC BY 4.0',
   licenseUrl: 'https://creativecommons.org/licenses/by/4.0/deed.es',
 }
+
+// Notas de campo sobre la foto. `x` e `y` son fracciones de la foto original;
+// el script las convierte a píxeles según cómo se recorta en cada pantalla.
+// El dato del hidrógeno y el lugar vienen del pie de foto de ESO.
+const notes = [
+  {
+    n: '01',
+    x: 0.44,
+    y: 0.3,
+    side: 'right',
+    name: 'Vía Láctea',
+    text: 'Nuestra galaxia vista desde dentro. El rojo que la atraviesa viene del hidrógeno repartido por ella.',
+  },
+  {
+    n: '02',
+    x: 0.413,
+    y: 0.603,
+    side: 'left',
+    name: 'Gran Nube de Magallanes',
+    text: 'Una galaxia vecina, a unos 160.000 años luz. Solo se ve a simple vista desde el hemisferio sur.',
+  },
+  {
+    n: '03',
+    x: 0.63,
+    y: 0.555,
+    side: 'right',
+    name: 'Valle de la Luna',
+    text: 'Las mismas formaciones de sal del capítulo 01, de noche.',
+  },
+]
 ---
 
 <!-- Empieza bajo la cortina de Atractivos: el cielo se ve detrás de sus esquinas -->
-<section
-  id="noche"
-  data-noche
-  class="relative -mt-12 h-svh overflow-hidden bg-desert-night sm:-mt-16"
->
-  <!--
-    Resplandor del atardecer en el horizonte: la capa externa aparece al entrar
-    y la interna se apaga mientras salen las estrellas (cada una con su trigger)
-  -->
-  <div aria-hidden="true" data-noche-dusk class="absolute inset-0 opacity-0">
-    <div
-      data-noche-dusk-glow
-      class="absolute inset-0 bg-linear-to-t from-dusk/30 via-dusk/5 to-transparent"
-    ></div>
-  </div>
+<section id="noche" data-noche class="relative -mt-12 bg-desert-night sm:-mt-16">
+  <!-- Escenario que queda fijo mientras avanza la bitácora de la noche -->
+  <div data-noche-stage class="relative h-svh overflow-hidden">
+    <!--
+      Resplandor del atardecer en el horizonte: la capa externa aparece al entrar
+      y la interna se apaga mientras salen las estrellas (cada una con su trigger)
+    -->
+    <div aria-hidden="true" data-noche-dusk class="absolute inset-0 opacity-0">
+      <div
+        data-noche-dusk-glow
+        class="absolute inset-0 bg-linear-to-t from-dusk/30 via-dusk/5 to-transparent"
+      ></div>
+    </div>
 
-  <!-- Estrellas dibujadas en canvas: la foto las tapa al abrirse -->
-  <canvas aria-hidden="true" data-noche-stars class="absolute inset-0 h-full w-full"></canvas>
+    <!-- Estrellas dibujadas en canvas: la foto las tapa al abrirse -->
+    <canvas aria-hidden="true" data-noche-stars class="absolute inset-0 h-full w-full"></canvas>
 
-  <!-- La foto se abre en un círculo centrado en el cielo -->
-  <div data-noche-media data-reveal class="absolute inset-0">
-    <Picture
-      src={nightImage}
-      alt="La Vía Láctea sobre las formaciones de sal del Valle de la Luna, de noche"
-      widths={[640, 1024, 1600, 2400, 3200]}
-      sizes="100vw"
-      formats={['avif', 'webp']}
-      data-noche-image
-      class="h-full w-full object-cover object-[50%_40%]"
-    />
-    <div
+    <!-- La foto se abre en un círculo centrado en el cielo -->
+    <div data-noche-media data-reveal class="absolute inset-0">
+      <Picture
+        src={nightImage}
+        alt="La Vía Láctea sobre las formaciones de sal del Valle de la Luna, de noche"
+        widths={[640, 1024, 1600, 2400, 3200]}
+        sizes="100vw"
+        formats={['avif', 'webp']}
+        data-noche-image
+        data-natural-width={nightImage.width}
+        data-natural-height={nightImage.height}
+        class="h-full w-full object-cover object-[50%_40%]"
+      />
+      <div
+        aria-hidden="true"
+        class="absolute inset-0 bg-linear-to-b from-desert-night/40 via-transparent to-desert-night/70"
+      ></div>
+      <!-- Baja la foto para que se lean las notas -->
+      <div
+        aria-hidden="true"
+        data-noche-shade
+        class="absolute inset-0 bg-desert-night opacity-0"
+      ></div>
+      <!-- Al final funde la foto con el fondo del cierre: sin corte contra lo que sigue -->
+      <div
+        aria-hidden="true"
+        data-noche-exit
+        class="absolute inset-x-0 bottom-0 h-1/2 bg-linear-to-b from-transparent to-desert-night opacity-0"
+      ></div>
+    </div>
+
+    <!--
+      Notas de campo: marcador sobre el objeto, línea y nota. Las posiciones las
+      calcula el script, así que sin JS no se muestran.
+    -->
+    <div data-noche-notes class="pointer-events-none absolute inset-0 hidden">
+      <svg aria-hidden="true" class="absolute inset-0 h-full w-full overflow-visible">
+        {notes.map((note) => (
+          <g data-note-mark>
+            <circle r="7" fill="none" class="stroke-sand/90" stroke-width="1.5" />
+            <polyline
+              fill="none"
+              pathLength="1"
+              stroke-dasharray="1"
+              class="stroke-sand/60 max-md:hidden"
+              stroke-width="1"
+            />
+            <text class="fill-gold text-sm font-light md:hidden">{note.n}</text>
+          </g>
+        ))}
+      </svg>
+
+      <ol
+        aria-label="Lo que se ve en la foto"
+        data-notes-list
+        class="group max-md:absolute max-md:inset-x-5 max-md:bottom-16 max-md:grid max-md:data-[mode=list]:gap-4 md:absolute md:inset-0"
+      >
+        {notes.map((note) => (
+          <li
+            data-note
+            data-reveal
+            data-x={note.x}
+            data-y={note.y}
+            data-side={note.side}
+            class:list={[
+              'max-md:[grid-area:1/1] max-md:group-data-[mode=list]:[grid-area:auto] md:absolute md:w-[270px]',
+              note.side === 'left' && 'md:text-right',
+            ]}
+          >
+            <span aria-hidden="true" class="text-sm font-light text-gold">
+              {note.n}
+            </span>
+            <p class="text-lg font-semibold max-md:group-data-[mode=list]:text-base">{note.name}</p>
+            <p class="mt-1 leading-relaxed text-sand/85 max-md:group-data-[mode=list]:text-sm">
+              {note.text}
+            </p>
+          </li>
+        ))}
+      </ol>
+    </div>
+
+    <div class="container-page relative flex h-full items-center justify-center">
+      <h2
+        data-noche-title
+        data-reveal
+        class="text-center text-5xl text-sand sm:text-7xl lg:text-8xl"
+      >
+        En la noche...
+      </h2>
+    </div>
+
+    <!-- El mismo título, chico y arriba, mientras se leen las notas -->
+    <p
       aria-hidden="true"
-      class="absolute inset-0 bg-linear-to-b from-desert-night/40 via-transparent to-desert-night/70"
-    ></div>
-  </div>
-
-  <div class="container-page relative flex h-full items-center justify-center">
-    <h2 data-noche-title data-reveal class="text-center text-5xl text-sand sm:text-7xl lg:text-8xl">
+      data-noche-title-small
+      data-reveal
+      class="container-page absolute inset-x-0 top-20 hidden text-3xl font-semibold sm:top-24 sm:text-4xl"
+    >
       En la noche...
-    </h2>
-  </div>
+    </p>
 
-  <!--
-    Fuera del círculo: en móvil el círculo no alcanza la esquina inferior y lo
-    recortaría. Aparece con su propio fundido cuando la foto ya está abierta.
-  -->
-  <PhotoCredit {...credit} data-noche-credit data-reveal class="sm:px-8" />
+    <!--
+      Fuera del círculo: en móvil el círculo no alcanza la esquina inferior y lo
+      recortaría. Aparece con su propio fundido cuando la foto ya está abierta.
+    -->
+    <PhotoCredit {...credit} data-noche-credit data-reveal class="sm:px-8" />
+  </div>
 </section>
 
 <script>
-  import { animate, gsap, ScrollTrigger, SplitText } from '@/lib/gsap'
+  import { coverPoint } from '@/lib/cover'
+  import { animate, gsap, MOTION, ScrollTrigger, SplitText } from '@/lib/gsap'
   import { createStarfield } from '@/lib/starfield'
 
   const section = document.querySelector<HTMLElement>('[data-noche]')
+  const stage = section?.querySelector<HTMLElement>('[data-noche-stage]')
   const title = section?.querySelector<HTMLElement>('[data-noche-title]')
   const canvas = section?.querySelector<HTMLCanvasElement>('[data-noche-stars]')
+  const image = section?.querySelector<HTMLImageElement>('[data-noche-image]')
+  const notesBox = section?.querySelector<HTMLElement>('[data-noche-notes]')
+  const list = section?.querySelector<HTMLElement>('[data-notes-list]')
 
-  if (section && title && canvas) {
+  const DESKTOP = '(min-width: 768px)'
+
+  if (section && stage && title && canvas && image && notesBox && list) {
+    const notes = [...list.querySelectorAll<HTMLElement>('[data-note]')]
+    const marks = [...notesBox.querySelectorAll<SVGGElement>('[data-note-mark]')]
+    const natural = {
+      width: Number(image.dataset.naturalWidth),
+      height: Number(image.dataset.naturalHeight),
+    }
+
+    // Coloca marcadores, líneas y notas sobre los objetos de la foto según el
+    // recorte actual. En móvil las notas van en una franja abajo, no junto al objeto.
+    const placeNotes = () => {
+      const box = { width: stage.clientWidth, height: stage.clientHeight }
+      const desktop = window.matchMedia(DESKTOP).matches
+      const margin = 20
+      notes.forEach((note, i) => {
+        const point = coverPoint(
+          box,
+          natural,
+          { x: 0.5, y: 0.4 },
+          {
+            x: Number(note.dataset.x),
+            y: Number(note.dataset.y),
+          },
+        )
+        const right = note.dataset.side === 'right'
+        const lineEnd = { x: point.x + (right ? 70 : -70), y: point.y - 40 }
+        const [circle, polyline, label] = marks[i].children as unknown as SVGElement[]
+        circle.setAttribute('cx', String(point.x))
+        circle.setAttribute('cy', String(point.y))
+        polyline.setAttribute(
+          'points',
+          `${point.x + (right ? 7 : -7)},${point.y} ${point.x + (right ? 42 : -42)},${lineEnd.y} ${lineEnd.x},${lineEnd.y}`,
+        )
+        label.setAttribute('x', String(point.x + 12))
+        label.setAttribute('y', String(point.y + 5))
+
+        if (!desktop) {
+          note.style.left = ''
+          note.style.top = ''
+          return
+        }
+        // La nota sigue a la línea y nunca se sale de la pantalla
+        const width = note.offsetWidth
+        const left = right ? lineEnd.x + 10 : lineEnd.x - 10 - width
+        note.style.left = `${Math.min(Math.max(left, margin), box.width - width - margin)}px`
+        note.style.top = `${lineEnd.y - 14}px`
+      })
+    }
+
+    // Notas y título chico dependen del script: sin JS quedan ocultos
+    notesBox.classList.remove('hidden')
+    section.querySelector('[data-noche-title-small]')?.classList.remove('hidden')
+    placeNotes()
+    window.addEventListener('resize', placeNotes)
+    ScrollTrigger.addEventListener('refresh', placeNotes)
+
     animate(section, ({ reduceMotion, afterFonts }) => {
-      // Con movimiento reducido la foto ya está abierta y sus estrellas bastan
-      if (reduceMotion) return
+      // Con movimiento reducido la foto ya está abierta, sus estrellas bastan y
+      // las notas se leen todas a la vez (en móvil, en lista)
+      if (reduceMotion) {
+        list.dataset.mode = 'list'
+        // El título va chico arriba para no quedar debajo de las notas
+        gsap.set('[data-noche-shade]', { autoAlpha: 0.35 })
+        // Solo opacidad: el h2 sigue siendo el título para lectores de pantalla
+        gsap.set(title, { opacity: 0 })
+        gsap.set('[data-noche-title-small]', { autoAlpha: 1 })
+        return () => delete list.dataset.mode
+      }
 
       const stars = createStarfield(canvas)
 
+      // Estados iniciales desde el principio, para que el respaldo de
+      // `data-reveal` no muestre notas ni el título chico antes de tiempo
+      gsap.set([...notes, ...marks, '[data-noche-title-small]'], { autoAlpha: 0 })
+
       // La foto carga en diferido, pero si el scroll salta directo a la sección
       // fija el navegador no la pide: se fuerza la carga unas pantallas antes
-      const image = section.querySelector<HTMLImageElement>('[data-noche-image]')
       ScrollTrigger.create({
         trigger: section,
         start: 'top 300%',
         once: true,
-        onEnter: () => image && (image.loading = 'eager'),
+        onEnter: () => (image.loading = 'eager'),
       })
 
       // Mientras la sección sube, oscurece y salen las estrellas más brillantes
@@ -95,61 +276,142 @@ const credit = {
         .fromTo(stars.state, { revealEnter: 0 }, { revealEnter: 0.5, ease: 'none' }, 0)
         .fromTo('[data-noche-dusk]', { autoAlpha: 0 }, { autoAlpha: 1, ease: 'none' }, 0)
 
+      let layout: gsap.MatchMedia | undefined
+
       afterFonts(() => {
         const split = SplitText.create(title, { type: 'chars' })
 
-        // La sección queda fija y todo avanza con el scroll: terminan de salir las
-        // estrellas y el título letra por letra, después la foto se abre desde el
-        // centro del cielo y tapa el canvas. El cielo gira apenas todo el tramo.
-        gsap
-          .timeline({
-            scrollTrigger: {
-              trigger: section,
-              start: 'top top',
-              end: '+=100%',
-              pin: true,
-              scrub: true,
-            },
+        // El recorrido cambia entre escritorio (todas las notas a la vez) y
+        // móvil (una nota a la vez): matchMedia lo reconstruye al cruzar el corte
+        layout = gsap.matchMedia()
+        layout.add({ desktop: DESKTOP, mobile: '(max-width: 767px)' }, (context) => {
+          const { desktop } = context.conditions as { desktop: boolean }
+          placeNotes()
+
+          // En escritorio las notas se acumulan; en móvil se turnan en la franja de
+          // abajo, así que cada una necesita más recorrido para alcanzar a leerse
+          const gap = desktop ? 0.45 : 1
+          const closeAt = 2 + notes.length * gap + (desktop ? 0.05 : -0.2)
+
+          // El escenario queda fijo tres pantallas (cuatro en móvil). Todo avanza con el scroll:
+          // 1) terminan de salir las estrellas y el título letra por letra;
+          // 2) la foto se abre desde el centro del cielo y tapa el canvas;
+          // 3) el título se hace chico y aparecen las notas de campo, una por una;
+          // 4) todo se apaga y la foto se funde con el fondo del cierre.
+          const tl = gsap
+            .timeline({
+              scrollTrigger: {
+                trigger: stage,
+                start: 'top top',
+                end: desktop ? '+=300%' : '+=400%',
+                pin: true,
+                scrub: true,
+              },
+            })
+            .set(title, { autoAlpha: 1 }, 0)
+            .fromTo(
+              stars.state,
+              { revealPin: 0 },
+              { revealPin: 0.5, duration: 0.45, ease: 'none' },
+              0,
+            )
+            .fromTo(stars.state, { spin: 0 }, { spin: 0.04, duration: 1.55, ease: 'none' }, 0)
+            .fromTo(
+              '[data-noche-dusk-glow]',
+              { autoAlpha: 1 },
+              { autoAlpha: 0, duration: 0.4, ease: 'none' },
+              0,
+            )
+            .fromTo(
+              split.chars,
+              { autoAlpha: 0, y: 40, filter: 'blur(10px)' },
+              { autoAlpha: 1, y: 0, filter: 'blur(0px)', stagger: 0.04, duration: 0.3 },
+              0,
+            )
+            .fromTo(
+              '[data-noche-media]',
+              { autoAlpha: 1, clipPath: 'circle(0% at 50% 40%)' },
+              { clipPath: 'circle(75% at 50% 40%)', duration: 1, ease: 'power2.inOut' },
+              0.35,
+            )
+            .fromTo(
+              '[data-noche-image]',
+              { scale: 1.4 },
+              { scale: 1, duration: 1.2, ease: 'none' },
+              0.35,
+            )
+            // El crédito aparece cuando la foto ya está abierta
+            .fromTo('[data-noche-credit]', { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.2 }, 1.2)
+            // Con la foto completa el canvas ya no se ve: deja de dibujar
+            .to(stars.state, { opacity: 0, duration: 0.15, ease: 'none' }, 1.35)
+
+            // Lo que se ve: la foto baja y el título pasa a la esquina
+            .fromTo(
+              '[data-noche-shade]',
+              { autoAlpha: 0 },
+              { autoAlpha: 0.35, duration: 0.4, ease: 'none' },
+              1.6,
+            )
+            // Solo opacidad: el h2 sigue siendo el título para lectores de pantalla
+            .to(title, { opacity: 0, y: -MOTION.rise, duration: 0.3, ease: 'none' }, 1.6)
+            .fromTo(
+              '[data-noche-title-small]',
+              { autoAlpha: 0, y: MOTION.rise },
+              { autoAlpha: 1, y: 0, duration: 0.3, ease: MOTION.ease },
+              1.75,
+            )
+
+          // Cada nota: marcador, línea que se dibuja y texto
+          notes.forEach((note, i) => {
+            const at = 2 + i * gap
+            const [circle, polyline] = marks[i].children
+            tl.fromTo(marks[i], { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.1 }, at)
+              .fromTo(
+                circle,
+                { scale: 0.6, transformOrigin: '50% 50%' },
+                { scale: 1, duration: 0.2, ease: MOTION.ease },
+                at,
+              )
+              .fromTo(
+                polyline,
+                { strokeDashoffset: 1 },
+                { strokeDashoffset: 0, duration: 0.2, ease: 'none' },
+                at + 0.05,
+              )
+              .fromTo(
+                note,
+                { autoAlpha: 0, y: MOTION.rise },
+                { autoAlpha: 1, y: 0, duration: 0.25, ease: MOTION.ease },
+                at + 0.15,
+              )
+            // En móvil las notas comparten la franja de abajo: sale la anterior
+            if (!desktop && i < notes.length - 1) {
+              tl.to(note, { autoAlpha: 0, duration: 0.1, ease: 'none' }, at + gap - 0.1)
+            }
           })
-          .set(title, { autoAlpha: 1 }, 0)
-          .fromTo(
-            stars.state,
-            { revealPin: 0 },
-            { revealPin: 0.5, duration: 0.45, ease: 'none' },
-            0,
+
+          // Cierre: se apagan notas y título, y la foto se funde con el fondo
+          tl.to(
+            [...notes, ...marks, '[data-noche-title-small]'],
+            { autoAlpha: 0, duration: 0.3, ease: 'none' },
+            closeAt,
           )
-          .fromTo(stars.state, { spin: 0 }, { spin: 0.04, duration: 1.55, ease: 'none' }, 0)
-          .fromTo(
-            '[data-noche-dusk-glow]',
-            { autoAlpha: 1 },
-            { autoAlpha: 0, duration: 0.4, ease: 'none' },
-            0,
-          )
-          .fromTo(
-            split.chars,
-            { autoAlpha: 0, y: 40, filter: 'blur(10px)' },
-            { autoAlpha: 1, y: 0, filter: 'blur(0px)', stagger: 0.04, duration: 0.3 },
-            0,
-          )
-          .fromTo(
-            '[data-noche-media]',
-            { autoAlpha: 1, clipPath: 'circle(0% at 50% 40%)' },
-            { clipPath: 'circle(75% at 50% 40%)', duration: 1, ease: 'power2.inOut' },
-            0.35,
-          )
-          .fromTo(
-            '[data-noche-image]',
-            { scale: 1.4 },
-            { scale: 1, duration: 1.2, ease: 'none' },
-            0.35,
-          )
-          // El crédito aparece cuando la foto ya está abierta
-          .fromTo('[data-noche-credit]', { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.2 }, 1.2)
-          // Con la foto completa el canvas ya no se ve: deja de dibujar
-          .to(stars.state, { opacity: 0, duration: 0.15, ease: 'none' }, 1.35)
+            .to('[data-noche-shade]', { autoAlpha: 0.75, duration: 0.5, ease: 'none' }, closeAt)
+            .fromTo(
+              '[data-noche-exit]',
+              { autoAlpha: 0 },
+              { autoAlpha: 1, duration: 0.5, ease: 'none' },
+              closeAt,
+            )
+            // Un respiro al final antes de soltar el escenario
+            .to({}, { duration: 0.1 }, closeAt + 0.5)
+        })
       })
 
-      return () => stars.destroy()
+      return () => {
+        layout?.revert()
+        stars.destroy()
+      }
     })
   }
 </script>

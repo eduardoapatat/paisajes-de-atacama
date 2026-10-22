@@ -280,11 +280,22 @@ Toda foto lleva su crédito dentro de la imagen, abajo a la derecha (`PhotoCredi
 
 ### Night Reveal (componente propio)
 
-Sección fija durante una pantalla de scroll, en tres capas: resplandor de atardecer, cielo de estrellas en canvas y la foto.
+El último capítulo de la bitácora. Un escenario queda fijo tres pantallas de scroll (cuatro en móvil), con capas de resplandor de atardecer, cielo de estrellas en canvas, la foto y las notas de campo.
 
-1. **Entrada:** mientras la sección sube, aparece un resplandor `dusk` en el horizonte (del 30 % abajo a transparente arriba) y salen las estrellas del canvas, primero las más brillantes, como al oscurecer.
-2. **Tramo fijo:** terminan de salir las estrellas, el resplandor se apaga y el título aparece letra por letra con desenfoque (de 10px a 0).
-3. **Foto:** se abre en un círculo desde el centro del cielo, de 0 % a 75 %, con un zoom de 1.4 a 1, y tapa el canvas. El crédito de la foto aparece al final.
+1. **Entrada:** Atractivos se levanta como cortina; mientras la sección sube, aparece un resplandor `dusk` en el horizonte (del 30 % abajo a transparente arriba) y salen las estrellas del canvas, primero las más brillantes, como al oscurecer.
+2. **Título y foto:** terminan de salir las estrellas, el resplandor se apaga y el título aparece letra por letra con desenfoque (de 10px a 0). La foto se abre en un círculo desde el centro del cielo, de 0 % a 75 %, con un zoom de 1.4 a 1, y tapa el canvas. El crédito aparece cuando la foto ya está abierta.
+3. **Lo que se ve:** la foto baja al 35 % con una capa `desert-night`, el título se apaga (solo opacidad: el `h2` sigue para lectores de pantalla) y aparece una copia chica arriba a la izquierda. Entran las notas de campo (ver Sky Notes).
+4. **Salida:** notas y título se apagan, la capa llega al 75 % y un degradado funde la foto con `desert-night` desde la mitad inferior: lo que sigue continúa sin corte.
+
+### Sky Notes (componente propio)
+
+Notas de campo ancladas a objetos reales de la foto (Vía Láctea, Gran Nube de Magallanes, la formación de sal). Cada una tiene un marcador (círculo de 7px, trazo `sand` al 90 %), una línea fina (`sand` al 60 %) que se dibuja con `stroke-dashoffset` y la nota: número en dorado (300), nombre (600, 1.125rem) y texto en `sand` al 85 %, con 270px de ancho máximo.
+
+- Las posiciones son fracciones de la foto original y `coverPoint` (`src/lib/cover.ts`) las lleva a píxeles según el recorte de `object-fit: cover`. Se recalculan al redimensionar. Si una nota no cabe, se pega al margen de 20px.
+- **Escritorio (≥ 768px):** las tres notas se acumulan junto a su objeto, una cada 0,45 del recorrido.
+- **Móvil:** marcadores numerados sobre la foto y una sola nota a la vez en una franja abajo; cada una se lee unos 360–420px de scroll.
+- **Reduced motion:** sin escenario fijo; la foto queda abierta con las notas visibles (en móvil, en lista con texto más chico) y el título chico arriba.
+- **Sin JS:** las notas y el título chico no se muestran, porque sus posiciones dependen del script.
 
 Las estrellas del canvas (`src/lib/starfield.ts`) tienen un núcleo nítido con halo suave y parpadean cada una a su ritmo. La mayoría son arena; unas pocas son dorado claro, cielo rosado o el celeste pálido del cielo del hero. El cielo gira apenas con el scroll alrededor de un punto bajo el horizonte. En dispositivos con mouse, las estrellas se apartan suavemente del cursor (radio 140px). GSAP anima los valores y el canvas solo los dibuja con `gsap.ticker`, y únicamente mientras está en pantalla. Con reduced motion no se crea el canvas: la foto queda abierta desde el inicio.
 
