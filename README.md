@@ -84,6 +84,10 @@ El sistema de diseño (colores, tipografía, movimiento y componentes) está doc
 
 Las fotos de Wikimedia Commons se usan en la versión de hasta 3840 px que publica Commons; en el sitio se recortan para cada formato y se convierten a AVIF y WebP. El crédito de cada foto se muestra dentro de la imagen y vive en el campo `coverCredit` de su ficha de contenido. Cada foto mantiene la licencia de su autor.
 
+## Licencia
+
+El código está bajo la licencia [MIT](LICENSE). Las fotos no: cada una mantiene la licencia de su autor, indicada en la tabla de créditos.
+
 ## Autor
 
 Hecho por Eduardo Apata Tito.
