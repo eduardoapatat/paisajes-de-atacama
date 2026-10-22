@@ -1,0 +1,164 @@
+---
+import { getCollection } from 'astro:content'
+import { formatAltitude, keepNumbersTogether } from '@/lib/format'
+
+const faqs = (await getCollection('faqs'))
+  .map((entry) => ({ ...entry.data, id: entry.id }))
+  .sort((a, b) => a.order - b.order)
+
+// La pregunta sobre el orden de visita se responde con la escalera de altura
+const visitOrder = faqs.find((faq) => faq.id === 'orden-de-visita')
+
+const groups = [
+  { category: 'clima', title: 'Clima' },
+  { category: 'altura', title: 'Altura' },
+  { category: 'preparacion', title: 'Preparación' },
+].map((group) => ({
+  ...group,
+  items: faqs.filter((faq) => faq.category === group.category && faq.id !== visitOrder?.id),
+}))
+
+// Escalera de altura: los paisajes de menor a mayor altura. La escala parte del
+// nivel del mar para que el largo de cada barra sea proporcional a su altitud.
+const paisajes = (await getCollection('paisajes')).sort(
+  (a, b) => a.data.altitudeMeters - b.data.altitudeMeters,
+)
+const SCALE_MAX = 4500
+const THRESHOLD = 4000
+const toPercent = (meters: number) => `${((meters / SCALE_MAX) * 100).toFixed(2)}%`
+---
+
+<section
+  id="antes-de-viajar"
+  data-viaje
+  class="relative z-10 bg-sand pt-8 pb-[calc(6rem+var(--horizon-height))] text-desert-night sm:pt-12 sm:pb-[calc(8rem+var(--horizon-height))]"
+>
+  <div class="container-page">
+    <header data-viaje-heading class="max-w-2xl">
+      <h2 data-reveal class="text-4xl text-desert-night sm:text-5xl">
+        Antes de viajar
+      </h2>
+    </header>
+
+    {visitOrder && (
+      <div class="mt-14 grid gap-10 lg:grid-cols-12 lg:gap-16">
+        <div class="lg:col-span-4">
+          <h3 data-reveal data-viaje-text class="text-2xl text-desert-night sm:text-3xl">
+            {visitOrder.question}
+          </h3>
+          <p data-reveal data-viaje-text class="mt-4 text-lg leading-relaxed text-desert-night/80">
+            {keepNumbersTogether(visitOrder.answer)}
+          </p>
+        </div>
+
+        <figure data-viaje-ladder class="lg:col-span-8 lg:pt-2">
+          <ol aria-label="Paisajes de menor a mayor altura" class="space-y-4">
+            {paisajes.map((paisaje, index) => (
+              <li>
+                <a
+                  href={`/paisajes/${paisaje.id}`}
+                  class="group flex items-baseline gap-3 py-1 text-desert-night"
+                >
+                  <span aria-hidden="true" class="w-5 shrink-0 text-desert-night/70 tabular-nums">
+                    {index + 1}
+                  </span>
+                  <span class="min-w-0 font-medium underline-offset-4 group-hover:underline">
+                    {paisaje.data.title}
+                  </span>
+                  <span class="ml-auto shrink-0 text-sm whitespace-nowrap text-desert-night/70 tabular-nums">
+                    {formatAltitude(paisaje.data.altitudeMeters)}
+                  </span>
+                </a>
+                {/* Carril y barra: el largo es la altitud; la marca punteada, los 4.000 m */}
+                <div aria-hidden="true" class="relative mt-1.5 h-3 bg-desert-night/10">
+                  <div
+                    data-viaje-bar
+                    class="h-full rounded-r-[4px] bg-desert-night/80"
+                    style={{ width: toPercent(paisaje.data.altitudeMeters) }}
+                  />
+                  <span
+                    class="absolute -inset-y-1 border-l border-dashed border-desert-night/50"
+                    style={{ left: toPercent(THRESHOLD) }}
+                  />
+                </div>
+              </li>
+            ))}
+          </ol>
+          <figcaption data-reveal data-viaje-text class="mt-6 text-sm text-desert-night/70">
+            La línea punteada marca los {formatAltitude(THRESHOLD)}
+          </figcaption>
+        </figure>
+      </div>
+    )}
+
+    <div class="mt-20 grid gap-12 border-t border-desert-night/10 pt-12 sm:mt-28 md:grid-cols-3 md:gap-10">
+      {groups.map((group) => (
+        <div data-reveal data-viaje-group>
+          <h3 class="text-2xl text-desert-night">{group.title}</h3>
+          <dl class="mt-6 space-y-6">
+            {group.items.map((faq) => (
+              <div>
+                <dt class="font-semibold">{faq.question}</dt>
+                <dd class="mt-2 leading-relaxed text-desert-night/80">
+                  {keepNumbersTogether(faq.answer)}
+                </dd>
+              </div>
+            ))}
+          </dl>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<script>
+  import { animate, fadeIn, gsap, MOTION } from '@/lib/gsap'
+
+  const section = document.querySelector<HTMLElement>('[data-viaje]')
+
+  if (section) {
+    animate(section, ({ reduceMotion }) => {
+      const blocks = gsap.utils.toArray<HTMLElement>(
+        section.querySelectorAll('[data-viaje-heading] > *, [data-viaje-text], [data-viaje-group]'),
+      )
+      const ladder = section.querySelector('[data-viaje-ladder]')
+      const bars = section.querySelectorAll('[data-viaje-bar]')
+
+      // Sin desplazamientos: cada bloque aparece con un fundido corto
+      if (reduceMotion) {
+        fadeIn(blocks)
+        return
+      }
+
+      // Textos y grupos: la misma aparición de los capítulos, una vez cada uno
+      blocks.forEach((block) => {
+        gsap.fromTo(
+          block,
+          { autoAlpha: 0, y: MOTION.rise },
+          {
+            autoAlpha: 1,
+            y: 0,
+            duration: MOTION.text,
+            ease: MOTION.ease,
+            scrollTrigger: { trigger: block, start: MOTION.start, once: true },
+          },
+        )
+      })
+
+      // Momento propio: las barras crecen de menor a mayor, como quien sube
+      if (ladder && bars.length) {
+        gsap.fromTo(
+          bars,
+          { scaleX: 0, transformOrigin: 'left center' },
+          {
+            scaleX: 1,
+            duration: MOTION.mask,
+            ease: MOTION.ease,
+            stagger: MOTION.staggerBlock,
+            scrollTrigger: { trigger: ladder, start: MOTION.start, once: true },
+          },
+        )
+      }
+    })
+  }
+</script>

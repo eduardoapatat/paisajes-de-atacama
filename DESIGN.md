@@ -212,6 +212,7 @@ Cuatro colores cálidos del atardecer en el altiplano: dos neutros que se altern
 - **Ritmo vertical:** las secciones de lectura tienen 96px de relleno vertical, que pasan a 128px desde `sm`. Entre capítulos hay 112px, que pasan a 160px desde `sm`.
 - **Capítulos de paisajes:** en móvil la foto va arriba y el texto debajo, con 40px de separación. Desde `lg` (1024px) es una grilla de 12 columnas: foto en 7 y texto en 5, con 64px de separación. El lado de la foto alterna en cada capítulo.
 - **Tarjetas de atractivos:** grilla de 1 columna, 2 desde `sm` y 3 desde `lg`, con 24px entre columnas y 48px entre filas. Si hay un solo atractivo, en vez de la grilla va foto y texto lado a lado desde `sm` (ancho máximo 1024px, 64px de separación desde `lg`, título a 2.25rem): nunca una tarjeta suelta con columnas vacías.
+- **Antes de viajar:** la escalera de altura ocupa 8 de 12 columnas desde `lg`, junto a su pregunta (4 columnas); debajo, separadas por una línea `desert-night` al 10 %, las preguntas en tres grupos (una columna en móvil, tres desde `md`). Es la sección clara que queda bajo el horizonte: su relleno inferior suma `--horizon-height`.
 - **Pantallas completas:** hero y noche ocupan `100svh`.
 
 **The One Idea Per Screen Rule.** Cada pantalla de scroll muestra una sola idea: un capítulo, un título o una foto. No se agrupan capítulos ni se comprimen los márgenes para que quepa más.
@@ -267,6 +268,16 @@ Hay un solo botón relleno en todo el sitio: "Explorar", en el hero. Todo lo dem
 - **Links:** texto arena en cápsulas internas de 8px × 16px. En hover, el texto pasa a dorado y el fondo a cielo rosado al 15 %.
 - **Behavior:** entra después de la animación del hero, se oculta al bajar (pasados 200px) y reaparece al subir.
 - **Mobile:** la misma cápsula, sin menú desplegable (solo hay dos enlaces).
+
+### Altitude Ladder (componente propio)
+
+Responde con datos "¿En qué orden conviene visitar los paisajes?": los paisajes de menor a mayor altitud, leídos de la colección (`altitudeMeters`), nunca escritos a mano.
+
+- **Fila:** número de orden (`desert-night` al 70 %), nombre con enlace a su página y altitud con `formatAltitude` y `tabular-nums`; debajo, un carril de 12px en `desert-night` al 10 % con la barra en `desert-night` al 80 %, recta en la base y con 4px de radio en el extremo.
+- **Escala:** desde el nivel del mar hasta 4.500 m, para que el largo de cada barra sea proporcional a su altitud. Una sola serie, un solo color.
+- **Umbral:** una marca punteada en `desert-night` al 50 % a los 4.000 m, dibujada solo sobre los carriles para no cruzar el texto, explicada en el pie del gráfico. Es el único caso en que se usa una línea punteada.
+- **Movimiento:** las barras crecen de izquierda a derecha (`scaleX`, `mask` 0,9 s, `staggerBlock`), de la más baja a la más alta, una sola vez. Con reduced motion aparecen completas con un fundido.
+- **Accesibilidad:** es una lista ordenada con texto; las barras son `aria-hidden`, porque la altitud ya está escrita en cada fila.
 
 ### Footer
 
