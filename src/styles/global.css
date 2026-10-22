@@ -104,6 +104,24 @@
   }
 }
 
+/*
+ * Atardecer: el fondo arena de la última sección clara pasa por el rosado del
+ * cielo (`dusk`) hasta la noche, sin borde ni sombra. Ocupa los últimos
+ * `--sunset-height` de la sección, que debe sumar ese alto a su relleno inferior.
+ */
+@utility bg-sunset {
+  background: linear-gradient(
+    in oklab to bottom,
+    var(--color-sand) calc(100% - var(--sunset-height)),
+    color-mix(in oklab, var(--color-sand) 50%, var(--color-dusk))
+      calc(100% - var(--sunset-height) * 0.68),
+    var(--color-dusk) calc(100% - var(--sunset-height) * 0.42),
+    color-mix(in oklab, var(--color-dusk) 40%, var(--color-desert-night))
+      calc(100% - var(--sunset-height) * 0.16),
+    var(--color-desert-night) 100%
+  );
+}
+
 @utility container-page {
   @apply mx-auto w-full max-w-7xl px-5 sm:px-8;
 }
