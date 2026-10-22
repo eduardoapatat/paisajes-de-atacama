@@ -285,7 +285,8 @@ El último capítulo de la bitácora. Un escenario queda fijo tres pantallas de 
 1. **Entrada:** Atractivos se levanta como cortina; mientras la sección sube, aparece un resplandor `dusk` en el horizonte (del 30 % abajo a transparente arriba) y salen las estrellas del canvas, primero las más brillantes, como al oscurecer.
 2. **Título y foto:** terminan de salir las estrellas, el resplandor se apaga y el título aparece letra por letra con desenfoque (de 10px a 0). La foto se abre en un círculo desde el centro del cielo, de 0 % a 75 %, con un zoom de 1.4 a 1, y tapa el canvas. El crédito aparece cuando la foto ya está abierta.
 3. **Lo que se ve:** la foto baja al 35 % con una capa `desert-night`, el título se apaga (solo opacidad: el `h2` sigue para lectores de pantalla) y aparece una copia chica arriba a la izquierda. Entran las notas de campo (ver Sky Notes).
-4. **Salida:** notas y título se apagan, la capa llega al 75 % y un degradado funde la foto con `desert-night` desde la mitad inferior: lo que sigue continúa sin corte.
+4. **Salida:** notas y título se apagan, la capa llega al 55 % (la foto sigue apenas visible, nunca una pantalla negra) y un degradado funde la mitad inferior con `desert-night`.
+5. **Cierre "Cuándo mirar el cielo":** en flujo normal, sobre el mismo `desert-night`. Titular, una entrada y tres consejos (Sin Luna, En invierno, Con abrigo) en tres columnas desde `md`, separados por una línea `dusk` al 30 %. Aparece como los capítulos (`text`, `staggerBlock`, una vez); su trigger se calcula después del escenario fijo (`refreshPriority: -1`).
 
 ### Sky Notes (componente propio)
 

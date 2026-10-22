@@ -2,6 +2,7 @@
 import { Picture } from 'astro:assets'
 import nightImage from '@/assets/images/valle-de-la-luna-noche.jpg'
 import PhotoCredit from '@/components/PhotoCredit.astro'
+import { keepNumbersTogether } from '@/lib/format'
 
 // Foto con licencia CC BY 4.0: el crédito debe quedar visible y enlazado
 const credit = {
@@ -38,6 +39,23 @@ const notes = [
     side: 'right',
     name: 'Valle de la Luna',
     text: 'Las mismas formaciones de sal del capítulo 01, de noche.',
+  },
+]
+
+// Cierre de la bitácora: consejos para quien viaja. La temperatura viene de las
+// preguntas frecuentes (faqs.json)
+const tips = [
+  {
+    title: 'Sin Luna',
+    text: 'Las noches cercanas a la luna nueva muestran muchas más estrellas.',
+  },
+  {
+    title: 'En invierno',
+    text: 'Entre mayo y agosto el centro de la Vía Láctea se ve alto en la noche.',
+  },
+  {
+    title: 'Con abrigo',
+    text: 'De noche la temperatura baja mucho: en San Pedro puede llegar a 0 °C.',
   },
 ]
 ---
@@ -167,11 +185,34 @@ const notes = [
     -->
     <PhotoCredit {...credit} data-noche-credit data-reveal class="sm:px-8" />
   </div>
+
+  <!-- Cierre: sigue sobre el mismo fondo en que se fundió la foto -->
+  <div data-noche-close class="container-page pt-8 pb-24 sm:pb-32">
+    <h3 data-reveal data-noche-close-item class="text-4xl sm:text-5xl">
+      Cuándo mirar el cielo
+    </h3>
+    <p
+      data-reveal
+      data-noche-close-item
+      class="mt-4 max-w-2xl text-lg leading-relaxed text-sand/85"
+    >
+      La altura, el aire seco y la distancia de las ciudades hacen del desierto uno de los mejores
+      lugares para mirar el cielo.
+    </p>
+    <ul class="mt-12 grid gap-8 border-t border-dusk/30 pt-8 md:grid-cols-3 md:gap-10">
+      {tips.map((tip) => (
+        <li data-reveal data-noche-close-item>
+          <h4 class="text-lg">{tip.title}</h4>
+          <p class="mt-2 leading-relaxed text-sand/85">{keepNumbersTogether(tip.text)}</p>
+        </li>
+      ))}
+    </ul>
+  </div>
 </section>
 
 <script>
   import { coverPoint } from '@/lib/cover'
-  import { animate, gsap, MOTION, ScrollTrigger, SplitText } from '@/lib/gsap'
+  import { animate, fadeIn, gsap, MOTION, ScrollTrigger, SplitText } from '@/lib/gsap'
   import { createStarfield } from '@/lib/starfield'
 
   const section = document.querySelector<HTMLElement>('[data-noche]')
@@ -233,6 +274,8 @@ const notes = [
       })
     }
 
+    const closeItems = section.querySelectorAll('[data-noche-close-item]')
+
     // Notas y título chico dependen del script: sin JS quedan ocultos
     notesBox.classList.remove('hidden')
     section.querySelector('[data-noche-title-small]')?.classList.remove('hidden')
@@ -250,8 +293,29 @@ const notes = [
         // Solo opacidad: el h2 sigue siendo el título para lectores de pantalla
         gsap.set(title, { opacity: 0 })
         gsap.set('[data-noche-title-small]', { autoAlpha: 1 })
+        fadeIn(closeItems)
         return () => delete list.dataset.mode
       }
+
+      // Cierre: aparece como los capítulos, una sola vez. Se calcula después de
+      // los demás triggers (refreshPriority -1) porque queda bajo el escenario fijo
+      gsap.fromTo(
+        closeItems,
+        { autoAlpha: 0, y: MOTION.rise },
+        {
+          autoAlpha: 1,
+          y: 0,
+          duration: MOTION.text,
+          ease: MOTION.ease,
+          stagger: MOTION.staggerBlock,
+          scrollTrigger: {
+            trigger: '[data-noche-close]',
+            start: MOTION.start,
+            once: true,
+            refreshPriority: -1,
+          },
+        },
+      )
 
       const stars = createStarfield(canvas)
 
@@ -396,7 +460,8 @@ const notes = [
             { autoAlpha: 0, duration: 0.3, ease: 'none' },
             closeAt,
           )
-            .to('[data-noche-shade]', { autoAlpha: 0.75, duration: 0.5, ease: 'none' }, closeAt)
+            // 55 %: la foto sigue apenas visible detrás de la transición, sin pantalla negra
+            .to('[data-noche-shade]', { autoAlpha: 0.55, duration: 0.5, ease: 'none' }, closeAt)
             .fromTo(
               '[data-noche-exit]',
               { autoAlpha: 0 },
