@@ -7,6 +7,7 @@ Objetivo del portafolio: demostrar dominio de Astro (colecciones de contenido, r
 - Repositorio: https://github.com/eduardoapatat/paisajes-de-atacama (público, rama `main`).
 - Sitio: https://paisajes-de-atacama.vercel.app (Vercel: cada push a `main` despliega a producción; es el `site` de `astro.config.mjs`).
 - `vercel.json`: encabezados de seguridad (CSP, HSTS, `nosniff`, sin iframes, `Referrer-Policy`, `Permissions-Policy`). La CSP solo admite scripts del propio sitio y el script en línea de `BaseLayout.astro` (el que agrega la clase `js`) por su hash `sha256`: si se cambia ese script, aunque sea un espacio, hay que recalcular el hash o el navegador lo bloquea. Nada se carga de otros dominios (fuentes, fotos y scripts son locales); si se agrega algo externo, sumarlo a la CSP.
+- CI: `.github/workflows/ci.yml` (GitHub Actions) corre `pnpm format:check`, `pnpm lint` y `pnpm build` en cada push a `main` y en cada pull request.
 - Nombre del proyecto y de la carpeta local: `paisajes-de-atacama`.
 
 ## Stack

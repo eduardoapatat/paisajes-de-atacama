@@ -31,6 +31,7 @@ Todas las animaciones respetan `prefers-reduced-motion`: con movimiento reducido
 | [sharp](https://sharp.pixelplumbing.com)                       | Optimización de imágenes en el build                                                   |
 | [ESLint](https://eslint.org) y [Prettier](https://prettier.io) | Revisión y formato del código                                                          |
 | [Vercel](https://vercel.com)                                   | Publicación: cada push a `main` despliega el sitio                                     |
+| [GitHub Actions](https://github.com/features/actions)          | Revisión automática: formato, lint y build en cada push y pull request                 |
 
 ## Cómo correrlo
 
