@@ -43,6 +43,7 @@ const ogImage = image ? new URL(image, Astro.site) : undefined
     <meta name="twitter:card" content={ogImage ? 'summary_large_image' : 'summary'} />
 
     <Font cssVariable="--font-outfit" preload />
+    {/* La CSP de vercel.json admite este script por su hash: si cambia, recalcularlo */}
     <script is:inline>
       document.documentElement.classList.add('js')
     </script>
