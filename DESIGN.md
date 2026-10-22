@@ -229,7 +229,7 @@ El sistema es plano. Las tarjetas y las fotos no llevan sombra. La profundidad v
 
 **The Curtain Rule.** Una sección clara que entra sobre una oscura lo hace como cortina: esquinas superiores redondeadas, sombra hacia arriba y `z-index` por encima. Nunca hay capas que oscurecen el hero hasta un color sólido ni cortes rectos entre claro y oscuro.
 
-**The Sunset Rule.** Al pasar de una sección clara a la noche no hay borde ni sombra: el fondo atardece. La utilidad `bg-sunset` lleva el arena por una mezcla arena-`dusk`, el `dusk` puro y una mezcla `dusk`-noche hasta `desert-night` (degradado en oklab), en los últimos `--sunset-height` de la sección (16rem, 22rem desde `sm`), que se suman a su relleno inferior. Las primeras estrellas aparecen justo donde termina.
+**The Real Horizon Rule.** El paso de una sección clara a la noche es el horizonte real del Valle de la Luna: la silueta de sus rocas, con la aguja de sal, extraída de la foto de la noche (`Horizon.astro`). Sube desde la noche sobre el arena en `desert-night`, sin sombra, sin degradado y sin esquinas. Mide `--horizon-height` (6rem, 9.5rem desde `sm`, 12.5rem desde `lg`), que la sección clara suma a su relleno inferior. Todo contorno orgánico sale de una imagen real, nunca de una forma geométrica inventada.
 
 ## Shapes
 
@@ -284,7 +284,7 @@ Toda foto lleva su crédito dentro de la imagen, abajo a la derecha (`PhotoCredi
 
 El último capítulo de la bitácora. Un escenario queda fijo tres pantallas de scroll (cuatro en móvil), con capas de resplandor de atardecer, cielo de estrellas en canvas, la foto y las notas de campo.
 
-1. **Entrada:** Atractivos termina en un atardecer (`bg-sunset`); mientras la sección sube, aparece un resplandor `dusk` en el horizonte (del 30 % abajo a transparente arriba) y salen las estrellas del canvas, primero las más brillantes, como al oscurecer.
+1. **Entrada:** la noche empieza en el horizonte real del Valle de la Luna, que sube sobre Atractivos; mientras la sección sube, aparece un resplandor `dusk` en el horizonte (del 30 % abajo a transparente arriba) y salen las estrellas del canvas, primero las más brillantes, como al oscurecer.
 2. **Título y foto:** terminan de salir las estrellas, el resplandor se apaga y el título aparece letra por letra con desenfoque (de 10px a 0). La foto se abre en un círculo desde el centro del cielo, de 0 % a 75 %, con un zoom de 1.4 a 1, y tapa el canvas. El crédito aparece cuando la foto ya está abierta.
 3. **Lo que se ve:** la foto baja al 35 % con una capa `desert-night`, el título se apaga (solo opacidad: el `h2` sigue para lectores de pantalla) y aparece una copia chica arriba a la izquierda. Entran las notas de campo (ver Sky Notes).
 4. **Salida:** notas y título se apagan, la capa llega al 55 % (la foto sigue apenas visible, nunca una pantalla negra) y un degradado funde la mitad inferior con `desert-night`.

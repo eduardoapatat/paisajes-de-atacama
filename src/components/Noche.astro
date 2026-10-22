@@ -1,6 +1,7 @@
 ---
 import { Picture } from 'astro:assets'
 import nightImage from '@/assets/images/valle-de-la-luna-noche.jpg'
+import Horizon from '@/components/Horizon.astro'
 import PhotoCredit from '@/components/PhotoCredit.astro'
 import { keepNumbersTogether } from '@/lib/format'
 
@@ -60,8 +61,9 @@ const tips = [
 ]
 ---
 
-<!-- Sigue al atardecer de Atractivos (`bg-sunset`), que ya termina en este fondo -->
 <section id="noche" data-noche class="relative bg-desert-night">
+  <!-- El horizonte real del Valle de la Luna sube sobre Atractivos: ahí empieza la noche -->
+  <Horizon />
   <!-- Escenario que queda fijo mientras avanza la bitácora de la noche -->
   <div data-noche-stage class="relative h-svh overflow-hidden">
     <!--

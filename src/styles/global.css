@@ -37,6 +37,19 @@
     -webkit-text-size-adjust: 100%;
   }
 
+  /* Alto de la silueta del horizonte entre Atractivos y la noche (Horizon.astro) */
+  :root {
+    --horizon-height: 6rem;
+
+    @media (width >= 40rem) {
+      --horizon-height: 9.5rem;
+    }
+
+    @media (width >= 64rem) {
+      --horizon-height: 12.5rem;
+    }
+  }
+
   body {
     @apply bg-desert-night font-sans text-sand antialiased;
     min-height: 100dvh;
@@ -102,24 +115,6 @@
       scroll-behavior: auto;
     }
   }
-}
-
-/*
- * Atardecer: el fondo arena de la última sección clara pasa por el rosado del
- * cielo (`dusk`) hasta la noche, sin borde ni sombra. Ocupa los últimos
- * `--sunset-height` de la sección, que debe sumar ese alto a su relleno inferior.
- */
-@utility bg-sunset {
-  background: linear-gradient(
-    in oklab to bottom,
-    var(--color-sand) calc(100% - var(--sunset-height)),
-    color-mix(in oklab, var(--color-sand) 50%, var(--color-dusk))
-      calc(100% - var(--sunset-height) * 0.68),
-    var(--color-dusk) calc(100% - var(--sunset-height) * 0.42),
-    color-mix(in oklab, var(--color-dusk) 40%, var(--color-desert-night))
-      calc(100% - var(--sunset-height) * 0.16),
-    var(--color-desert-night) 100%
-  );
 }
 
 @utility container-page {

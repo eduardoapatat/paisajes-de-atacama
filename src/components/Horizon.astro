@@ -1,0 +1,20 @@
+---
+/**
+ * Horizonte del Valle de la Luna: separa la última sección clara de la noche.
+ * Es la silueta real de las rocas (con la aguja de sal) extraída de la foto
+ * valle-de-la-luna-noche.jpg: en cada columna se marcó dónde empieza la roca,
+ * oscura y cálida, bajo el cielo verdoso. viewBox 0 0 1000 100, se estira al ancho.
+ * Va arriba de la sección de la noche y sube sobre la anterior (`bottom-full`).
+ */
+const ridge =
+  'M0 100 L0 45.3 L6 46.7 L13 48 L19 48 L25 49.4 L31 49.4 L38 50.7 L44 54.7 L50 56 L56 58.7 L63 61.4 L69 62.7 L75 62.7 L81 64 L88 62.7 L94 62.7 L100 61.4 L107 62.7 L113 65.3 L119 68 L125 69.3 L132 68 L138 68 L144 73.3 L150 76 L157 76 L163 78.7 L169 80 L175 81.3 L182 81.3 L188 82.7 L194 84 L200 85.3 L207 86.7 L213 88 L219 89.4 L226 90.7 L232 92 L238 93.3 L244 94.6 L251 94.6 L257 96 L263 96 L269 96 L276 97.3 L282 97.3 L288 96 L294 92 L301 88 L307 89.4 L313 90.7 L319 92 L326 93.3 L332 93.3 L338 93.3 L345 93.3 L351 94.6 L357 93.3 L363 88 L370 89.4 L376 92 L382 94.6 L388 96 L395 96 L401 96 L407 97.3 L413 98.7 L420 97.3 L426 97.3 L432 98.7 L438 100 L445 100 L451 98.7 L457 96 L464 90.7 L470 88 L476 85.3 L482 90.7 L489 90.7 L495 88 L501 85.3 L507 84 L514 81.3 L520 76 L526 78.7 L532 82.7 L539 84 L545 85.3 L551 93.3 L557 93.3 L564 97.3 L570 89.4 L576 80 L583 84 L589 80 L595 78.7 L601 70.7 L608 69.3 L614 48 L620 0 L626 2.7 L633 6.7 L639 9.4 L645 10.6 L651 14.7 L658 20 L664 28 L670 50.7 L676 52 L683 65.3 L689 65.3 L695 77.4 L702 78.7 L708 77.4 L714 78.7 L720 82.7 L727 82.7 L733 72 L739 70.7 L745 64 L752 62.7 L758 57.3 L764 54.7 L770 54.7 L777 54.7 L783 53.3 L789 53.3 L795 52 L802 50.7 L808 48 L814 46.7 L821 46.7 L827 46.7 L833 46.7 L839 44 L846 40 L852 36 L858 34.7 L864 32 L871 30.7 L877 30.7 L883 29.3 L889 28 L896 26.7 L902 25.3 L908 24 L914 24 L921 22.7 L927 21.4 L933 17.3 L940 16 L946 16 L952 13.3 L958 10.6 L965 10.6 L971 10.6 L977 9.4 L983 9.4 L990 8 L996 5.4 L1000 5.4 L1000 100 Z'
+---
+
+<svg
+  aria-hidden="true"
+  viewBox="0 0 1000 100"
+  preserveAspectRatio="none"
+  class="pointer-events-none absolute inset-x-0 bottom-full z-20 -mb-px block h-(--horizon-height) w-full"
+>
+  <path d={ridge} class="fill-desert-night"></path>
+</svg>
